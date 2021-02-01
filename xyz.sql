@@ -1,1 +1,1 @@
-select * from tablet
+select * from table24
