@@ -1,0 +1,33 @@
+# Virtual environment
+backend/venv/
+venv/
+.venv/
+
+# Python caches
+__pycache__/
+**/__pycache__/
+*.pyc
+
+# Local SQLite databases
+backend/*.db
+backend/*.db-journal
+*.db
+
+# Node dependencies and builds
+node_modules/
+frontend/node_modules/
+frontend/dist/
+
+# IDE files
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+
+# Log files
+*.log
+brain/
+*.webp
+*.png
