@@ -1,0 +1,201 @@
+mandt,spras,anlkl,txk20,txk50,txt50,txa50,xltxid,operation_flag,is_deleted,recordstamp
+100,D,5000,GWG,Geringwertige Wirtschaftsgüter,,,,I,False,2022-04-21 14:40:42.650360+00:00
+100,E,2000,Machinery,Machinery,,,,I,False,2022-04-21 14:40:42.650360+00:00
+100,D,1000,Grundstuecke,"Grundstuecke, grundstuecksgleiche Rechte",,,,I,False,2022-04-21 14:40:42.650360+00:00
+100,D,3200,EDV / Hardware,EDV / Hardware,,,,I,False,2022-04-21 14:40:42.650360+00:00
+100,E,7000,Formation expense,Formation expense,,,,I,False,2022-04-21 14:40:42.650360+00:00
+100,E,4001,Investment measure,AuC as investment measure,,,,I,False,2022-04-21 14:40:42.650360+00:00
+100,E,4000,Assets under const.,Assets under construction,,,,I,False,2022-04-21 14:40:42.650360+00:00
+100,E,3000,Fixtures & fittings,Fixtures and fittings,,,,I,False,2022-04-21 14:40:42.650360+00:00
+100,D,3000,Betr.-und Geschäfts.,Betriebs- und Geschäftsausstattung,,,,I,False,2022-04-21 14:40:42.650360+00:00
+100,E,5000,LVA,Low-value assets,,,,I,False,2022-04-21 14:40:42.650360+00:00
+100,D,3100,Fuhrpark,Fuhrpark,,,,I,False,2022-04-21 14:40:42.650360+00:00
+100,D,1100,Gebäude,Gebäude,,,,I,False,2022-04-21 14:40:42.650360+00:00
+100,D,8200,Goodwill,Goodwill,,,,I,False,2022-04-21 14:40:42.650360+00:00
+100,E,8200,Goodwill,Goodwill,,,,I,False,2022-04-21 14:40:42.650360+00:00
+100,E,3100,Vehicles,Vehicles,,,,I,False,2022-04-21 14:40:42.650360+00:00
+100,E,1100,Buildings,Buildings,,,,I,False,2022-04-21 14:40:42.650360+00:00
+100,D,2000,Maschinen,Maschinen,,,,I,False,2022-04-21 14:40:42.650360+00:00
+100,E,1000,Real estate,Real estate and similar rights,,,,I,False,2022-04-21 14:40:42.650360+00:00
+100,D,8000,Kunstobjekte,Kunstobjekte,,,,I,False,2022-04-21 14:40:42.650360+00:00
+100,E,3200,DP / Hardware,DP / Hardware,,,,I,False,2022-04-21 14:40:42.650360+00:00
+100,D,4000,Anlagen im Bau,Anlagen im Bau,,,,I,False,2022-04-21 14:40:42.650360+00:00
+100,E,8000,Objects of art,Objects of art,,,,I,False,2022-04-21 14:40:42.650360+00:00
+100,D,6000,Leasing (Oper.),Geleaste Anlagen (Operational Lease),,,,I,False,2022-04-21 14:40:42.650360+00:00
+100,E,6000,Leasing (oper.),Leased assets (operating lease),,,,I,False,2022-04-21 14:40:42.650360+00:00
+100,D,8100,Vorauszahlungen,Vorauszahlungen,,,,I,False,2022-04-21 14:40:42.650360+00:00
+100,E,8100,Advance payments,Advance payments,,,,I,False,2022-04-21 14:40:42.650360+00:00
+100,D,7000,Gründungsaufwand,Gründungsaufwand,,,,I,False,2022-04-21 14:40:42.650360+00:00
+100,D,6100,Leasing (Capital),Geleaste Anlagen (Capital Lease),,,,I,False,2022-04-21 14:40:42.650360+00:00
+100,E,6100,Leasing (capital),Leased assets (capital lease),,,,I,False,2022-04-21 14:40:42.650360+00:00
+100,D,4001,Investitionsmaßnahme,AiB als Investitionsmaßnahme,,,,I,False,2022-04-21 14:40:42.650360+00:00
+0,D,5000,GWG,Geringwertige Wirtschaftsgüter,,,,L,False,2022-01-31 20:41:43.517301+00:00
+1,D,5000,GWG,Geringwertige Wirtschaftsgüter,,,,L,False,2022-01-31 20:41:43.517301+00:00
+50,D,5000,GWG,Geringwertige Wirtschaftsgüter,,,,L,False,2022-01-31 20:41:43.517301+00:00
+100,D,5000,GWG,Geringwertige Wirtschaftsgüter,,,,L,False,2022-01-31 20:41:43.517301+00:00
+200,D,5000,GWG,Geringwertige Wirtschaftsgüter,,,,L,False,2022-01-31 20:41:43.517301+00:00
+250,D,5000,GWG,Geringwertige Wirtschaftsgüter,,,,L,False,2022-01-31 20:41:43.517301+00:00
+0,E,2000,Machinery,Machinery,,,,L,False,2022-01-31 20:41:43.517301+00:00
+1,E,2000,Machinery,Machinery,,,,L,False,2022-01-31 20:41:43.517301+00:00
+50,E,2000,Machinery,Machinery,,,,L,False,2022-01-31 20:41:43.517301+00:00
+100,E,2000,Machinery,Machinery,,,,L,False,2022-01-31 20:41:43.517301+00:00
+200,E,2000,Machinery,Machinery,,,,L,False,2022-01-31 20:41:43.517301+00:00
+250,E,2000,Machinery,Machinery,,,,L,False,2022-01-31 20:41:43.517301+00:00
+0,D,1000,Grundstuecke,"Grundstuecke, grundstuecksgleiche Rechte",,,,L,False,2022-01-31 20:41:43.517301+00:00
+1,D,1000,Grundstuecke,"Grundstuecke, grundstuecksgleiche Rechte",,,,L,False,2022-01-31 20:41:43.517301+00:00
+50,D,1000,Grundstuecke,"Grundstuecke, grundstuecksgleiche Rechte",,,,L,False,2022-01-31 20:41:43.517301+00:00
+100,D,1000,Grundstuecke,"Grundstuecke, grundstuecksgleiche Rechte",,,,L,False,2022-01-31 20:41:43.517301+00:00
+200,D,1000,Grundstuecke,"Grundstuecke, grundstuecksgleiche Rechte",,,,L,False,2022-01-31 20:41:43.517301+00:00
+250,D,1000,Grundstuecke,"Grundstuecke, grundstuecksgleiche Rechte",,,,L,False,2022-01-31 20:41:43.517301+00:00
+0,D,3200,EDV / Hardware,EDV / Hardware,,,,L,False,2022-01-31 20:41:43.517301+00:00
+1,D,3200,EDV / Hardware,EDV / Hardware,,,,L,False,2022-01-31 20:41:43.517301+00:00
+50,D,3200,EDV / Hardware,EDV / Hardware,,,,L,False,2022-01-31 20:41:43.517301+00:00
+100,D,3200,EDV / Hardware,EDV / Hardware,,,,L,False,2022-01-31 20:41:43.517301+00:00
+200,D,3200,EDV / Hardware,EDV / Hardware,,,,L,False,2022-01-31 20:41:43.517301+00:00
+250,D,3200,EDV / Hardware,EDV / Hardware,,,,L,False,2022-01-31 20:41:43.517301+00:00
+0,E,7000,Formation expense,Formation expense,,,,L,False,2022-01-31 20:41:43.517301+00:00
+1,E,7000,Formation expense,Formation expense,,,,L,False,2022-01-31 20:41:43.517301+00:00
+50,E,7000,Formation expense,Formation expense,,,,L,False,2022-01-31 20:41:43.517301+00:00
+100,E,7000,Formation expense,Formation expense,,,,L,False,2022-01-31 20:41:43.517301+00:00
+200,E,7000,Formation expense,Formation expense,,,,L,False,2022-01-31 20:41:43.517301+00:00
+250,E,7000,Formation expense,Formation expense,,,,L,False,2022-01-31 20:41:43.517301+00:00
+0,E,4001,Investment measure,AuC as investment measure,,,,L,False,2022-01-31 20:41:43.517301+00:00
+1,E,4001,Investment measure,AuC as investment measure,,,,L,False,2022-01-31 20:41:43.517301+00:00
+50,E,4001,Investment measure,AuC as investment measure,,,,L,False,2022-01-31 20:41:43.517301+00:00
+100,E,4001,Investment measure,AuC as investment measure,,,,L,False,2022-01-31 20:41:43.517301+00:00
+200,E,4001,Investment measure,AuC as investment measure,,,,L,False,2022-01-31 20:41:43.517301+00:00
+250,E,4001,Investment measure,AuC as investment measure,,,,L,False,2022-01-31 20:41:43.517301+00:00
+0,E,4000,Assets under const.,Assets under construction,,,,L,False,2022-01-31 20:41:43.517301+00:00
+1,E,4000,Assets under const.,Assets under construction,,,,L,False,2022-01-31 20:41:43.517301+00:00
+50,E,4000,Assets under const.,Assets under construction,,,,L,False,2022-01-31 20:41:43.517301+00:00
+100,E,4000,Assets under const.,Assets under construction,,,,L,False,2022-01-31 20:41:43.517301+00:00
+200,E,4000,Assets under const.,Assets under construction,,,,L,False,2022-01-31 20:41:43.517301+00:00
+250,E,4000,Assets under const.,Assets under construction,,,,L,False,2022-01-31 20:41:43.517301+00:00
+0,E,3000,Fixtures & fittings,Fixtures and fittings,,,,L,False,2022-01-31 20:41:43.517301+00:00
+1,E,3000,Fixtures & fittings,Fixtures and fittings,,,,L,False,2022-01-31 20:41:43.517301+00:00
+50,E,3000,Fixtures & fittings,Fixtures and fittings,,,,L,False,2022-01-31 20:41:43.517301+00:00
+100,E,3000,Fixtures & fittings,Fixtures and fittings,,,,L,False,2022-01-31 20:41:43.517301+00:00
+200,E,3000,Fixtures & fittings,Fixtures and fittings,,,,L,False,2022-01-31 20:41:43.517301+00:00
+250,E,3000,Fixtures & fittings,Fixtures and fittings,,,,L,False,2022-01-31 20:41:43.517301+00:00
+0,D,3000,Betr.-und Geschäfts.,Betriebs- und Geschäftsausstattung,,,,L,False,2022-01-31 20:41:43.517301+00:00
+1,D,3000,Betr.-und Geschäfts.,Betriebs- und Geschäftsausstattung,,,,L,False,2022-01-31 20:41:43.517301+00:00
+50,D,3000,Betr.-und Geschäfts.,Betriebs- und Geschäftsausstattung,,,,L,False,2022-01-31 20:41:43.517301+00:00
+100,D,3000,Betr.-und Geschäfts.,Betriebs- und Geschäftsausstattung,,,,L,False,2022-01-31 20:41:43.517301+00:00
+200,D,3000,Betr.-und Geschäfts.,Betriebs- und Geschäftsausstattung,,,,L,False,2022-01-31 20:41:43.517301+00:00
+250,D,3000,Betr.-und Geschäfts.,Betriebs- und Geschäftsausstattung,,,,L,False,2022-01-31 20:41:43.517301+00:00
+0,E,5000,LVA,Low-value assets,,,,L,False,2022-01-31 20:41:43.517301+00:00
+1,E,5000,LVA,Low-value assets,,,,L,False,2022-01-31 20:41:43.517301+00:00
+50,E,5000,LVA,Low-value assets,,,,L,False,2022-01-31 20:41:43.517301+00:00
+100,E,5000,LVA,Low-value assets,,,,L,False,2022-01-31 20:41:43.517301+00:00
+200,E,5000,LVA,Low-value assets,,,,L,False,2022-01-31 20:41:43.517301+00:00
+250,E,5000,LVA,Low-value assets,,,,L,False,2022-01-31 20:41:43.517301+00:00
+0,D,3100,Fuhrpark,Fuhrpark,,,,L,False,2022-01-31 20:41:43.517301+00:00
+1,D,3100,Fuhrpark,Fuhrpark,,,,L,False,2022-01-31 20:41:43.517301+00:00
+50,D,3100,Fuhrpark,Fuhrpark,,,,L,False,2022-01-31 20:41:43.517301+00:00
+100,D,3100,Fuhrpark,Fuhrpark,,,,L,False,2022-01-31 20:41:43.517301+00:00
+200,D,3100,Fuhrpark,Fuhrpark,,,,L,False,2022-01-31 20:41:43.517301+00:00
+250,D,3100,Fuhrpark,Fuhrpark,,,,L,False,2022-01-31 20:41:43.517301+00:00
+0,D,1100,Gebäude,Gebäude,,,,L,False,2022-01-31 20:41:43.517301+00:00
+1,D,1100,Gebäude,Gebäude,,,,L,False,2022-01-31 20:41:43.517301+00:00
+50,D,1100,Gebäude,Gebäude,,,,L,False,2022-01-31 20:41:43.517301+00:00
+100,D,1100,Gebäude,Gebäude,,,,L,False,2022-01-31 20:41:43.517301+00:00
+200,D,1100,Gebäude,Gebäude,,,,L,False,2022-01-31 20:41:43.517301+00:00
+250,D,1100,Gebäude,Gebäude,,,,L,False,2022-01-31 20:41:43.517301+00:00
+0,D,8200,Goodwill,Goodwill,,,,L,False,2022-01-31 20:41:43.517301+00:00
+0,E,8200,Goodwill,Goodwill,,,,L,False,2022-01-31 20:41:43.517301+00:00
+1,D,8200,Goodwill,Goodwill,,,,L,False,2022-01-31 20:41:43.517301+00:00
+1,E,8200,Goodwill,Goodwill,,,,L,False,2022-01-31 20:41:43.517301+00:00
+50,D,8200,Goodwill,Goodwill,,,,L,False,2022-01-31 20:41:43.517301+00:00
+50,E,8200,Goodwill,Goodwill,,,,L,False,2022-01-31 20:41:43.517301+00:00
+100,D,8200,Goodwill,Goodwill,,,,L,False,2022-01-31 20:41:43.517301+00:00
+100,E,8200,Goodwill,Goodwill,,,,L,False,2022-01-31 20:41:43.517301+00:00
+200,D,8200,Goodwill,Goodwill,,,,L,False,2022-01-31 20:41:43.517301+00:00
+200,E,8200,Goodwill,Goodwill,,,,L,False,2022-01-31 20:41:43.517301+00:00
+250,D,8200,Goodwill,Goodwill,,,,L,False,2022-01-31 20:41:43.517301+00:00
+250,E,8200,Goodwill,Goodwill,,,,L,False,2022-01-31 20:41:43.517301+00:00
+0,E,3100,Vehicles,Vehicles,,,,L,False,2022-01-31 20:41:43.517301+00:00
+1,E,3100,Vehicles,Vehicles,,,,L,False,2022-01-31 20:41:43.517301+00:00
+50,E,3100,Vehicles,Vehicles,,,,L,False,2022-01-31 20:41:43.517301+00:00
+100,E,3100,Vehicles,Vehicles,,,,L,False,2022-01-31 20:41:43.517301+00:00
+200,E,3100,Vehicles,Vehicles,,,,L,False,2022-01-31 20:41:43.517301+00:00
+250,E,3100,Vehicles,Vehicles,,,,L,False,2022-01-31 20:41:43.517301+00:00
+0,E,1100,Buildings,Buildings,,,,L,False,2022-01-31 20:41:43.517301+00:00
+1,E,1100,Buildings,Buildings,,,,L,False,2022-01-31 20:41:43.517301+00:00
+50,E,1100,Buildings,Buildings,,,,L,False,2022-01-31 20:41:43.517301+00:00
+100,E,1100,Buildings,Buildings,,,,L,False,2022-01-31 20:41:43.517301+00:00
+200,E,1100,Buildings,Buildings,,,,L,False,2022-01-31 20:41:43.517301+00:00
+250,E,1100,Buildings,Buildings,,,,L,False,2022-01-31 20:41:43.517301+00:00
+0,D,2000,Maschinen,Maschinen,,,,L,False,2022-01-31 20:41:43.517301+00:00
+1,D,2000,Maschinen,Maschinen,,,,L,False,2022-01-31 20:41:43.517301+00:00
+50,D,2000,Maschinen,Maschinen,,,,L,False,2022-01-31 20:41:43.517301+00:00
+100,D,2000,Maschinen,Maschinen,,,,L,False,2022-01-31 20:41:43.517301+00:00
+200,D,2000,Maschinen,Maschinen,,,,L,False,2022-01-31 20:41:43.517301+00:00
+250,D,2000,Maschinen,Maschinen,,,,L,False,2022-01-31 20:41:43.517301+00:00
+0,E,1000,Real estate,Real estate and similar rights,,,,L,False,2022-01-31 20:41:43.517301+00:00
+1,E,1000,Real estate,Real estate and similar rights,,,,L,False,2022-01-31 20:41:43.517301+00:00
+50,E,1000,Real estate,Real estate and similar rights,,,,L,False,2022-01-31 20:41:43.517301+00:00
+100,E,1000,Real estate,Real estate and similar rights,,,,L,False,2022-01-31 20:41:43.517301+00:00
+200,E,1000,Real estate,Real estate and similar rights,,,,L,False,2022-01-31 20:41:43.517301+00:00
+250,E,1000,Real estate,Real estate and similar rights,,,,L,False,2022-01-31 20:41:43.517301+00:00
+0,D,8000,Kunstobjekte,Kunstobjekte,,,,L,False,2022-01-31 20:41:43.517301+00:00
+1,D,8000,Kunstobjekte,Kunstobjekte,,,,L,False,2022-01-31 20:41:43.517301+00:00
+50,D,8000,Kunstobjekte,Kunstobjekte,,,,L,False,2022-01-31 20:41:43.517301+00:00
+100,D,8000,Kunstobjekte,Kunstobjekte,,,,L,False,2022-01-31 20:41:43.517301+00:00
+200,D,8000,Kunstobjekte,Kunstobjekte,,,,L,False,2022-01-31 20:41:43.517301+00:00
+250,D,8000,Kunstobjekte,Kunstobjekte,,,,L,False,2022-01-31 20:41:43.517301+00:00
+0,E,3200,DP / Hardware,DP / Hardware,,,,L,False,2022-01-31 20:41:43.517301+00:00
+1,E,3200,DP / Hardware,DP / Hardware,,,,L,False,2022-01-31 20:41:43.517301+00:00
+50,E,3200,DP / Hardware,DP / Hardware,,,,L,False,2022-01-31 20:41:43.517301+00:00
+100,E,3200,DP / Hardware,DP / Hardware,,,,L,False,2022-01-31 20:41:43.517301+00:00
+200,E,3200,DP / Hardware,DP / Hardware,,,,L,False,2022-01-31 20:41:43.517301+00:00
+250,E,3200,DP / Hardware,DP / Hardware,,,,L,False,2022-01-31 20:41:43.517301+00:00
+0,D,4000,Anlagen im Bau,Anlagen im Bau,,,,L,False,2022-01-31 20:41:43.517301+00:00
+1,D,4000,Anlagen im Bau,Anlagen im Bau,,,,L,False,2022-01-31 20:41:43.517301+00:00
+50,D,4000,Anlagen im Bau,Anlagen im Bau,,,,L,False,2022-01-31 20:41:43.517301+00:00
+100,D,4000,Anlagen im Bau,Anlagen im Bau,,,,L,False,2022-01-31 20:41:43.517301+00:00
+200,D,4000,Anlagen im Bau,Anlagen im Bau,,,,L,False,2022-01-31 20:41:43.517301+00:00
+250,D,4000,Anlagen im Bau,Anlagen im Bau,,,,L,False,2022-01-31 20:41:43.517301+00:00
+0,E,8000,Objects of art,Objects of art,,,,L,False,2022-01-31 20:41:43.517301+00:00
+1,E,8000,Objects of art,Objects of art,,,,L,False,2022-01-31 20:41:43.517301+00:00
+50,E,8000,Objects of art,Objects of art,,,,L,False,2022-01-31 20:41:43.517301+00:00
+100,E,8000,Objects of art,Objects of art,,,,L,False,2022-01-31 20:41:43.517301+00:00
+200,E,8000,Objects of art,Objects of art,,,,L,False,2022-01-31 20:41:43.517301+00:00
+250,E,8000,Objects of art,Objects of art,,,,L,False,2022-01-31 20:41:43.517301+00:00
+0,D,6000,Leasing (Oper.),Geleaste Anlagen (Operational Lease),,,,L,False,2022-01-31 20:41:43.517301+00:00
+1,D,6000,Leasing (Oper.),Geleaste Anlagen (Operational Lease),,,,L,False,2022-01-31 20:41:43.517301+00:00
+50,D,6000,Leasing (Oper.),Geleaste Anlagen (Operational Lease),,,,L,False,2022-01-31 20:41:43.517301+00:00
+100,D,6000,Leasing (Oper.),Geleaste Anlagen (Operational Lease),,,,L,False,2022-01-31 20:41:43.517301+00:00
+200,D,6000,Leasing (Oper.),Geleaste Anlagen (Operational Lease),,,,L,False,2022-01-31 20:41:43.517301+00:00
+250,D,6000,Leasing (Oper.),Geleaste Anlagen (Operational Lease),,,,L,False,2022-01-31 20:41:43.517301+00:00
+0,E,6000,Leasing (oper.),Leased assets (operating lease),,,,L,False,2022-01-31 20:41:43.517301+00:00
+1,E,6000,Leasing (oper.),Leased assets (operating lease),,,,L,False,2022-01-31 20:41:43.517301+00:00
+50,E,6000,Leasing (oper.),Leased assets (operating lease),,,,L,False,2022-01-31 20:41:43.517301+00:00
+100,E,6000,Leasing (oper.),Leased assets (operating lease),,,,L,False,2022-01-31 20:41:43.517301+00:00
+200,E,6000,Leasing (oper.),Leased assets (operating lease),,,,L,False,2022-01-31 20:41:43.517301+00:00
+250,E,6000,Leasing (oper.),Leased assets (operating lease),,,,L,False,2022-01-31 20:41:43.517301+00:00
+0,D,8100,Vorauszahlungen,Vorauszahlungen,,,,L,False,2022-01-31 20:41:43.517301+00:00
+1,D,8100,Vorauszahlungen,Vorauszahlungen,,,,L,False,2022-01-31 20:41:43.517301+00:00
+50,D,8100,Vorauszahlungen,Vorauszahlungen,,,,L,False,2022-01-31 20:41:43.517301+00:00
+100,D,8100,Vorauszahlungen,Vorauszahlungen,,,,L,False,2022-01-31 20:41:43.517301+00:00
+200,D,8100,Vorauszahlungen,Vorauszahlungen,,,,L,False,2022-01-31 20:41:43.517301+00:00
+250,D,8100,Vorauszahlungen,Vorauszahlungen,,,,L,False,2022-01-31 20:41:43.517301+00:00
+0,E,8100,Advance payments,Advance payments,,,,L,False,2022-01-31 20:41:43.517301+00:00
+1,E,8100,Advance payments,Advance payments,,,,L,False,2022-01-31 20:41:43.517301+00:00
+50,E,8100,Advance payments,Advance payments,,,,L,False,2022-01-31 20:41:43.517301+00:00
+100,E,8100,Advance payments,Advance payments,,,,L,False,2022-01-31 20:41:43.517301+00:00
+200,E,8100,Advance payments,Advance payments,,,,L,False,2022-01-31 20:41:43.517301+00:00
+250,E,8100,Advance payments,Advance payments,,,,L,False,2022-01-31 20:41:43.517301+00:00
+0,D,7000,Gründungsaufwand,Gründungsaufwand,,,,L,False,2022-01-31 20:41:43.517301+00:00
+1,D,7000,Gründungsaufwand,Gründungsaufwand,,,,L,False,2022-01-31 20:41:43.517301+00:00
+50,D,7000,Gründungsaufwand,Gründungsaufwand,,,,L,False,2022-01-31 20:41:43.517301+00:00
+100,D,7000,Gründungsaufwand,Gründungsaufwand,,,,L,False,2022-01-31 20:41:43.517301+00:00
+200,D,7000,Gründungsaufwand,Gründungsaufwand,,,,L,False,2022-01-31 20:41:43.517301+00:00
+250,D,7000,Gründungsaufwand,Gründungsaufwand,,,,L,False,2022-01-31 20:41:43.517301+00:00
+0,D,6100,Leasing (Capital),Geleaste Anlagen (Capital Lease),,,,L,False,2022-01-31 20:41:43.517301+00:00
+1,D,6100,Leasing (Capital),Geleaste Anlagen (Capital Lease),,,,L,False,2022-01-31 20:41:43.517301+00:00
+50,D,6100,Leasing (Capital),Geleaste Anlagen (Capital Lease),,,,L,False,2022-01-31 20:41:43.517301+00:00
+100,D,6100,Leasing (Capital),Geleaste Anlagen (Capital Lease),,,,L,False,2022-01-31 20:41:43.517301+00:00
+200,D,6100,Leasing (Capital),Geleaste Anlagen (Capital Lease),,,,L,False,2022-01-31 20:41:43.517301+00:00
+250,D,6100,Leasing (Capital),Geleaste Anlagen (Capital Lease),,,,L,False,2022-01-31 20:41:43.517301+00:00
+0,E,6100,Leasing (capital),Leased assets (capital lease),,,,L,False,2022-01-31 20:41:43.517301+00:00
+1,E,6100,Leasing (capital),Leased assets (capital lease),,,,L,False,2022-01-31 20:41:43.517301+00:00

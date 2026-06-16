@@ -1,0 +1,201 @@
+mandt,spras,matkl,wgbez,wgbez60,operation_flag,is_deleted,recordstamp
+800,1,07,计算机设备、软件和用品,计算机设备、软件和用品,I,False,2021-03-31 05:00:41.416210+00:00
+800,P,07,"Computador, software","Computador, software e suprimentos",I,False,2021-03-31 05:00:41.416210+00:00
+800,E,07,Computer Equipment,"Computer Equipment, Software, & Supplies",I,False,2021-03-31 05:00:41.416210+00:00
+800,D,07,Computerausrüstung,"Computerausrüstung, Software & Zubehör",I,False,2021-03-31 05:00:41.416210+00:00
+800,S,07,"Equipo informático,","Equipo informático, software y suministros",I,False,2021-03-31 05:00:41.416210+00:00
+800,3,07,"컴퓨터 장비, 소프트웨어, 소모품","컴퓨터 장비, 소프트웨어, 소모품",I,False,2021-03-31 05:00:41.416210+00:00
+800,F,07,"Fournitures, logicie","Fournitures, logiciel et équipement informatiques",I,False,2021-03-31 05:00:41.416210+00:00
+800,J,07,コンピュータ機器、ソフトウェアおよび補給,コンピュータ機器、ソフトウェアおよび補給品,I,False,2021-03-31 05:00:41.416210+00:00
+800,R,07,Компьютерное оборудо,"Компьютерное оборудование, прог.обеспечение и принадлежности",I,False,2021-03-31 05:00:41.416210+00:00
+800,P,001,Metalurgia,Metalurgia,I,False,2021-03-31 05:00:41.416210+00:00
+800,J,001,金属処理,金属処理,I,False,2021-03-31 05:00:41.416210+00:00
+800,1,001,金属加工,金属加工,I,False,2021-03-31 05:00:41.416210+00:00
+800,E,001,Metal Processing,Metal Processing,I,False,2021-03-31 05:00:41.416210+00:00
+800,3,001,Metal Processing,Metal Processing,I,False,2021-03-31 05:00:41.416210+00:00
+800,D,001,Metallverarbeitung,Metallverarbeitung,I,False,2021-03-31 05:00:41.416210+00:00
+800,F,001,Traitement métaux,Traitement métaux,I,False,2021-03-31 05:00:41.416210+00:00
+800,S,001,Tratamiento metales,Tratamiento metales,I,False,2021-03-31 05:00:41.416210+00:00
+800,R,001,Металлообработка,Металлообработка,I,False,2021-03-31 05:00:41.416210+00:00
+800,3,002,전자 부품,전자 부품,I,False,2021-03-31 05:00:41.416210+00:00
+800,3,003,전구,전구,I,False,2021-03-31 05:00:41.416210+00:00
+800,3,004,화학,화학,I,False,2021-03-31 05:00:41.416210+00:00
+800,3,006,사무용 자재,사무용 자재,I,False,2021-03-31 05:00:41.416210+00:00
+800,3,007,서비스,서비스,I,False,2021-03-31 05:00:41.416210+00:00
+800,3,008,포장,포장,I,False,2021-03-31 05:00:41.416210+00:00
+800,3,009,액세서리,액세서리,I,False,2021-03-31 05:00:41.416210+00:00
+800,3,010,소모품,소모품,I,False,2021-03-31 05:00:41.416210+00:00
+800,3,011,솔벤트,솔벤트,I,False,2021-03-31 05:00:41.416210+00:00
+800,3,012,하드웨어,하드웨어,I,False,2021-03-31 05:00:41.416210+00:00
+800,3,013,엘리베이터,엘리베이터,I,False,2021-03-31 05:00:41.416210+00:00
+800,3,014,소프트웨어 - 일반,소프트웨어 - 일반,I,False,2021-03-31 05:00:41.416210+00:00
+800,3,015,음식,음식,I,False,2021-03-31 05:00:41.416210+00:00
+800,3,016,가죽 및 텍스타일,가죽 및 텍스타일,I,False,2021-03-31 05:00:41.416210+00:00
+800,3,017,의약품,의약품,I,False,2021-03-31 05:00:41.416210+00:00
+800,1,018,能源资产,能源资产,I,False,2021-03-31 05:00:41.416210+00:00
+800,W,018,Energy Assets,Energy Assets,I,False,2021-03-31 05:00:41.416210+00:00
+800,4,018,Energy Assets,Energy Assets,I,False,2021-03-31 05:00:41.416210+00:00
+800,Z,018,Energy Assets,Energy Assets,I,False,2021-03-31 05:00:41.416210+00:00
+800,6,018,Energy Assets,Energy Assets,I,False,2021-03-31 05:00:41.416210+00:00
+800,E,018,Energy Assets,Energy Assets,I,False,2021-03-31 05:00:41.416210+00:00
+800,G,018,Energy Assets,Energy Assets,I,False,2021-03-31 05:00:41.416210+00:00
+800,5,018,Energy Assets,Energy Assets,I,False,2021-03-31 05:00:41.416210+00:00
+800,d,018,Energy Assets,Energy Assets,I,False,2021-03-31 05:00:41.416210+00:00
+800,D,018,Energieanlagen,Energieanlagen,I,False,2021-03-31 05:00:41.416210+00:00
+800,S,018,Activos energía,Activos energía,I,False,2021-03-31 05:00:41.416210+00:00
+800,3,018,에너지 자산,에너지 자산,I,False,2021-03-31 05:00:41.416210+00:00
+800,P,018,Ativos energéticos,Ativos energéticos,I,False,2021-03-31 05:00:41.416210+00:00
+800,F,018,Biens énergétiques,Biens énergétiques,I,False,2021-03-31 05:00:41.416210+00:00
+800,J,018,エネルギー資産,エネルギー資産,I,False,2021-03-31 05:00:41.416210+00:00
+800,R,018,Энергооборудование,Энергооборудование,I,False,2021-03-31 05:00:41.416210+00:00
+800,W,019,Media,Media,I,False,2021-03-31 05:00:41.416210+00:00
+800,E,019,Media,Media,I,False,2021-03-31 05:00:41.416210+00:00
+800,G,019,Media,Media,I,False,2021-03-31 05:00:41.416210+00:00
+800,d,019,Media,Media,I,False,2021-03-31 05:00:41.416210+00:00
+800,4,019,Media,Media,I,False,2021-03-31 05:00:41.416210+00:00
+800,Z,019,Media,Media,I,False,2021-03-31 05:00:41.416210+00:00
+800,6,019,Media,Media,I,False,2021-03-31 05:00:41.416210+00:00
+800,5,019,Media,Media,I,False,2021-03-31 05:00:41.416210+00:00
+800,D,019,Medien,Medien,I,False,2021-03-31 05:00:41.416210+00:00
+800,S,019,Medios,Medios,I,False,2021-03-31 05:00:41.416210+00:00
+800,F,019,Média,Média,I,False,2021-03-31 05:00:41.416210+00:00
+800,P,019,Mídia,Mídia,I,False,2021-03-31 05:00:41.416210+00:00
+800,1,019,介质,介质,I,False,2021-03-31 05:00:41.416210+00:00
+800,3,019,미디어,미디어,I,False,2021-03-31 05:00:41.416210+00:00
+800,J,019,メディア,メディア,I,False,2021-03-31 05:00:41.416210+00:00
+800,R,019,Медиа,Носители,I,False,2021-03-31 05:00:41.416210+00:00
+800,3,020,차량,차량,I,False,2021-03-31 05:00:41.416210+00:00
+800,R,021,ВНЗМ,ВостокНефтеЗаводМонтаж,I,False,2021-03-31 05:00:41.416210+00:00
+800,3,030,문서 작성,문서 작성,I,False,2021-03-31 05:00:41.416210+00:00
+800,D,040,Bürobedarf,Bürobedarf,I,False,2021-03-31 05:00:41.416210+00:00
+800,1,040,办公用品,办公用品,I,False,2021-03-31 05:00:41.416210+00:00
+800,E,040,Office materials,Office materials,I,False,2021-03-31 05:00:41.416210+00:00
+800,G,040,Office materials,Office materials,I,False,2021-03-31 05:00:41.416210+00:00
+800,W,040,Office materials,Office materials,I,False,2021-03-31 05:00:41.416210+00:00
+800,6,040,Office materials,Office materials,I,False,2021-03-31 05:00:41.416210+00:00
+800,d,040,Office materials,Office materials,I,False,2021-03-31 05:00:41.416210+00:00
+800,4,040,Office materials,Office materials,I,False,2021-03-31 05:00:41.416210+00:00
+800,5,040,Office materials,Office materials,I,False,2021-03-31 05:00:41.416210+00:00
+800,3,040,사무실 자재,사무실 자재,I,False,2021-03-31 05:00:41.416210+00:00
+800,J,040,オフィス用品,オフィス用品,I,False,2021-03-31 05:00:41.416210+00:00
+800,S,040,Material de oficina,Material de oficina,I,False,2021-03-31 05:00:41.416210+00:00
+800,F,040,Matériel de bureau,Matériel de bureau,I,False,2021-03-31 05:00:41.416210+00:00
+800,R,040,Канцтовары,Канцтовары,I,False,2021-03-31 05:00:41.416210+00:00
+800,P,040,Materiais escritório,Materiais escritório,I,False,2021-03-31 05:00:41.416210+00:00
+800,D,050,Foto,Foto,I,False,2021-03-31 05:00:41.416210+00:00
+800,P,050,Foto,Foto,I,False,2021-03-31 05:00:41.416210+00:00
+800,F,050,Photo,Ecran,I,False,2021-03-31 05:00:41.416210+00:00
+800,G,050,Photo,Photo,I,False,2021-03-31 05:00:41.416210+00:00
+800,5,050,Photo,Photo,I,False,2021-03-31 05:00:41.416210+00:00
+800,W,050,Photo,Photo,I,False,2021-03-31 05:00:41.416210+00:00
+800,E,050,Photo,Photo,I,False,2021-03-31 05:00:41.416210+00:00
+800,6,050,Photo,Photo,I,False,2021-03-31 05:00:41.416210+00:00
+800,d,050,Photo,Photo,I,False,2021-03-31 05:00:41.416210+00:00
+800,4,050,Photo,Photo,I,False,2021-03-31 05:00:41.416210+00:00
+800,J,050,写真,写真,I,False,2021-03-31 05:00:41.416210+00:00
+800,1,050,照片,照片,I,False,2021-03-31 05:00:41.416210+00:00
+800,3,050,사진,사진,I,False,2021-03-31 05:00:41.416210+00:00
+800,S,050,Fotografía,Fotografía,I,False,2021-03-31 05:00:41.416210+00:00
+800,R,050,Фотография,Фотография,I,False,2021-03-31 05:00:41.416210+00:00
+800,R,060,Mіbel,Mіbel,I,False,2021-03-31 05:00:41.416210+00:00
+800,J,060,家具,家具,I,False,2021-03-31 05:00:41.416210+00:00
+800,1,060,装备,装备,I,False,2021-03-31 05:00:41.416210+00:00
+800,3,060,가구,가구,I,False,2021-03-31 05:00:41.416210+00:00
+800,P,060,Móveis,Móveis,I,False,2021-03-31 05:00:41.416210+00:00
+800,D,060,Mobiliar,Mobiliar,I,False,2021-03-31 05:00:41.416210+00:00
+800,F,060,Mobilier,Mobilier,I,False,2021-03-31 05:00:41.416210+00:00
+800,G,060,Furnitures,Furnitures,I,False,2021-03-31 05:00:41.416210+00:00
+800,6,060,Furnitures,Furnitures,I,False,2021-03-31 05:00:41.416210+00:00
+800,E,060,Furnitures,Furnitures,I,False,2021-03-31 05:00:41.416210+00:00
+800,d,060,Furnitures,Furnitures,I,False,2021-03-31 05:00:41.416210+00:00
+800,4,060,Furnitures,Furnitures,I,False,2021-03-31 05:00:41.416210+00:00
+800,W,060,Furnitures,Furnitures,I,False,2021-03-31 05:00:41.416210+00:00
+800,Z,060,Furnitures,Furnitures,I,False,2021-03-31 05:00:41.416210+00:00
+800,5,060,Furnitures,Furnitures,I,False,2021-03-31 05:00:41.416210+00:00
+800,S,060,Mobiliario,Mobiliario,I,False,2021-03-31 05:00:41.416210+00:00
+800,F,300,Avions,Avions,I,False,2021-03-31 05:00:41.416210+00:00
+800,S,300,Aviones,Aviones,I,False,2021-03-31 05:00:41.416210+00:00
+800,P,300,Aeronaves,Aeronaves,I,False,2021-03-31 05:00:41.416210+00:00
+800,D,300,Flugzeuge,Flugzeuge,I,False,2021-03-31 05:00:41.416210+00:00
+800,J,300,航空機,航空機,I,False,2021-03-31 05:00:41.416210+00:00
+800,1,300,飞行器,飞行器,I,False,2021-03-31 05:00:41.416210+00:00
+800,3,300,항공기,항공기,I,False,2021-03-31 05:00:41.416210+00:00
+800,Z,300,Aircrafts,Aerospace & Defense,I,False,2021-03-31 05:00:41.416210+00:00
+800,4,300,Aircrafts,Aerospace & Defense,I,False,2021-03-31 05:00:41.416210+00:00
+800,d,300,Aircrafts,Aerospace & Defense,I,False,2021-03-31 05:00:41.416210+00:00
+800,G,300,Aircrafts,Aerospace & Defense,I,False,2021-03-31 05:00:41.416210+00:00
+800,E,300,Aircrafts,Aerospace & Defense,I,False,2021-03-31 05:00:41.416210+00:00
+800,5,300,Aircrafts,Aerospace & Defense,I,False,2021-03-31 05:00:41.416210+00:00
+800,6,300,Aircrafts,Aerospace & Defense,I,False,2021-03-31 05:00:41.416210+00:00
+800,R,300,Самолеты,Aerospace & Defense,I,False,2021-03-31 05:00:41.416210+00:00
+800,W,300,Aircrafts,Aerospace & Defense,I,False,2021-03-31 05:00:41.416210+00:00
+800,3,401,인력,인력,I,False,2021-03-31 05:00:41.416210+00:00
+800,3,403,자재,자재,I,False,2021-03-31 05:00:41.416210+00:00
+800,3,404,출장,출장,I,False,2021-03-31 05:00:41.416210+00:00
+800,3,408,오버헤드,오버헤드,I,False,2021-03-31 05:00:41.416210+00:00
+800,3,409,외주,외주,I,False,2021-03-31 05:00:41.416210+00:00
+800,J,900,紙,紙,I,False,2021-03-31 05:00:41.416210+00:00
+800,1,900,纸,纸,I,False,2021-03-31 05:00:41.416210+00:00
+800,P,900,Papel,Papel,I,False,2021-03-31 05:00:41.416210+00:00
+800,S,900,Papel,Papel,I,False,2021-03-31 05:00:41.416210+00:00
+800,5,900,Paper,Paper,I,False,2021-03-31 05:00:41.416210+00:00
+800,4,900,Paper,Paper,I,False,2021-03-31 05:00:41.416210+00:00
+800,Z,900,Paper,Paper,I,False,2021-03-31 05:00:41.416210+00:00
+800,G,900,Paper,Paper,I,False,2021-03-31 05:00:41.416210+00:00
+800,6,900,Paper,Paper,I,False,2021-03-31 05:00:41.416210+00:00
+800,d,900,Paper,Paper,I,False,2021-03-31 05:00:41.416210+00:00
+800,W,900,Paper,Paper,I,False,2021-03-31 05:00:41.416210+00:00
+800,E,900,Paper,Paper,I,False,2021-03-31 05:00:41.416210+00:00
+800,F,900,Papier,Papier,I,False,2021-03-31 05:00:41.416210+00:00
+800,D,900,Papier,Papier,I,False,2021-03-31 05:00:41.416210+00:00
+800,3,900,종이,종이,I,False,2021-03-31 05:00:41.416210+00:00
+800,R,900,Бумага,Бумага,I,False,2021-03-31 05:00:41.416210+00:00
+800,E,CPG,CPG Company,CPG Candy Company,I,False,2021-03-31 05:00:41.416210+00:00
+800,P,CPG,Empresa CPG,Empresa CPG Candy,I,False,2021-03-31 05:00:41.416210+00:00
+800,1,CPG,消费品公司,糖果 cpg 公司,I,False,2021-03-31 05:00:41.416210+00:00
+800,F,CPG,Cpg société,Cpg bonbons société,I,False,2021-03-31 05:00:41.416210+00:00
+800,S,CPG,Empresa bienes cons.,Empresa de bienes de consumo de dulces,I,False,2021-03-31 05:00:41.416210+00:00
+800,Z,DAD,Aircrafts,Aerospace & Defense,I,False,2021-03-31 05:00:41.416210+00:00
+800,1,0025,移动通信,移动通信,I,False,2021-03-31 05:00:41.416210+00:00
+800,J,0025,モバイル通信,モバイル通信,I,False,2021-03-31 05:00:41.416210+00:00
+800,F,0025,Communication mobile,Communication mobile,I,False,2021-03-31 05:00:41.416210+00:00
+800,S,0025,Comunicación móvil,Comunicación móvil,I,False,2021-03-31 05:00:41.416210+00:00
+800,P,0025,Comunicação móvel,Comunicação móvel,I,False,2021-03-31 05:00:41.416210+00:00
+800,R,0025,Mobile Communication,Mobile Communication,I,False,2021-03-31 05:00:41.416210+00:00
+800,6,0025,Mobile Communication,Mobile Communication,I,False,2021-03-31 05:00:41.416210+00:00
+800,Z,0025,Mobile Communication,Mobile Communication,I,False,2021-03-31 05:00:41.416210+00:00
+800,G,0025,Mobile Communication,Mobile Communication,I,False,2021-03-31 05:00:41.416210+00:00
+800,5,0025,Mobile Communication,Mobile Communication,I,False,2021-03-31 05:00:41.416210+00:00
+800,W,0025,Mobile Communication,Mobile Communication,I,False,2021-03-31 05:00:41.416210+00:00
+800,d,0025,Mobile Communication,Mobile Communication,I,False,2021-03-31 05:00:41.416210+00:00
+800,E,0025,Mobile Communication,Mobile Communication,I,False,2021-03-31 05:00:41.416210+00:00
+800,4,0025,Mobile Communication,Mobile Communication,I,False,2021-03-31 05:00:41.416210+00:00
+800,D,0025,Mobile Kommunikation,Mobile Kommunikation,I,False,2021-03-31 05:00:41.416210+00:00
+800,3,0025,모바일 통신 기기,모바일 통신 기기,I,False,2021-03-31 05:00:41.416210+00:00
+800,1,0026,数码相机,数码相机,I,False,2021-03-31 05:00:41.416210+00:00
+800,D,0026,Digitalkameras,Digitalkameras,I,False,2021-03-31 05:00:41.416210+00:00
+800,5,0026,Digitale Cameras,Digital Cameras,I,False,2021-03-31 05:00:41.416210+00:00
+800,E,0026,Digitale Cameras,Digital Cameras,I,False,2021-03-31 05:00:41.416210+00:00
+800,W,0026,Digitale Cameras,Digital Cameras,I,False,2021-03-31 05:00:41.416210+00:00
+800,d,0026,Digitale Cameras,Digital Cameras,I,False,2021-03-31 05:00:41.416210+00:00
+800,R,0026,Digitale Cameras,Digital Cameras,I,False,2021-03-31 05:00:41.416210+00:00
+800,G,0026,Digitale Cameras,Digital Cameras,I,False,2021-03-31 05:00:41.416210+00:00
+800,4,0026,Digitale Cameras,Digital Cameras,I,False,2021-03-31 05:00:41.416210+00:00
+800,6,0026,Digitale Cameras,Digital Cameras,I,False,2021-03-31 05:00:41.416210+00:00
+800,P,0026,Câmeras digitais,Câmeras digitais,I,False,2021-03-31 05:00:41.416210+00:00
+800,S,0026,Cámaras digitales,Cámaras digitales,I,False,2021-03-31 05:00:41.416210+00:00
+800,F,0026,Appareil photo num.,Appareil photo num.,I,False,2021-03-31 05:00:41.416210+00:00
+800,3,0026,디지털 카메라,디지털 카메라,I,False,2021-03-31 05:00:41.416210+00:00
+800,Z,0026,Mobile Communication,Mobile Communication,I,False,2021-03-31 05:00:41.416210+00:00
+800,J,0026,デジタルカメラ,デジタルカメラ,I,False,2021-03-31 05:00:41.416210+00:00
+800,3,0201,모터사이클,모터사이클,I,False,2021-03-31 05:00:41.416210+00:00
+800,1,0501,底片冲洗,底片冲洗,I,False,2021-03-31 05:00:41.416210+00:00
+800,3,0501,필름 현상,필름 현상,I,False,2021-03-31 05:00:41.416210+00:00
+800,D,0501,Filmentwicklung,Filmentwicklung,I,False,2021-03-31 05:00:41.416210+00:00
+800,d,0501,Film Development,Film Development,I,False,2021-03-31 05:00:41.416210+00:00
+800,4,0501,Film Development,Film Development,I,False,2021-03-31 05:00:41.416210+00:00
+800,Z,0501,Film Development,Film Development,I,False,2021-03-31 05:00:41.416210+00:00
+800,6,0501,Film Development,Film Development,I,False,2021-03-31 05:00:41.416210+00:00
+800,R,0501,Film Development,Film Development,I,False,2021-03-31 05:00:41.416210+00:00
+800,W,0501,Film Development,Film Development,I,False,2021-03-31 05:00:41.416210+00:00
+800,5,0501,Film Development,Film Development,I,False,2021-03-31 05:00:41.416210+00:00

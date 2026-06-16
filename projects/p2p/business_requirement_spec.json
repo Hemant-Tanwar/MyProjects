@@ -1,0 +1,83 @@
+{
+  "process_name": "Purchase-to-Pay (P2P) Optimization",
+  "source_systems": [
+    "SAP ECC / S4HANA"
+  ],
+  "case_id_definition": "EKPO.EBELN (Purchase Order Document Number) + EKPO.EBELP (Purchase Order Line Item Number)",
+  "activity_definitions": [
+    {
+      "name": "Create Purchase Order Item",
+      "trigger_condition": "Creation of purchase order item in EKPO table"
+    },
+    {
+      "name": "Approve Purchase Order Item",
+      "trigger_condition": "Release indicator update in EKKO or CDHDR tracking"
+    },
+    {
+      "name": "Receive Goods",
+      "trigger_condition": "Post goods receipt in MSEG table with transaction type 101"
+    },
+    {
+      "name": "Receive Invoice",
+      "trigger_condition": "Register vendor invoice in RBKP / RSEG tables"
+    },
+    {
+      "name": "Pay Invoice",
+      "trigger_condition": "Clear payment in BSAK / BKPF financial ledger"
+    }
+  ],
+  "key_timestamp_fields": [
+    {
+      "activity_name": "Create Purchase Order Item",
+      "source_field": "EKKO.AEDAT or CDHDR.UDATE"
+    },
+    {
+      "activity_name": "Approve Purchase Order Item",
+      "source_field": "CDHDR.UDATE"
+    },
+    {
+      "activity_name": "Receive Goods",
+      "source_field": "MSEG.BUDAT"
+    },
+    {
+      "activity_name": "Receive Invoice",
+      "source_field": "RBKP.BUDAT"
+    },
+    {
+      "activity_name": "Pay Invoice",
+      "source_field": "BKPF.BUDAT"
+    }
+  ],
+  "kpis": [
+    {
+      "name": "PO-to-GR Throughput Time",
+      "description": "Time elapsed between creating PO item and receiving goods",
+      "calculation_idea": "AVG(Timestamp(Receive Goods) - Timestamp(Create Purchase Order Item))"
+    },
+    {
+      "name": "Touchless PO Rate",
+      "description": "Percentage of POs that did not require manual approval changes",
+      "calculation_idea": "COUNT(cases with no changes) / Total PO Cases"
+    },
+    {
+      "name": "Invoice Verification Time",
+      "description": "Time to post an invoice since goods receipt",
+      "calculation_idea": "AVG(Timestamp(Receive Invoice) - Timestamp(Receive Goods))"
+    }
+  ],
+  "business_filters": [
+    {
+      "name": "High Value Orders",
+      "rule": "PO Item net value (EKPO.NETPR) > 10,000 EUR"
+    },
+    {
+      "name": "Maverick Buying",
+      "rule": "Invoice posting occurs before PO creation date"
+    }
+  ],
+  "acceptance_rules": [
+    "Case ID must never be null",
+    "Activities must follow sequential timestamps (Create PO <= Receive Goods <= Receive Invoice <= Clear Payment)",
+    "Goods receipt must link to the purchase order reference (MSEG.EBELN = EKPO.EBELN)"
+  ]
+}

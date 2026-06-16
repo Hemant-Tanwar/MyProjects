@@ -1,0 +1,201 @@
+mandt,spras,land1,landx,natio,landx50,natio50,prq_spregt,operation_flag,is_deleted,recordstamp
+50,E,CA,Canada,Canadian,Canada,Canadian,,U,False,2022-02-23 07:47:57.686185+00:00
+50,E,DE,Germany,German,Germany,German,,U,False,2022-02-23 07:53:51.020225+00:00
+50,E,JP,Japan,Japanese,Japan,Japanese,,U,False,2022-02-23 07:59:49.612662+00:00
+100,D,AD,Andorra,andorranisch,Andorra,andorranisch,,I,False,2022-04-21 15:05:20.095141+00:00
+100,E,AD,Andorra,Andorran,Andorra,Andorran,,I,False,2022-04-21 15:05:20.095141+00:00
+100,E,AE,Utd.Arab Emir.,Unit.Arab Emir.,United Arab Emirates,United Arab Emirates,,I,False,2022-04-21 15:05:20.095141+00:00
+100,D,AE,Ver.Arab.Emir.,d. Verein. Arab,Vereinigte Arabische Emirate,v.d. Vereinigten Arabischen Emiraten,,I,False,2022-04-21 15:05:20.095141+00:00
+100,D,AF,Afghanistan,afghanisch,Afghanistan,afghanisch,,I,False,2022-04-21 15:05:20.095141+00:00
+100,E,AF,Afghanistan,Afghan,Afghanistan,Afghan,,I,False,2022-04-21 15:05:20.095141+00:00
+100,E,AG,Antigua/Barbuda,Antiguan,Antigua and Barbuda,Antiguan,,I,False,2022-04-21 15:05:20.095141+00:00
+100,D,AG,Antigua/Barbuda,antiguanisch,Antigua und Barbuda,antiguanisch,,I,False,2022-04-21 15:05:20.095141+00:00
+100,D,AI,Anguilla,Anguilla,Anguilla,anguillanisch,,I,False,2022-04-21 15:05:20.095141+00:00
+100,E,AI,Anguilla,Anguilla,Anguilla,Anguillian,,I,False,2022-04-21 15:05:20.095141+00:00
+100,E,AL,Albania,Albanian,Albania,Albanian,,I,False,2022-04-21 15:05:20.095141+00:00
+100,D,AL,Albanien,albanisch,Albanien,albanisch,,I,False,2022-04-21 15:05:20.095141+00:00
+100,E,AM,Armenia,Armenian,Armenia,Armenian,,I,False,2022-04-21 15:05:20.095141+00:00
+100,D,AM,Armenien,armenisch,Armenien,armenisch,,I,False,2022-04-21 15:05:20.095141+00:00
+100,D,AO,Angola,angolanisch,Angola,angolanisch,,I,False,2022-04-21 15:05:20.095141+00:00
+100,E,AO,Angola,Angolan,Angola,Angolan,,I,False,2022-04-21 15:05:20.095141+00:00
+100,D,AQ,Antarktis,Antarktis,Antarktis,v.d. Antarktis,,I,False,2022-04-21 15:05:20.095141+00:00
+100,E,AQ,Antarctica,Antarctica,Antarctica,From Antarctica,,I,False,2022-04-21 15:05:20.095141+00:00
+100,E,AR,Argentina,Argentinian,Argentina,Argentinian,,I,False,2022-04-21 15:05:20.095141+00:00
+100,D,AR,Argentinien,argentinisch,Argentinien,argentinisch,,I,False,2022-04-21 15:05:20.095141+00:00
+100,E,AS,"Samoa, America",Samoan,American Samoa,Samoan,,I,False,2022-04-21 15:05:20.095141+00:00
+100,D,AS,"Samoa, Amerikan",samoanisch,Amerikanisch-Samoa,samoanisch,,I,False,2022-04-21 15:05:20.095141+00:00
+100,E,AT,Austria,Austrian,Austria,Austrian,,I,False,2022-04-21 15:05:20.095141+00:00
+100,D,AT,Österreich,österreichisch,Österreich,österreichisch,,I,False,2022-04-21 15:05:20.095141+00:00
+100,E,AU,Australia,Australian,Australia,Australian,,I,False,2022-04-21 15:05:20.095141+00:00
+100,D,AU,Australien,australisch,Australien,australisch,,I,False,2022-04-21 15:05:20.095141+00:00
+100,D,AW,Aruba,arubanisch,Aruba,arubanisch,,I,False,2022-04-21 15:05:20.095141+00:00
+100,E,AW,Aruba,Aruban,Aruba,Aruban,,I,False,2022-04-21 15:05:20.095141+00:00
+100,E,AZ,Azerbaijan,Azerbaijani,Azerbaijan,Azerbaijani,,I,False,2022-04-21 15:05:20.095141+00:00
+100,D,AZ,Aserbaidschan,aserbaidschanis,Aserbaidschan,aserbaidschanisch,,I,False,2022-04-21 15:05:20.095141+00:00
+100,E,BA,Bosnia-Herz.,Bosnian,Bosnia and Herzegovina,Bosnian-Herzegovinian,,I,False,2022-04-21 15:05:20.095141+00:00
+100,D,BA,Bosnien-Herz.,Bosnisch,Bosnien und Herzegowina,bosnisch-herzegowinisch,,I,False,2022-04-21 15:05:20.095141+00:00
+100,D,BB,Barbados,barbadisch,Barbados,barbadisch,,I,False,2022-04-21 15:05:20.095141+00:00
+100,E,BB,Barbados,Barbadian,Barbados,Barbadian,,I,False,2022-04-21 15:05:20.095141+00:00
+100,E,BD,Bangladesh,Bangladeshi,Bangladesh,Bangladeshi,,I,False,2022-04-21 15:05:20.095141+00:00
+100,D,BD,Bangladesch,bangladeschisch,Bangladesch,bangladeschisch,,I,False,2022-04-21 15:05:20.095141+00:00
+100,D,BE,Belgien,belgisch,Belgien,belgisch,,I,False,2022-04-21 15:05:20.095141+00:00
+100,E,BE,Belgium,Belgian,Belgium,Belgian,,I,False,2022-04-21 15:05:20.095141+00:00
+100,E,BF,Burkina Faso,Burkinabe,Burkina Faso,Burkinabe,,I,False,2022-04-21 15:05:20.095141+00:00
+100,D,BF,Burkina-Faso,burkinisch,Burkina-Faso,burkinisch,,I,False,2022-04-21 15:05:20.095141+00:00
+100,E,BG,Bulgaria,Bulgarian,Bulgaria,Bulgarian,,I,False,2022-04-21 15:05:20.095141+00:00
+100,D,BG,Bulgarien,bulgarisch,Bulgarien,bulgarisch,,I,False,2022-04-21 15:05:20.095141+00:00
+100,D,BH,Bahrain,bahrainisch,Bahrain,bahrainisch,,I,False,2022-04-21 15:05:20.095141+00:00
+100,E,BH,Bahrain,Bahraini,Bahrain,Bahraini,,I,False,2022-04-21 15:05:20.095141+00:00
+100,D,BI,Burundi,burundisch,Burundi,burundisch,,I,False,2022-04-21 15:05:20.095141+00:00
+100,E,BI,Burundi,Burundian,Burundi,Burundian,,I,False,2022-04-21 15:05:20.095141+00:00
+100,D,BJ,Benin,beninisch,Benin,beninisch,,I,False,2022-04-21 15:05:20.095141+00:00
+100,E,BJ,Benin,Beninese,Benin,Beninese,,I,False,2022-04-21 15:05:20.095141+00:00
+100,D,BM,Bermuda,bermudisch,Bermuda,bermudisch,,I,False,2022-04-21 15:05:20.095141+00:00
+100,E,BM,Bermuda,Bermudan,Bermuda,Bermudan,,I,False,2022-04-21 15:05:20.095141+00:00
+100,D,BN,Brunei Drussal.,bruneiisch,Brunei Darussalam,bruneiisch,,I,False,2022-04-21 15:05:20.095141+00:00
+100,E,BN,Brunei Daruss.,Bruneian,Brunei Darussalam,Bruneian,,I,False,2022-04-21 15:05:20.095141+00:00
+100,E,BO,Bolivia,Bolivian,Bolivia,Bolivian,,I,False,2022-04-21 15:05:20.095141+00:00
+100,D,BO,Bolivien,bolivianisch,Bolivien,bolivianisch,,I,False,2022-04-21 15:05:20.095141+00:00
+100,E,BQ,"Bonaire, Saba",Dutch,"Bonaire, Sint Eustatius and Saba",Dutch,,I,False,2022-04-21 15:05:20.095141+00:00
+100,D,BQ,"Bonaire, Saba",niederländisch,"Bonaire, Saint Eustatius und Saba",niederländisch,,I,False,2022-04-21 15:05:20.095141+00:00
+100,E,BR,Brazil,Brazilian,Brazil,Brazilian,,I,False,2022-04-21 15:05:20.095141+00:00
+100,D,BR,Brasilien,brasilianisch,Brasilien,brasilianisch,,I,False,2022-04-21 15:05:20.095141+00:00
+100,D,BS,Bahamas,bahamaisch,Bahamas,bahamaisch,,I,False,2022-04-21 15:05:20.095141+00:00
+100,E,BS,Bahamas,Bahaman,Bahamas,Bahaman,,I,False,2022-04-21 15:05:20.095141+00:00
+100,D,BT,Bhutan,bhutanisch,Bhutan,bhutanisch,,I,False,2022-04-21 15:05:20.095141+00:00
+100,E,BT,Bhutan,Bhutanese,Bhutan,Bhutanese,,I,False,2022-04-21 15:05:20.095141+00:00
+100,D,BV,Bouvet Inseln,Bouvet Inseln,Bouvet Inseln,v.d. Bouvet Inseln,,I,False,2022-04-21 15:05:20.095141+00:00
+100,E,BV,Bouvet Islands,Bouvet Islands,Bouvet Islands,From the Bouvet Islands,,I,False,2022-04-21 15:05:20.095141+00:00
+100,D,BW,Botsuana,botsuanisch,Botsuana,botsuanisch,,I,False,2022-04-21 15:05:20.095141+00:00
+100,E,BW,Botswana,Botswanan,Botswana,Botswanan,,I,False,2022-04-21 15:05:20.095141+00:00
+100,E,BY,Belarus,Belarusian,Belarus,Belarusian,,I,False,2022-04-21 15:05:20.095141+00:00
+100,D,BY,Belarus,belarussisch,Belarus (Weißrussland),belarussisch,,I,False,2022-04-21 15:05:20.095141+00:00
+100,D,BZ,Belize,belizisch,Belize,belizisch,,I,False,2022-04-21 15:05:20.095141+00:00
+100,E,BZ,Belize,Belizean,Belize,Belizean,,I,False,2022-04-21 15:05:20.095141+00:00
+100,E,CA,Canada,Canadian,Canada,Canadian,,I,False,2022-04-21 15:05:20.095141+00:00
+100,D,CA,Kanada,kanadisch,Kanada,kanadisch,,I,False,2022-04-21 15:05:20.095141+00:00
+100,D,CC,Kokosinseln,australisch,Kokosinseln,australisch,,I,False,2022-04-21 15:05:20.095141+00:00
+100,E,CC,Keeling Islands,Australian,Cocos (Keeling) Islands,Australian,,I,False,2022-04-21 15:05:20.095141+00:00
+100,D,CD,Republik Kongo,kongolesisch,Republik Kongo,kongolesisch,,I,False,2022-04-21 15:05:20.095141+00:00
+100,E,CD,Dem. Rep. Congo,Congolese,Democratic Republic of the Congo,Congolese,,I,False,2022-04-21 15:05:20.095141+00:00
+100,E,CF,CAR,Central African,Central African Republic,Central African,,I,False,2022-04-21 15:05:20.095141+00:00
+100,D,CF,Zentralaf. Rep.,zentralafrikani,Zentralafrikanische Republik,zentralafrikanisch,,I,False,2022-04-21 15:05:20.095141+00:00
+100,D,CG,Kongo,kongolesisch,Kongo,kongolesisch,,I,False,2022-04-21 15:05:20.095141+00:00
+100,E,CG,Rep.of Congo,Congolese,Republic of the Congo,Congolese,,I,False,2022-04-21 15:05:20.095141+00:00
+100,D,CH,Schweiz,schweizerisch,Schweiz,schweizerisch,,I,False,2022-04-21 15:05:20.095141+00:00
+100,E,CH,Switzerland,Swiss,Switzerland,Swiss,,I,False,2022-04-21 15:05:20.095141+00:00
+100,E,CI,Cote d'Ivoire,Ivoirian,Cote d'Ivoire,Ivoirian,,I,False,2022-04-21 15:05:20.095141+00:00
+100,D,CI,Elfenbeinküste,ivorisch,Elfenbeinküste,ivorisch,,I,False,2022-04-21 15:05:20.095141+00:00
+100,D,CK,Cookinseln,Cookinseln,Cookinseln,Cookinseln,,I,False,2022-04-21 15:05:20.095141+00:00
+100,E,CK,Cook Islands,Cook Islands,Cook Islands,Cook Islands,,I,False,2022-04-21 15:05:20.095141+00:00
+100,D,CL,Chile,chilenisch,Chile,chilenisch,,I,False,2022-04-21 15:05:20.095141+00:00
+100,E,CL,Chile,Chilean,Chile,Chilean,,I,False,2022-04-21 15:05:20.095141+00:00
+100,D,CM,Kamerun,kamerunisch,Kamerun,kamerunisch,,I,False,2022-04-21 15:05:20.095141+00:00
+100,E,CM,Cameroon,Cameroonian,Cameroon,Cameroonian,,I,False,2022-04-21 15:05:20.095141+00:00
+100,D,CN,China,chinesisch,China,chinesisch,,I,False,2022-04-21 15:05:20.095141+00:00
+100,E,CN,China,Chinese,China,Chinese,,I,False,2022-04-21 15:05:20.095141+00:00
+100,E,CO,Colombia,Colombian,Colombia,Colombian,,I,False,2022-04-21 15:05:20.095141+00:00
+100,D,CO,Kolumbien,kolumbianisch,Kolumbien,kolumbianisch,,I,False,2022-04-21 15:05:20.095141+00:00
+100,D,CR,Costa Rica,costaricanisch,Costa Rica,costaricanisch,,I,False,2022-04-21 15:05:20.095141+00:00
+100,E,CR,Costa Rica,Costa Rican,Costa Rica,Costa Rican,,I,False,2022-04-21 15:05:20.095141+00:00
+100,E,CS,Serbia/Monten.,Serbian/Monten.,Serbia and Montenegro,Serbian; Montenegrin,,I,False,2022-04-21 15:05:20.095141+00:00
+100,D,CS,Serbien/Monten.,Serb-Monteneg.,Serbien und Montenegro,Serbisch-Montenegrinisch,,I,False,2022-04-21 15:05:20.095141+00:00
+100,E,CU,Cuba,Cuban,Cuba,Cuban,,I,False,2022-04-21 15:05:20.095141+00:00
+100,D,CU,Kuba,kubanisch,Kuba,kubanisch,,I,False,2022-04-21 15:05:20.095141+00:00
+100,D,CV,Kap Verde,kapverdisch,Kap Verde,kapverdisch,,I,False,2022-04-21 15:05:20.095141+00:00
+100,E,CV,Cape Verde,Cape Verdean,Cape Verde,Cape Verdean,,I,False,2022-04-21 15:05:20.095141+00:00
+100,E,CW,Curacao,Curacaoan,Curacao,Curacaoan,,I,False,2022-04-21 15:05:20.095141+00:00
+100,D,CW,Curaçao,curaçaoisch,Curaçao,curaçaoisch,,I,False,2022-04-21 15:05:20.095141+00:00
+100,E,CX,Christmas Islnd,Australian,Christmas Islnd,Australian,,I,False,2022-04-21 15:05:20.095141+00:00
+100,D,CX,Weihnachtsinsel,australisch,Weihnachtsinsel,australisch,,I,False,2022-04-21 15:05:20.095141+00:00
+100,E,CY,Cyprus,Cypriot,Cyprus,Cypriot,,I,False,2022-04-21 15:05:20.095141+00:00
+100,D,CY,Zypern,zyprisch,Zypern,zyprisch,,I,False,2022-04-21 15:05:20.095141+00:00
+100,E,CZ,Czech Republic,Czech,Czech Republic,Czech,,I,False,2022-04-21 15:05:20.095141+00:00
+100,D,CZ,Tschechische Re,tschechisch,Tschechische Republik,tschechisch,,I,False,2022-04-21 15:05:20.095141+00:00
+100,E,DE,Germany,German,Germany,German,,I,False,2022-04-21 15:05:20.095141+00:00
+100,D,DE,Deutschland,deutsch,Deutschland,deutsch,,I,False,2022-04-21 15:05:20.095141+00:00
+100,E,DJ,Djibouti,Djiboutian,Djibouti,Djiboutian,,I,False,2022-04-21 15:05:20.095141+00:00
+100,D,DJ,Dschibuti,dschibutisch,Dschibuti,dschibutisch,,I,False,2022-04-21 15:05:20.095141+00:00
+100,E,DK,Denmark,Danish,Denmark,Danish,,I,False,2022-04-21 15:05:20.095141+00:00
+100,D,DK,Dänemark,dänisch,Dänemark,dänisch,,I,False,2022-04-21 15:05:20.095141+00:00
+100,D,DM,Dominica,dominicanisch,Dominica,dominicanisch,,I,False,2022-04-21 15:05:20.095141+00:00
+100,E,DM,Dominica,Dominican,Dominica,Dominican,,I,False,2022-04-21 15:05:20.095141+00:00
+100,E,DO,Dominican Rep.,Dominican,Dominican Republic,Dominican,,I,False,2022-04-21 15:05:20.095141+00:00
+100,D,DO,Dominik. Rep.,dominikanisch,Dominikanische Republik,dominikanisch,,I,False,2022-04-21 15:05:20.095141+00:00
+100,E,DZ,Algeria,Algerian,Algeria,Algerian,,I,False,2022-04-21 15:05:20.095141+00:00
+100,D,DZ,Algerien,algerisch,Algerien,algerisch,,I,False,2022-04-21 15:05:20.095141+00:00
+100,D,EC,Ecuador,ecuadorianisch,Ecuador,ecuadorianisch,,I,False,2022-04-21 15:05:20.095141+00:00
+100,E,EC,Ecuador,Ecuadorian,Ecuador,Ecuadorian,,I,False,2022-04-21 15:05:20.095141+00:00
+100,D,EE,Estland,estländisch,Estland,estländisch,,I,False,2022-04-21 15:05:20.095141+00:00
+100,E,EE,Estonia,Estonian,Estonia,Estonian,,I,False,2022-04-21 15:05:20.095141+00:00
+100,E,EG,Egypt,Egyptian,Egypt,Egyptian,,I,False,2022-04-21 15:05:20.095141+00:00
+100,D,EG,Ägypten,ägyptisch,Ägypten,ägyptisch,,I,False,2022-04-21 15:05:20.095141+00:00
+100,E,EH,West Sahara,French,Western Sahara,French,,I,False,2022-04-21 15:05:20.095141+00:00
+100,D,EH,West Sahara,französisch,Westsahara,französisch,,I,False,2022-04-21 15:05:20.095141+00:00
+100,D,ER,Eritrea,eritreisch,Eritrea,eritreisch,,I,False,2022-04-21 15:05:20.095141+00:00
+100,E,ER,Eritrea,Eritrean,Eritrea,Eritrean,,I,False,2022-04-21 15:05:20.095141+00:00
+100,E,ES,Spain,Spanish,Spain,Spanish,,I,False,2022-04-21 15:05:20.095141+00:00
+100,D,ES,Spanien,spanisch,Spanien,spanisch,,I,False,2022-04-21 15:05:20.095141+00:00
+100,E,ET,Ethiopia,Ethiopian,Ethiopia,Ethiopian,,I,False,2022-04-21 15:05:20.095141+00:00
+100,D,ET,Äthiopien,äthiopisch,Äthiopien,äthiopisch,,I,False,2022-04-21 15:05:20.095141+00:00
+100,E,FI,Finland,Finnish,Finland,Finnish,,I,False,2022-04-21 15:05:20.095141+00:00
+100,D,FI,Finnland,finnisch,Finnland,finnisch,,I,False,2022-04-21 15:05:20.095141+00:00
+100,E,FJ,Fiji,Fijian,Fiji,Fijian,,I,False,2022-04-21 15:05:20.095141+00:00
+100,D,FJ,Fidschi,fidschianisch,Fidschi,fidschianisch,,I,False,2022-04-21 15:05:20.095141+00:00
+100,E,FK,Falkland Islnds,British,Falkland Islands,British,,I,False,2022-04-21 15:05:20.095141+00:00
+100,D,FK,Falklandinseln,britisch,Falklandinseln,britisch,,I,False,2022-04-21 15:05:20.095141+00:00
+100,E,FM,Micronesia,Micronesian,Micronesia,Micronesian,,I,False,2022-04-21 15:05:20.095141+00:00
+100,D,FM,Mikronesien,mikronesisch,Mikronesien,mikronesisch,,I,False,2022-04-21 15:05:20.095141+00:00
+100,D,FO,Färöer,dänisch,Färöer,dänisch,,I,False,2022-04-21 15:05:20.095141+00:00
+100,E,FO,Faroe Islands,Danish,Faroe Islands,Danish,,I,False,2022-04-21 15:05:20.095141+00:00
+100,E,FR,France,French,France,French,,I,False,2022-04-21 15:05:20.095141+00:00
+100,D,FR,Frankreich,französisch,Frankreich,französisch,,I,False,2022-04-21 15:05:20.095141+00:00
+100,E,GA,Gabon,Gabonese,Gabon,Gabonese,,I,False,2022-04-21 15:05:20.095141+00:00
+100,D,GA,Gabun,gabunisch,Gabun,gabunisch,,I,False,2022-04-21 15:05:20.095141+00:00
+100,E,GB,United Kingdom,British,United Kingdom,British,,I,False,2022-04-21 15:05:20.095141+00:00
+100,D,GB,Verein. Königr.,britisch,Vereinigtes Königreich,britisch,,I,False,2022-04-21 15:05:20.095141+00:00
+100,D,GD,Grenada,grenadisch,Grenada,grenadisch,,I,False,2022-04-21 15:05:20.095141+00:00
+100,E,GD,Grenada,Grenadian,Grenada,Grenadian,,I,False,2022-04-21 15:05:20.095141+00:00
+100,E,GE,Georgia,Georgian,Georgia,Georgian,,I,False,2022-04-21 15:05:20.095141+00:00
+100,D,GE,Georgien,georgisch,Georgien,georgisch,,I,False,2022-04-21 15:05:20.095141+00:00
+100,E,GF,French Guayana,French,French Guyana,French,,I,False,2022-04-21 15:05:20.095141+00:00
+100,D,GF,Französ.Guayana,französisch,Französisch-Guayana,französisch,,I,False,2022-04-21 15:05:20.095141+00:00
+100,D,GH,Ghana,ghanaisch,Ghana,ghanaisch,,I,False,2022-04-21 15:05:20.095141+00:00
+100,E,GH,Ghana,Ghanaian,Ghana,Ghanaian,,I,False,2022-04-21 15:05:20.095141+00:00
+100,D,GI,Gibraltar,Gibraltar,Gibraltar,Gibraltar,,I,False,2022-04-21 15:05:20.095141+00:00
+100,E,GI,Gibraltar,Gibraltar,Gibraltar,Gibraltar,,I,False,2022-04-21 15:05:20.095141+00:00
+100,E,GL,Greenland,Danish,Greenland,Danish,,I,False,2022-04-21 15:05:20.095141+00:00
+100,D,GL,Grönland,dänisch,Grönland,dänisch,,I,False,2022-04-21 15:05:20.095141+00:00
+100,D,GM,Gambia,gambisch,Gambia,gambisch,,I,False,2022-04-21 15:05:20.095141+00:00
+100,E,GM,Gambia,Gambian,Gambia,Gambian,,I,False,2022-04-21 15:05:20.095141+00:00
+100,D,GN,Guinea,guineisch,Guinea,guineisch,,I,False,2022-04-21 15:05:20.095141+00:00
+100,E,GN,Guinea,Guinean,Guinea,Guinean,,I,False,2022-04-21 15:05:20.095141+00:00
+100,E,GP,Guadeloupe,French,Guadeloupe,French,,I,False,2022-04-21 15:05:20.095141+00:00
+100,D,GP,Guadeloupe,französisch,Guadeloupe,französisch,,I,False,2022-04-21 15:05:20.095141+00:00
+100,E,GQ,Equatorial Guin,Equatorial Guin,Equatorial Guinea,Equatorial Guinean,,I,False,2022-04-21 15:05:20.095141+00:00
+100,D,GQ,Äquatorialguine,äquatorialguine,Äquatorialguinea,äquatorialguinesisch,,I,False,2022-04-21 15:05:20.095141+00:00
+100,E,GR,Greece,Greek,Greece,Greek,,I,False,2022-04-21 15:05:20.095141+00:00
+100,D,GR,Griechenland,griechisch,Griechenland,griechisch,,I,False,2022-04-21 15:05:20.095141+00:00
+100,D,GS,S. Sandwich Ins,Südgeorgien,Südgeorgien und südliche Sandwichinseln,Südgeorgien,,I,False,2022-04-21 15:05:20.095141+00:00
+100,E,GS,S. Sandwich Ins,South Georgia,South Georgia and the Southern Sandwich Islands,South Georgia,,I,False,2022-04-21 15:05:20.095141+00:00
+100,D,GT,Guatemala,guatemaltekisch,Guatemala,guatemaltekisch,,I,False,2022-04-21 15:05:20.095141+00:00
+100,E,GT,Guatemala,Guatemalan,Guatemala,Guatemalan,,I,False,2022-04-21 15:05:20.095141+00:00
+100,E,GU,Guam,American,Guam,American,,I,False,2022-04-21 15:05:20.095141+00:00
+100,D,GU,Guam,amerikanisch,Guam,amerikanisch,,I,False,2022-04-21 15:05:20.095141+00:00
+100,D,GW,Guinea-Bissau,guinea-bissauis,Guinea-Bissau,guinea-bissauisch,,I,False,2022-04-21 15:05:20.095141+00:00
+100,E,GW,Guinea-Bissau,Guinean,Guinea-Bissau,Guinean,,I,False,2022-04-21 15:05:20.095141+00:00
+100,D,GY,Guyana,guyanisch,Guyana,guyanisch,,I,False,2022-04-21 15:05:20.095141+00:00
+100,E,GY,Guyana,Guyanese,Guyana,Guyanese,,I,False,2022-04-21 15:05:20.095141+00:00
+100,D,HK,Hongkong,Hongkong,Hongkong,Hongkong,,I,False,2022-04-21 15:05:20.095141+00:00
+100,E,HK,Hong Kong,Hong Kong,Hong Kong,Hong Kong,,I,False,2022-04-21 15:05:20.095141+00:00
+100,D,HM,Heard/McDon.Ins,Heard/McDon.Ins,Heard und McDonaldinseln,v.d. Heard und McDonald Inseln,,I,False,2022-04-21 15:05:20.095141+00:00
+100,E,HM,Heard/McDon.Isl,Heard/McDon.Isl,Heard and McDonald Islands,From the Heard and McDonald Islands,,I,False,2022-04-21 15:05:20.095141+00:00
+100,D,HN,Honduras,honduranisch,Honduras,honduranisch,,I,False,2022-04-21 15:05:20.095141+00:00
+100,E,HN,Honduras,Honduran,Honduras,Honduran,,I,False,2022-04-21 15:05:20.095141+00:00
+100,E,HR,Croatia,Croatian,Croatia,Croatian,,I,False,2022-04-21 15:05:20.095141+00:00
+100,D,HR,Kroatien,kroatisch,Kroatien,kroatisch,,I,False,2022-04-21 15:05:20.095141+00:00
+100,D,HT,Haiti,haitianisch,Haiti,haitianisch,,I,False,2022-04-21 15:05:20.095141+00:00
+100,E,HT,Haiti,Haitian,Haiti,Haitian,,I,False,2022-04-21 15:05:20.095141+00:00
+100,D,HU,Ungarn,ungarisch,Ungarn,ungarisch,,I,False,2022-04-21 15:05:20.095141+00:00
+100,E,HU,Hungary,Hungarian,Hungary,Hungarian,,I,False,2022-04-21 15:05:20.095141+00:00
+100,E,ID,Indonesia,Indonesian,Indonesia,Indonesian,,I,False,2022-04-21 15:05:20.095141+00:00

@@ -1,0 +1,201 @@
+mandt,spras,ktopl,saknr,txt20,txt50,mcod1,operation_flag,is_deleted,recordstamp
+50,E,CA01,220900,Tax Payable,Alterative Tax Payable  - UMS,ALTERATIVE TAX PAYABLE  -,I,False,2022-02-07 08:55:02.805766+00:00
+0,D,GKR,154098,Korr. GB Steuern,Nachbelastung Geschäftsbereich Steuern,NACHBELASTUNG GESCHÄFTSBE,L,False,2022-01-31 20:43:35.420426+00:00
+0,D,GKR,175098,Korr. GB Steuern,Nachbelastung Geschäftsbereich Steuern,NACHBELASTUNG GESCHÄFTSBE,L,False,2022-01-31 20:43:35.420426+00:00
+1,D,GKR,154098,Korr. GB Steuern,Nachbelastung Geschäftsbereich Steuern,NACHBELASTUNG GESCHÄFTSBE,L,False,2022-01-31 20:43:35.420426+00:00
+1,D,GKR,175098,Korr. GB Steuern,Nachbelastung Geschäftsbereich Steuern,NACHBELASTUNG GESCHÄFTSBE,L,False,2022-01-31 20:43:35.420426+00:00
+50,D,GKR,154098,Korr. GB Steuern,Nachbelastung Geschäftsbereich Steuern,NACHBELASTUNG GESCHÄFTSBE,L,False,2022-01-31 20:43:35.420426+00:00
+50,D,GKR,175098,Korr. GB Steuern,Nachbelastung Geschäftsbereich Steuern,NACHBELASTUNG GESCHÄFTSBE,L,False,2022-01-31 20:43:35.420426+00:00
+100,D,GKR,154098,Korr. GB Steuern,Nachbelastung Geschäftsbereich Steuern,NACHBELASTUNG GESCHÄFTSBE,L,False,2022-01-31 20:43:35.420426+00:00
+100,D,GKR,175098,Korr. GB Steuern,Nachbelastung Geschäftsbereich Steuern,NACHBELASTUNG GESCHÄFTSBE,L,False,2022-01-31 20:43:35.420426+00:00
+200,D,GKR,154098,Korr. GB Steuern,Nachbelastung Geschäftsbereich Steuern,NACHBELASTUNG GESCHÄFTSBE,L,False,2022-01-31 20:43:35.420426+00:00
+200,D,GKR,175098,Korr. GB Steuern,Nachbelastung Geschäftsbereich Steuern,NACHBELASTUNG GESCHÄFTSBE,L,False,2022-01-31 20:43:35.420426+00:00
+250,D,GKR,154098,Korr. GB Steuern,Nachbelastung Geschäftsbereich Steuern,NACHBELASTUNG GESCHÄFTSBE,L,False,2022-01-31 20:43:35.420426+00:00
+250,D,GKR,175098,Korr. GB Steuern,Nachbelastung Geschäftsbereich Steuern,NACHBELASTUNG GESCHÄFTSBE,L,False,2022-01-31 20:43:35.420426+00:00
+0,D,GKR,161098,Korr.GB.Verb.Ausl.,Nachbelastung Geschäftsbereich Verbindl. Ausland,NACHBELASTUNG GESCHÄFTSBE,L,False,2022-01-31 20:43:35.420426+00:00
+1,D,GKR,161098,Korr.GB.Verb.Ausl.,Nachbelastung Geschäftsbereich Verbindl. Ausland,NACHBELASTUNG GESCHÄFTSBE,L,False,2022-01-31 20:43:35.420426+00:00
+50,D,GKR,161098,Korr.GB.Verb.Ausl.,Nachbelastung Geschäftsbereich Verbindl. Ausland,NACHBELASTUNG GESCHÄFTSBE,L,False,2022-01-31 20:43:35.420426+00:00
+100,D,GKR,161098,Korr.GB.Verb.Ausl.,Nachbelastung Geschäftsbereich Verbindl. Ausland,NACHBELASTUNG GESCHÄFTSBE,L,False,2022-01-31 20:43:35.420426+00:00
+200,D,GKR,161098,Korr.GB.Verb.Ausl.,Nachbelastung Geschäftsbereich Verbindl. Ausland,NACHBELASTUNG GESCHÄFTSBE,L,False,2022-01-31 20:43:35.420426+00:00
+250,D,GKR,161098,Korr.GB.Verb.Ausl.,Nachbelastung Geschäftsbereich Verbindl. Ausland,NACHBELASTUNG GESCHÄFTSBE,L,False,2022-01-31 20:43:35.420426+00:00
+0,D,GKR,880098,Korr.GB Kundenkonti,Nachbelastung Geschäftsbereich Kundenskonti,NACHBELASTUNG GESCHÄFTSBE,L,False,2022-01-31 20:43:35.420426+00:00
+1,D,GKR,880098,Korr.GB Kundenkonti,Nachbelastung Geschäftsbereich Kundenskonti,NACHBELASTUNG GESCHÄFTSBE,L,False,2022-01-31 20:43:35.420426+00:00
+50,D,GKR,880098,Korr.GB Kundenkonti,Nachbelastung Geschäftsbereich Kundenskonti,NACHBELASTUNG GESCHÄFTSBE,L,False,2022-01-31 20:43:35.420426+00:00
+100,D,GKR,880098,Korr.GB Kundenkonti,Nachbelastung Geschäftsbereich Kundenskonti,NACHBELASTUNG GESCHÄFTSBE,L,False,2022-01-31 20:43:35.420426+00:00
+200,D,GKR,880098,Korr.GB Kundenkonti,Nachbelastung Geschäftsbereich Kundenskonti,NACHBELASTUNG GESCHÄFTSBE,L,False,2022-01-31 20:43:35.420426+00:00
+250,D,GKR,880098,Korr.GB Kundenkonti,Nachbelastung Geschäftsbereich Kundenskonti,NACHBELASTUNG GESCHÄFTSBE,L,False,2022-01-31 20:43:35.420426+00:00
+0,D,GKR,140098,Korr.GB.Ford.Inland,Nachbelastung Geschäftsbereich Forderungen Inland,NACHBELASTUNG GESCHÄFTSBE,L,False,2022-01-31 20:43:35.420426+00:00
+1,D,GKR,140098,Korr.GB.Ford.Inland,Nachbelastung Geschäftsbereich Forderungen Inland,NACHBELASTUNG GESCHÄFTSBE,L,False,2022-01-31 20:43:35.420426+00:00
+50,D,GKR,140098,Korr.GB.Ford.Inland,Nachbelastung Geschäftsbereich Forderungen Inland,NACHBELASTUNG GESCHÄFTSBE,L,False,2022-01-31 20:43:35.420426+00:00
+100,D,GKR,140098,Korr.GB.Ford.Inland,Nachbelastung Geschäftsbereich Forderungen Inland,NACHBELASTUNG GESCHÄFTSBE,L,False,2022-01-31 20:43:35.420426+00:00
+200,D,GKR,140098,Korr.GB.Ford.Inland,Nachbelastung Geschäftsbereich Forderungen Inland,NACHBELASTUNG GESCHÄFTSBE,L,False,2022-01-31 20:43:35.420426+00:00
+250,D,GKR,140098,Korr.GB.Ford.Inland,Nachbelastung Geschäftsbereich Forderungen Inland,NACHBELASTUNG GESCHÄFTSBE,L,False,2022-01-31 20:43:35.420426+00:00
+0,D,GKR,160098,Korr.GB.Verb.Inland,Nachbelastung Geschäftsbereich Verbindl. Inland,NACHBELASTUNG GESCHÄFTSBE,L,False,2022-01-31 20:43:35.420426+00:00
+1,D,GKR,160098,Korr.GB.Verb.Inland,Nachbelastung Geschäftsbereich Verbindl. Inland,NACHBELASTUNG GESCHÄFTSBE,L,False,2022-01-31 20:43:35.420426+00:00
+50,D,GKR,160098,Korr.GB.Verb.Inland,Nachbelastung Geschäftsbereich Verbindl. Inland,NACHBELASTUNG GESCHÄFTSBE,L,False,2022-01-31 20:43:35.420426+00:00
+100,D,GKR,160098,Korr.GB.Verb.Inland,Nachbelastung Geschäftsbereich Verbindl. Inland,NACHBELASTUNG GESCHÄFTSBE,L,False,2022-01-31 20:43:35.420426+00:00
+200,D,GKR,160098,Korr.GB.Verb.Inland,Nachbelastung Geschäftsbereich Verbindl. Inland,NACHBELASTUNG GESCHÄFTSBE,L,False,2022-01-31 20:43:35.420426+00:00
+250,D,GKR,160098,Korr.GB.Verb.Inland,Nachbelastung Geschäftsbereich Verbindl. Inland,NACHBELASTUNG GESCHÄFTSBE,L,False,2022-01-31 20:43:35.420426+00:00
+0,D,GKR,248098,Korr.GB Lieferskonto,Nachbelastung Geschäftsbereich Liefererskonti,NACHBELASTUNG GESCHÄFTSBE,L,False,2022-01-31 20:43:35.420426+00:00
+1,D,GKR,248098,Korr.GB Lieferskonto,Nachbelastung Geschäftsbereich Liefererskonti,NACHBELASTUNG GESCHÄFTSBE,L,False,2022-01-31 20:43:35.420426+00:00
+50,D,GKR,248098,Korr.GB Lieferskonto,Nachbelastung Geschäftsbereich Liefererskonti,NACHBELASTUNG GESCHÄFTSBE,L,False,2022-01-31 20:43:35.420426+00:00
+100,D,GKR,248098,Korr.GB Lieferskonto,Nachbelastung Geschäftsbereich Liefererskonti,NACHBELASTUNG GESCHÄFTSBE,L,False,2022-01-31 20:43:35.420426+00:00
+200,D,GKR,248098,Korr.GB Lieferskonto,Nachbelastung Geschäftsbereich Liefererskonti,NACHBELASTUNG GESCHÄFTSBE,L,False,2022-01-31 20:43:35.420426+00:00
+250,D,GKR,248098,Korr.GB Lieferskonto,Nachbelastung Geschäftsbereich Liefererskonti,NACHBELASTUNG GESCHÄFTSBE,L,False,2022-01-31 20:43:35.420426+00:00
+0,D,GKR,141098,Korr.GB.Ford.Ausland,Nachbelastung Geschäftsbereich Forderungen Ausland,NACHBELASTUNG GESCHÄFTSBE,L,False,2022-01-31 20:43:35.420426+00:00
+1,D,GKR,141098,Korr.GB.Ford.Ausland,Nachbelastung Geschäftsbereich Forderungen Ausland,NACHBELASTUNG GESCHÄFTSBE,L,False,2022-01-31 20:43:35.420426+00:00
+50,D,GKR,141098,Korr.GB.Ford.Ausland,Nachbelastung Geschäftsbereich Forderungen Ausland,NACHBELASTUNG GESCHÄFTSBE,L,False,2022-01-31 20:43:35.420426+00:00
+100,D,GKR,141098,Korr.GB.Ford.Ausland,Nachbelastung Geschäftsbereich Forderungen Ausland,NACHBELASTUNG GESCHÄFTSBE,L,False,2022-01-31 20:43:35.420426+00:00
+200,D,GKR,141098,Korr.GB.Ford.Ausland,Nachbelastung Geschäftsbereich Forderungen Ausland,NACHBELASTUNG GESCHÄFTSBE,L,False,2022-01-31 20:43:35.420426+00:00
+250,D,GKR,141098,Korr.GB.Ford.Ausland,Nachbelastung Geschäftsbereich Forderungen Ausland,NACHBELASTUNG GESCHÄFTSBE,L,False,2022-01-31 20:43:35.420426+00:00
+0,D,GKR,145098,Korr.GB.Ford.nahes.U,Nachbelastung Geschäftsbereich Ford. nahest. Unt.,NACHBELASTUNG GESCHÄFTSBE,L,False,2022-01-31 20:43:35.420426+00:00
+1,D,GKR,145098,Korr.GB.Ford.nahes.U,Nachbelastung Geschäftsbereich Ford. nahest. Unt.,NACHBELASTUNG GESCHÄFTSBE,L,False,2022-01-31 20:43:35.420426+00:00
+50,D,GKR,145098,Korr.GB.Ford.nahes.U,Nachbelastung Geschäftsbereich Ford. nahest. Unt.,NACHBELASTUNG GESCHÄFTSBE,L,False,2022-01-31 20:43:35.420426+00:00
+100,D,GKR,145098,Korr.GB.Ford.nahes.U,Nachbelastung Geschäftsbereich Ford. nahest. Unt.,NACHBELASTUNG GESCHÄFTSBE,L,False,2022-01-31 20:43:35.420426+00:00
+200,D,GKR,145098,Korr.GB.Ford.nahes.U,Nachbelastung Geschäftsbereich Ford. nahest. Unt.,NACHBELASTUNG GESCHÄFTSBE,L,False,2022-01-31 20:43:35.420426+00:00
+250,D,GKR,145098,Korr.GB.Ford.nahes.U,Nachbelastung Geschäftsbereich Ford. nahest. Unt.,NACHBELASTUNG GESCHÄFTSBE,L,False,2022-01-31 20:43:35.420426+00:00
+0,D,GKR,144098,Korr.GB.Ford.verb.U.,Nachbelastung Geschäftsbereich Ford. verb. Untern.,NACHBELASTUNG GESCHÄFTSBE,L,False,2022-01-31 20:43:35.420426+00:00
+1,D,GKR,144098,Korr.GB.Ford.verb.U.,Nachbelastung Geschäftsbereich Ford. verb. Untern.,NACHBELASTUNG GESCHÄFTSBE,L,False,2022-01-31 20:43:35.420426+00:00
+50,D,GKR,144098,Korr.GB.Ford.verb.U.,Nachbelastung Geschäftsbereich Ford. verb. Untern.,NACHBELASTUNG GESCHÄFTSBE,L,False,2022-01-31 20:43:35.420426+00:00
+100,D,GKR,144098,Korr.GB.Ford.verb.U.,Nachbelastung Geschäftsbereich Ford. verb. Untern.,NACHBELASTUNG GESCHÄFTSBE,L,False,2022-01-31 20:43:35.420426+00:00
+200,D,GKR,144098,Korr.GB.Ford.verb.U.,Nachbelastung Geschäftsbereich Ford. verb. Untern.,NACHBELASTUNG GESCHÄFTSBE,L,False,2022-01-31 20:43:35.420426+00:00
+250,D,GKR,144098,Korr.GB.Ford.verb.U.,Nachbelastung Geschäftsbereich Ford. verb. Untern.,NACHBELASTUNG GESCHÄFTSBE,L,False,2022-01-31 20:43:35.420426+00:00
+0,D,GKR,165098,Korr.GB.Verb.nahest.,Nachbelastung Geschäftsber. Verbindl. nahest. Unt.,NACHBELASTUNG GESCHÄFTSBE,L,False,2022-01-31 20:43:35.420426+00:00
+1,D,GKR,165098,Korr.GB.Verb.nahest.,Nachbelastung Geschäftsber. Verbindl. nahest. Unt.,NACHBELASTUNG GESCHÄFTSBE,L,False,2022-01-31 20:43:35.420426+00:00
+50,D,GKR,165098,Korr.GB.Verb.nahest.,Nachbelastung Geschäftsber. Verbindl. nahest. Unt.,NACHBELASTUNG GESCHÄFTSBE,L,False,2022-01-31 20:43:35.420426+00:00
+100,D,GKR,165098,Korr.GB.Verb.nahest.,Nachbelastung Geschäftsber. Verbindl. nahest. Unt.,NACHBELASTUNG GESCHÄFTSBE,L,False,2022-01-31 20:43:35.420426+00:00
+200,D,GKR,165098,Korr.GB.Verb.nahest.,Nachbelastung Geschäftsber. Verbindl. nahest. Unt.,NACHBELASTUNG GESCHÄFTSBE,L,False,2022-01-31 20:43:35.420426+00:00
+250,D,GKR,165098,Korr.GB.Verb.nahest.,Nachbelastung Geschäftsber. Verbindl. nahest. Unt.,NACHBELASTUNG GESCHÄFTSBE,L,False,2022-01-31 20:43:35.420426+00:00
+0,D,GKR,164098,Korr.GB.Verb.verb.U.,Nachbelastung Geschäftsbereich Verbindl. verb. Unt,NACHBELASTUNG GESCHÄFTSBE,L,False,2022-01-31 20:43:35.420426+00:00
+1,D,GKR,164098,Korr.GB.Verb.verb.U.,Nachbelastung Geschäftsbereich Verbindl. verb. Unt,NACHBELASTUNG GESCHÄFTSBE,L,False,2022-01-31 20:43:35.420426+00:00
+50,D,GKR,164098,Korr.GB.Verb.verb.U.,Nachbelastung Geschäftsbereich Verbindl. verb. Unt,NACHBELASTUNG GESCHÄFTSBE,L,False,2022-01-31 20:43:35.420426+00:00
+100,D,GKR,164098,Korr.GB.Verb.verb.U.,Nachbelastung Geschäftsbereich Verbindl. verb. Unt,NACHBELASTUNG GESCHÄFTSBE,L,False,2022-01-31 20:43:35.420426+00:00
+200,D,GKR,164098,Korr.GB.Verb.verb.U.,Nachbelastung Geschäftsbereich Verbindl. verb. Unt,NACHBELASTUNG GESCHÄFTSBE,L,False,2022-01-31 20:43:35.420426+00:00
+250,D,GKR,164098,Korr.GB.Verb.verb.U.,Nachbelastung Geschäftsbereich Verbindl. verb. Unt,NACHBELASTUNG GESCHÄFTSBE,L,False,2022-01-31 20:43:35.420426+00:00
+0,F,GKR,1010,,Amort. Cum. Terrains et Droits de superficie,AMORT. CUM. TERRAINS ET D,L,False,2022-01-31 20:43:35.420426+00:00
+0,F,GKR,29100,,Avances et acomptes sur immob. corp. activés,AVANCES ET ACOMPTES SUR I,L,False,2022-01-31 20:43:35.420426+00:00
+0,F,GKR,52800,,Acomptes versés sur immobilisations incorporelles,ACOMPTES VERSéS SUR IMMOB,L,False,2022-01-31 20:43:35.420426+00:00
+0,F,GKR,52900,,Acomptes sur immobil. incorporelles activées,ACOMPTES SUR IMMOBIL. INC,L,False,2022-01-31 20:43:35.420426+00:00
+0,F,GKR,52910,,Cumul amort. acomptes sur immobil. incorporelles,CUMUL AMORT. ACOMPTES SUR,L,False,2022-01-31 20:43:35.420426+00:00
+0,F,GKR,55000,,Titres de placement,TITRES DE PLACEMENT,L,False,2022-01-31 20:43:35.420426+00:00
+0,F,GKR,55910,,Elimination tva déductible acomptes immob. financ.,ELIMINATION TVA DéDUCTIBL,L,False,2022-01-31 20:43:35.420426+00:00
+0,F,GKR,56000,,Autres prêts,AUTRES PRêTS,L,False,2022-01-31 20:43:35.420426+00:00
+0,F,GKR,57000,,Prêts aux entreprises liées,PRêTS AUX ENTREPRISES LIé,L,False,2022-01-31 20:43:35.420426+00:00
+0,F,GKR,57500,,Créances à entreprises liées,CRéANCES à ENTREPRISES LI,L,False,2022-01-31 20:43:35.420426+00:00
+0,F,GKR,72000,,Réserve légale,RéSERVE LéGALE,L,False,2022-01-31 20:43:35.420426+00:00
+0,F,GKR,73000,,Réserves pour participations propres,RéSERVES POUR PARTICIPATI,L,False,2022-01-31 20:43:35.420426+00:00
+0,F,GKR,74900,,Autres réserves,AUTRES RéSERVES,L,False,2022-01-31 20:43:35.420426+00:00
+0,F,GKR,86300,,Provision coûts acquisition (MM),PROVISION COûTS ACQUISITI,L,False,2022-01-31 20:43:35.420426+00:00
+0,F,GKR,86900,,Autres provisions,AUTRES PROVISIONS,L,False,2022-01-31 20:43:35.420426+00:00
+0,F,GKR,110002,,Compte CCP (décaissement),COMPTE CCP (DéCAISSEMENT),L,False,2022-01-31 20:43:35.420426+00:00
+0,F,GKR,110005,,Compte CCP (autres écritures intermédiaires),COMPTE CCP (AUTRES éCRITU,L,False,2022-01-31 20:43:35.420426+00:00
+0,F,GKR,110009,,Compte CCP (entrée fonds client),COMPTE CCP (ENTRéE FONDS,L,False,2022-01-31 20:43:35.420426+00:00
+0,F,GKR,113101,,Banque 1 (chèque émis),BANQUE 1 (CHèQUE éMIS),L,False,2022-01-31 20:43:35.420426+00:00
+0,F,GKR,113104,,Banque 1 (Prélèv. bancaire auto.),BANQUE 1 (PRéLèV. BANCAIR,L,False,2022-01-31 20:43:35.420426+00:00
+0,F,GKR,113106,,Banque 1(engagem. traites propr. accept.),BANQUE 1(ENGAGEM. TRAITES,L,False,2022-01-31 20:43:35.420426+00:00
+0,F,GKR,113107,,Banque 1 (engagement remise à l´escompte),BANQUE 1 (ENGAGEMENT REMI,L,False,2022-01-31 20:43:35.420426+00:00
+0,F,GKR,113108,,Banque 1 (encaissement chèque),BANQUE 1 (ENCAISSEMENT CH,L,False,2022-01-31 20:43:35.420426+00:00
+0,F,GKR,113109,,Banque 1 (entrée fonds client),BANQUE 1 (ENTRéE FONDS CL,L,False,2022-01-31 20:43:35.420426+00:00
+0,F,GKR,113111,,Banque 1 (effet à payer courants),BANQUE 1 (EFFET à PAYER C,L,False,2022-01-31 20:43:35.420426+00:00
+0,F,GKR,113112,,Bque 1 (effet-rem.enc.),BQUE 1 (EFFET-REM.ENC.),L,False,2022-01-31 20:43:35.420426+00:00
+0,F,GKR,113150,,Banque 1 - devise interne A,BANQUE 1 - DEVISE INTERNE,L,False,2022-01-31 20:43:35.420426+00:00
+0,F,GKR,113155,,TR-TM Bque 1 Compensation dev. étr. A,TR-TM BQUE 1 COMPENSATION,L,False,2022-01-31 20:43:35.420426+00:00
+0,F,GKR,113160,,Banque 1 - devise interne B,BANQUE 1 - DEVISE INTERNE,L,False,2022-01-31 20:43:35.420426+00:00
+0,F,GKR,113165,,TR-TM Bque 1 Compensation Dev. étr. B,TR-TM BQUE 1 COMPENSATION,L,False,2022-01-31 20:43:35.420426+00:00
+0,F,GKR,113205,,Banque 2 (autr. écrit. intermédiaires),BANQUE 2 (AUTR. éCRIT. IN,L,False,2022-01-31 20:43:35.420426+00:00
+0,F,GKR,143100,,Fournisseurs débiteurs,FOURNISSEURS DéBITEURS,L,False,2022-01-31 20:43:35.420426+00:00
+0,F,GKR,151110,,Imputation tva déductible acompte sur actif circ.,IMPUTATION TVA DéDUCTIBLE,L,False,2022-01-31 20:43:35.420426+00:00
+0,F,GKR,171000,,Avances et acomptes reçus,AVANCES ET ACOMPTES REçUS,L,False,2022-01-31 20:43:35.420426+00:00
+0,F,GKR,191000,,Elimination EM/EF -fabrication interne-,ELIMINATION EM/EF -FABRIC,L,False,2022-01-31 20:43:35.420426+00:00
+0,F,GKR,191100,,Elimination EM/EF - approvisionnement externe -,ELIMINATION EM/EF - APPRO,L,False,2022-01-31 20:43:35.420426+00:00
+0,F,GKR,191500,,Transitoires Immobilisations à inventaire,TRANSITOIRES IMMOBILISATI,L,False,2022-01-31 20:43:35.420426+00:00
+0,F,GKR,191750,,Elimination coûts indirects acquisition (MM),ELIMINATION COûTS INDIREC,L,False,2022-01-31 20:43:35.420426+00:00
+0,F,GKR,194500,,Elimination domaine activité,ELIMINATION DOMAINE ACTIV,L,False,2022-01-31 20:43:35.420426+00:00
+0,F,GKR,196300,,Demandes de versement d´acompte (fournisseurs),DEMANDES DE VERSEMENT D´A,L,False,2022-01-31 20:43:35.420426+00:00
+0,F,GKR,196400,,Cautions obtenues (Créanciers),CAUTIONS OBTENUES (CRéANC,L,False,2022-01-31 20:43:35.420426+00:00
+0,F,GKR,200100,,Charges de différences de cours de change,CHARGES DE DIFFéRENCES DE,L,False,2022-01-31 20:43:35.420426+00:00
+0,F,GKR,201200,,Frais revalorisation produit fabrication interne,FRAIS REVALORISATION PROD,L,False,2022-01-31 20:43:35.420426+00:00
+0,F,GKR,201250,,Charge de la revalorisation de l'article externe,CHARGE DE LA REVALORISATI,L,False,2022-01-31 20:43:35.420426+00:00
+0,F,GKR,201400,,Frais de transfert de stock,FRAIS DE TRANSFERT DE STO,L,False,2022-01-31 20:43:35.420426+00:00
+0,F,GKR,204400,,Produit de transfert physique,PRODUIT DE TRANSFERT PHYS,L,False,2022-01-31 20:43:35.420426+00:00
+0,F,GKR,204700,,Produit écarts sur prix produits externes,PRODUIT éCARTS SUR PRIX P,L,False,2022-01-31 20:43:35.420426+00:00
+0,F,GKR,204750,,Produit écarts sur prix du ledger articles,PRODUIT éCARTS SUR PRIX D,L,False,2022-01-31 20:43:35.420426+00:00
+0,F,GKR,204800,,Prod. écart de ristournes,PROD. éCART DE RISTOURNES,L,False,2022-01-31 20:43:35.420426+00:00
+0,F,GKR,205100,,Produit de différences de change,PRODUIT DE DIFFéRENCES DE,L,False,2022-01-31 20:43:35.420426+00:00
+0,F,GKR,205129,,Compensation prod. de conversion de devises,COMPENSATION PROD. DE CON,L,False,2022-01-31 20:43:35.420426+00:00
+0,F,GKR,205150,,Produit de différences de change non-réalisées,PRODUIT DE DIFFéRENCES DE,L,False,2022-01-31 20:43:35.420426+00:00
+0,F,GKR,221500,,Frais écarts sur prix produits fabrication interne,FRAIS éCARTS SUR PRIX PRO,L,False,2022-01-31 20:43:35.420426+00:00
+0,F,GKR,221600,,Coûts indirects d'acquisition non planifiés,COûTS INDIRECTS D'ACQUISI,L,False,2022-01-31 20:43:35.420426+00:00
+0,F,GKR,221700,,Frais des écarts sur prix de produits externes,FRAIS DES éCARTS SUR PRIX,L,False,2022-01-31 20:43:35.420426+00:00
+0,F,GKR,221750,,Charge écarts sur prix du paiement du ledger art.,CHARGE éCARTS SUR PRIX DU,L,False,2022-01-31 20:43:35.420426+00:00
+0,F,GKR,221900,,Frais petite différence entrée de facture (MM),FRAIS PETITE DIFFéRENCE E,L,False,2022-01-31 20:43:35.420426+00:00
+0,F,GKR,226500,,Produit d'écart sur prix produits de fabr. interne,PRODUIT D'éCART SUR PRIX,L,False,2022-01-31 20:43:35.420426+00:00
+0,F,GKR,226900,,Prod. écarts minimes entrée de facture (MM),PROD. éCARTS MINIMES ENTR,L,False,2022-01-31 20:43:35.420426+00:00
+0,F,GKR,230300,,Charges pour paramétrage des postes spéciaux,CHARGES POUR PARAMéTRAGE,L,False,2022-01-31 20:43:35.420426+00:00
+0,F,GKR,230500,,Autres amortissements immobilisations financ.,AUTRES AMORTISSEMENTS IMM,L,False,2022-01-31 20:43:35.420426+00:00
+0,F,GKR,230650,,Autres amortissements sur titres actif circulant,AUTRES AMORTISSEMENTS SUR,L,False,2022-01-31 20:43:35.420426+00:00
+0,F,GKR,239000,,Charges dotations aux provisions pour créances,CHARGES DOTATIONS AUX PRO,L,False,2022-01-31 20:43:35.420426+00:00
+0,F,GKR,239100,,Dévaluation pr. risque fluct. valeurs - créances,DéVALUATION PR. RISQUE FL,L,False,2022-01-31 20:43:35.420426+00:00
+0,F,GKR,240950,,Autres intérêts et charges sembl. entrepr. liées,AUTRES INTéRêTS ET CHARGE,L,False,2022-01-31 20:43:35.420426+00:00
+0,F,GKR,245100,,Produit d'intérêts (entreprises non liées),PRODUIT D'INTéRêTS (ENTRE,L,False,2022-01-31 20:43:35.420426+00:00
+0,F,GKR,245150,,Produit d'intérêts de sociétés affiliées,PRODUIT D'INTéRêTS DE SOC,L,False,2022-01-31 20:43:35.420426+00:00
+0,F,GKR,252000,,Produit de la reprise du poste spécial,PRODUIT DE LA REPRISE DU,L,False,2022-01-31 20:43:35.420426+00:00
+0,F,GKR,254010,,Pertes pour immobilisations mises au rebut,PERTES POUR IMMOBILISATIO,L,False,2022-01-31 20:43:35.420426+00:00
+0,F,GKR,255900,,Produit exceptionnel,PRODUIT EXCEPTIONNEL,L,False,2022-01-31 20:43:35.420426+00:00
+0,F,GKR,280000,,Eliminat. amortiss. analytique sur immob. corpor.,ELIMINAT. AMORTISS. ANALY,L,False,2022-01-31 20:43:35.420426+00:00
+0,F,GKR,281000,,Elimination intérêt analytique immob. corpor.,ELIMINATION INTéRêT ANALY,L,False,2022-01-31 20:43:35.420426+00:00
+0,F,GKR,282000,,Elimination risque calculé,ELIMINATION RISQUE CALCUL,L,False,2022-01-31 20:43:35.420426+00:00
+0,F,GKR,284000,,Elimination autres coûts analytiques,ELIMINATION AUTRES COûTS,L,False,2022-01-31 20:43:35.420426+00:00
+0,F,GKR,290400,,Impôts latents § 274/2 HGB,IMPôTS LATENTS § 274/2 HG,L,False,2022-01-31 20:43:35.420426+00:00
+0,F,GKR,382000,,Soldes pour sous-traitants,SOLDES POUR SOUS-TRAITANT,L,False,2022-01-31 20:43:35.420426+00:00
+0,F,GKR,433100,,Primes heures supplémentaires. Salaires,PRIMES HEURES SUPPLéMENTA,L,False,2022-01-31 20:43:35.420426+00:00
+0,F,GKR,474100,,Frais déplacement nat. (TVA déd. forf.),FRAIS DéPLACEMENT NAT. (T,L,False,2022-01-31 20:43:35.420426+00:00
+0,F,GKR,891000,,Var. des stocks - en cours de prod.,VAR. DES STOCKS - EN COUR,L,False,2022-01-31 20:43:35.420426+00:00
+0,F,GKR,893010,,Var. stocks vente produits int. sans nat. cpt.,VAR. STOCKS VENTE PRODUIT,L,False,2022-01-31 20:43:35.420426+00:00
+0,F,GKR,950000,,Déficit non couvert par capitaux propres,DéFICIT NON COUVERT PAR C,L,False,2022-01-31 20:43:35.420426+00:00
+1,F,GKR,1010,,Amort. Cum. Terrains et Droits de superficie,AMORT. CUM. TERRAINS ET D,L,False,2022-01-31 20:43:35.420426+00:00
+1,F,GKR,29100,,Avances et acomptes sur immob. corp. activés,AVANCES ET ACOMPTES SUR I,L,False,2022-01-31 20:43:35.420426+00:00
+1,F,GKR,52800,,Acomptes versés sur immobilisations incorporelles,ACOMPTES VERSéS SUR IMMOB,L,False,2022-01-31 20:43:35.420426+00:00
+1,F,GKR,52900,,Acomptes sur immobil. incorporelles activées,ACOMPTES SUR IMMOBIL. INC,L,False,2022-01-31 20:43:35.420426+00:00
+1,F,GKR,52910,,Cumul amort. acomptes sur immobil. incorporelles,CUMUL AMORT. ACOMPTES SUR,L,False,2022-01-31 20:43:35.420426+00:00
+1,F,GKR,55000,,Titres de placement,TITRES DE PLACEMENT,L,False,2022-01-31 20:43:35.420426+00:00
+1,F,GKR,55910,,Elimination tva déductible acomptes immob. financ.,ELIMINATION TVA DéDUCTIBL,L,False,2022-01-31 20:43:35.420426+00:00
+1,F,GKR,56000,,Autres prêts,AUTRES PRêTS,L,False,2022-01-31 20:43:35.420426+00:00
+1,F,GKR,57000,,Prêts aux entreprises liées,PRêTS AUX ENTREPRISES LIé,L,False,2022-01-31 20:43:35.420426+00:00
+1,F,GKR,57500,,Créances à entreprises liées,CRéANCES à ENTREPRISES LI,L,False,2022-01-31 20:43:35.420426+00:00
+1,F,GKR,72000,,Réserve légale,RéSERVE LéGALE,L,False,2022-01-31 20:43:35.420426+00:00
+1,F,GKR,73000,,Réserves pour participations propres,RéSERVES POUR PARTICIPATI,L,False,2022-01-31 20:43:35.420426+00:00
+1,F,GKR,74900,,Autres réserves,AUTRES RéSERVES,L,False,2022-01-31 20:43:35.420426+00:00
+1,F,GKR,86300,,Provision coûts acquisition (MM),PROVISION COûTS ACQUISITI,L,False,2022-01-31 20:43:35.420426+00:00
+1,F,GKR,86900,,Autres provisions,AUTRES PROVISIONS,L,False,2022-01-31 20:43:35.420426+00:00
+1,F,GKR,110002,,Compte CCP (décaissement),COMPTE CCP (DéCAISSEMENT),L,False,2022-01-31 20:43:35.420426+00:00
+1,F,GKR,110005,,Compte CCP (autres écritures intermédiaires),COMPTE CCP (AUTRES éCRITU,L,False,2022-01-31 20:43:35.420426+00:00
+1,F,GKR,110009,,Compte CCP (entrée fonds client),COMPTE CCP (ENTRéE FONDS,L,False,2022-01-31 20:43:35.420426+00:00
+1,F,GKR,113101,,Banque 1 (chèque émis),BANQUE 1 (CHèQUE éMIS),L,False,2022-01-31 20:43:35.420426+00:00
+1,F,GKR,113104,,Banque 1 (Prélèv. bancaire auto.),BANQUE 1 (PRéLèV. BANCAIR,L,False,2022-01-31 20:43:35.420426+00:00
+1,F,GKR,113106,,Banque 1(engagem. traites propr. accept.),BANQUE 1(ENGAGEM. TRAITES,L,False,2022-01-31 20:43:35.420426+00:00
+1,F,GKR,113107,,Banque 1 (engagement remise à l´escompte),BANQUE 1 (ENGAGEMENT REMI,L,False,2022-01-31 20:43:35.420426+00:00
+1,F,GKR,113108,,Banque 1 (encaissement chèque),BANQUE 1 (ENCAISSEMENT CH,L,False,2022-01-31 20:43:35.420426+00:00
+1,F,GKR,113109,,Banque 1 (entrée fonds client),BANQUE 1 (ENTRéE FONDS CL,L,False,2022-01-31 20:43:35.420426+00:00
+1,F,GKR,113111,,Banque 1 (effet à payer courants),BANQUE 1 (EFFET à PAYER C,L,False,2022-01-31 20:43:35.420426+00:00
+1,F,GKR,113112,,Bque 1 (effet-rem.enc.),BQUE 1 (EFFET-REM.ENC.),L,False,2022-01-31 20:43:35.420426+00:00
+1,F,GKR,113150,,Banque 1 - devise interne A,BANQUE 1 - DEVISE INTERNE,L,False,2022-01-31 20:43:35.420426+00:00
+1,F,GKR,113155,,TR-TM Bque 1 Compensation dev. étr. A,TR-TM BQUE 1 COMPENSATION,L,False,2022-01-31 20:43:35.420426+00:00
+1,F,GKR,113160,,Banque 1 - devise interne B,BANQUE 1 - DEVISE INTERNE,L,False,2022-01-31 20:43:35.420426+00:00
+1,F,GKR,113165,,TR-TM Bque 1 Compensation Dev. étr. B,TR-TM BQUE 1 COMPENSATION,L,False,2022-01-31 20:43:35.420426+00:00
+1,F,GKR,113205,,Banque 2 (autr. écrit. intermédiaires),BANQUE 2 (AUTR. éCRIT. IN,L,False,2022-01-31 20:43:35.420426+00:00
+1,F,GKR,143100,,Fournisseurs débiteurs,FOURNISSEURS DéBITEURS,L,False,2022-01-31 20:43:35.420426+00:00
+1,F,GKR,151110,,Imputation tva déductible acompte sur actif circ.,IMPUTATION TVA DéDUCTIBLE,L,False,2022-01-31 20:43:35.420426+00:00
+1,F,GKR,171000,,Avances et acomptes reçus,AVANCES ET ACOMPTES REçUS,L,False,2022-01-31 20:43:35.420426+00:00
+1,F,GKR,191000,,Elimination EM/EF -fabrication interne-,ELIMINATION EM/EF -FABRIC,L,False,2022-01-31 20:43:35.420426+00:00
+1,F,GKR,191100,,Elimination EM/EF - approvisionnement externe -,ELIMINATION EM/EF - APPRO,L,False,2022-01-31 20:43:35.420426+00:00
+1,F,GKR,191500,,Transitoires Immobilisations à inventaire,TRANSITOIRES IMMOBILISATI,L,False,2022-01-31 20:43:35.420426+00:00
+1,F,GKR,191750,,Elimination coûts indirects acquisition (MM),ELIMINATION COûTS INDIREC,L,False,2022-01-31 20:43:35.420426+00:00
+1,F,GKR,194500,,Elimination domaine activité,ELIMINATION DOMAINE ACTIV,L,False,2022-01-31 20:43:35.420426+00:00
+1,F,GKR,196300,,Demandes de versement d´acompte (fournisseurs),DEMANDES DE VERSEMENT D´A,L,False,2022-01-31 20:43:35.420426+00:00
+1,F,GKR,196400,,Cautions obtenues (Créanciers),CAUTIONS OBTENUES (CRéANC,L,False,2022-01-31 20:43:35.420426+00:00
+1,F,GKR,200100,,Charges de différences de cours de change,CHARGES DE DIFFéRENCES DE,L,False,2022-01-31 20:43:35.420426+00:00
+1,F,GKR,201200,,Frais revalorisation produit fabrication interne,FRAIS REVALORISATION PROD,L,False,2022-01-31 20:43:35.420426+00:00
+1,F,GKR,201250,,Charge de la revalorisation de l'article externe,CHARGE DE LA REVALORISATI,L,False,2022-01-31 20:43:35.420426+00:00
+1,F,GKR,201400,,Frais de transfert de stock,FRAIS DE TRANSFERT DE STO,L,False,2022-01-31 20:43:35.420426+00:00
+1,F,GKR,204400,,Produit de transfert physique,PRODUIT DE TRANSFERT PHYS,L,False,2022-01-31 20:43:35.420426+00:00

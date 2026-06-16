@@ -1,0 +1,40 @@
+id: P2P_Semantic_KM
+displayName: Purchase-to-Pay Semantic Layer
+key_performance_indicators:
+- id: THROUGHPUT_TIME_PO_TO_GR
+  name: PO Item to Goods Receipt Throughput Time
+  description: Calculates the average elapsed time between purchasing items and receiving
+    them.
+  formula: AVG(CALC_THROUGHPUT(FIRST_OCCURRENCE['Create Purchase Order Item'] TO LAST_OCCURRENCE['Receive
+    Goods'], EVENTTIME('_cel_event_log')))
+  unit: Days
+- name: Automation Rate (Touchless PO)
+  id: AUTOMATION_RATE
+  description: Percentage of PO line items created and processed fully automatically
+    without changes.
+  formula: COUNT(CASE WHEN PU_COUNT(TEMP_P2P_CASES, TEMP_P2P_EVENT_LOG.ACTIVITY, TEMP_P2P_EVENT_LOG.USER_NAME
+    = 'SYSTEM') = PU_COUNT(TEMP_P2P_CASES, TEMP_P2P_EVENT_LOG.ACTIVITY) THEN TEMP_P2P_CASES.CASE_KEY
+    END) / COUNT(TEMP_P2P_CASES.CASE_KEY) * 100.0
+  unit: '%'
+- id: TOTAL_PO_VALUE
+  name: Total Purchase Order Net Value
+  description: Sum of PO line items values.
+  formula: SUM(TEMP_P2P_CASES.PO_AMOUNT)
+  unit: EUR
+custom_dimensions:
+- id: VENDOR_COUNTRY
+  name: Vendor Country Code
+  expression: LFA1.LAND1
+  description: The country where the supplier is situated.
+- id: VALUE_BUCKETS
+  name: Order Value Tier
+  expression: CASE WHEN TEMP_P2P_CASES.PO_AMOUNT > 10000 THEN 'High Value' ELSE 'Standard'
+    END
+  description: Categorizes purchase items into value groupings.
+process_filters:
+- id: MAVERICK_BUYING_FILTER
+  name: Maverick Buying cases
+  filter_expression: FILTER PROCESS OCCURRENCE 'Receive Invoice' BEFORE 'Create Purchase
+    Order Item';
+  description: Filter to view cases where the supplier invoice was registered prior
+    to PO authorization.

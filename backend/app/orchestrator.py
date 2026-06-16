@@ -6,7 +6,7 @@ from app.agents.requirement_agent import RequirementAnalyzerAgent
 from app.agents.sql_agent import TransformationSQLAgent
 from app.agents.data_model_agent import DataModelAgent
 from app.agents.knowledge_model_agent import KnowledgeModelAgent
-from app.agents.view_agent import ViewAgent
+from app.agents.analysis_agent import AnalysisAgent
 from app.agents.qa_agent import QAAgent
 
 logger = logging.getLogger(__name__)
@@ -17,7 +17,7 @@ class WorkflowOrchestrator:
         self.sql_agent = TransformationSQLAgent()
         self.data_model_agent = DataModelAgent()
         self.knowledge_model_agent = KnowledgeModelAgent()
-        self.view_agent = ViewAgent()
+        self.analysis_agent = AnalysisAgent()
         self.qa_agent = QAAgent()
 
     def run_stage(self, db: Session, session_id: str, stage: str) -> ArtifactModel:
@@ -58,13 +58,13 @@ class WorkflowOrchestrator:
                     raise ValueError("Requirement specification and Data Model must be generated first.")
                 rationale, content = self.knowledge_model_agent.generate(req_artifact.content, dm_artifact.content)
 
-            # 5. View Stage
-            elif stage == "view":
+            # 5. Analysis Stage
+            elif stage == "analysis":
                 req_artifact = self._get_approved_or_latest_artifact(db, session_id, "requirement")
                 km_artifact = self._get_approved_or_latest_artifact(db, session_id, "knowledge_model")
                 if not req_artifact or not km_artifact:
                     raise ValueError("Requirement specification and Knowledge Model must be generated first.")
-                rationale, content = self.view_agent.generate(req_artifact.content, km_artifact.content)
+                rationale, content = self.analysis_agent.generate(req_artifact.content, km_artifact.content)
 
             # 6. QA Stage
             elif stage == "qa":
@@ -72,17 +72,17 @@ class WorkflowOrchestrator:
                 sql_artifact = self._get_approved_or_latest_artifact(db, session_id, "sql")
                 dm_artifact = self._get_approved_or_latest_artifact(db, session_id, "data_model")
                 km_artifact = self._get_approved_or_latest_artifact(db, session_id, "knowledge_model")
-                view_artifact = self._get_approved_or_latest_artifact(db, session_id, "view")
+                analysis_artifact = self._get_approved_or_latest_artifact(db, session_id, "analysis")
                 
-                if not all([req_artifact, sql_artifact, dm_artifact, km_artifact, view_artifact]):
-                    raise ValueError("All prior stages (Requirement, SQL, Data Model, Knowledge Model, View) must be completed before running QA.")
+                if not all([req_artifact, sql_artifact, dm_artifact, km_artifact, analysis_artifact]):
+                    raise ValueError("All prior stages (Requirement, SQL, Data Model, Knowledge Model, Analysis) must be completed before running QA.")
                 
                 rationale, content = self.qa_agent.validate(
                     req_artifact.content,
                     sql_artifact.content,
                     dm_artifact.content,
                     km_artifact.content,
-                    view_artifact.content
+                    analysis_artifact.content
                 )
             else:
                 raise ValueError(f"Unknown workflow stage: {stage}")
@@ -113,8 +113,8 @@ class WorkflowOrchestrator:
                 "requirement": "sql_transformation",
                 "sql": "data_modeling",
                 "data_model": "knowledge_modeling",
-                "knowledge_model": "view_generation",
-                "view": "qa_validation",
+                "knowledge_model": "analysis_generation",
+                "analysis": "completed",
                 "qa": "qa_validation"  # QA stays in validation until promoted
             }
             session.status = next_status_map.get(stage, session.status)
@@ -151,7 +151,7 @@ class WorkflowOrchestrator:
             "sql": "Transformation SQL Agent",
             "data_model": "Data Model Agent",
             "knowledge_model": "Knowledge Model Agent",
-            "view": "View Agent",
+            "analysis": "Analysis Agent",
             "qa": "QA / Validation Agent"
         }
         

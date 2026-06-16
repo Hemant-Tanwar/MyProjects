@@ -1,0 +1,201 @@
+mandt,langu,rldnr,name,operation_flag,is_deleted,recordstamp
+100,D,3A,Abstimmledger,I,False,2022-04-21 15:18:15.197176+00:00
+100,D,7R,Retail Ledger,I,False,2022-04-21 15:18:15.197176+00:00
+100,E,7R,Retail Ledger,I,False,2022-04-21 15:18:15.197176+00:00
+100,D,9J,HHM Finanzplan,I,False,2022-04-21 15:18:15.197176+00:00
+100,E,0L,Leading Ledger,I,False,2022-04-21 15:18:15.197176+00:00
+100,E,1L,Leading Ledger,I,False,2022-04-21 15:18:15.197176+00:00
+100,E,9F,FM Payment Budget,I,False,2022-04-21 15:18:15.197176+00:00
+100,D,90,Grants Management,I,False,2022-04-21 15:18:15.197176+00:00
+100,E,90,Grants Management,I,False,2022-04-21 15:18:15.197176+00:00
+100,D,0L,führendes Ledger,I,False,2022-04-21 15:18:15.197176+00:00
+100,D,1L,führendes Ledger,I,False,2022-04-21 15:18:15.197176+00:00
+100,D,9F,HHM Zahlungsbudget,I,False,2022-04-21 15:18:15.197176+00:00
+100,E,9J,FM Financial Budget,I,False,2022-04-21 15:18:15.197176+00:00
+100,E,LR,Local rollup ledger,I,False,2022-04-21 15:18:15.197176+00:00
+100,E,10,Consolidation Ledger,I,False,2022-04-21 15:18:15.197176+00:00
+100,E,1C,Consolidation Ledger,I,False,2022-04-21 15:18:15.197176+00:00
+100,E,8E,Export Ledger for 8A,I,False,2022-04-21 15:18:15.197176+00:00
+100,E,9G,FM Commitment Budget,I,False,2022-04-21 15:18:15.197176+00:00
+100,D,8C,Rollup Profit Center,I,False,2022-04-21 15:18:15.197176+00:00
+100,E,8C,Rollup Profit Center,I,False,2022-04-21 15:18:15.197176+00:00
+100,D,10,Konsolidierungsledger,I,False,2022-04-21 15:18:15.197176+00:00
+100,D,1C,Konsolidierungsledger,I,False,2022-04-21 15:18:15.197176+00:00
+100,D,LR,Lokales Rollup-Ledger,I,False,2022-04-21 15:18:15.197176+00:00
+100,E,3A,Reconciliation Ledger,I,False,2022-04-21 15:18:15.197176+00:00
+100,D,8A,Profit-Center-Rechnung,I,False,2022-04-21 15:18:15.197176+00:00
+100,D,8E, Export -Ledger für 8A,I,False,2022-04-21 15:18:15.197176+00:00
+100,D,9G,HHM Verpflichtungsbudget,I,False,2022-04-21 15:18:15.197176+00:00
+100,E,1M,Management consolidation,I,False,2022-04-21 15:18:15.197176+00:00
+100,E,8A,Profit Center Accounting,I,False,2022-04-21 15:18:15.197176+00:00
+100,D,00,Sachkonto-Verkehrszahlen,I,False,2022-04-21 15:18:15.197176+00:00
+100,D,9C,Controlling Haushaltsmgm.,I,False,2022-04-21 15:18:15.197176+00:00
+100,D,1M,Management-Konsolidierung,I,False,2022-04-21 15:18:15.197176+00:00
+100,D,9M,BEE Ledger: Zahlungsbudget,I,False,2022-04-21 15:18:15.197176+00:00
+100,E,0R,Export Ledger for Ledger 0,I,False,2022-04-21 15:18:15.197176+00:00
+100,E,9I,FM CB Availability Control,I,False,2022-04-21 15:18:15.197176+00:00
+100,E,9H,FM PB Availability Control,I,False,2022-04-21 15:18:15.197176+00:00
+100,E,9D,Funds Mgmt Workflow Ledger,I,False,2022-04-21 15:18:15.197176+00:00
+100,E,9K,GM PB Availability Control,I,False,2022-04-21 15:18:15.197176+00:00
+100,D,3J,ISSR: Meldewesen DE Erfolg,I,False,2022-04-21 15:18:15.197176+00:00
+100,E,3I,ISSR: Reporting DE Balance,I,False,2022-04-21 15:18:15.197176+00:00
+100,E,3K,ISSR: Reporting DE Payable,I,False,2022-04-21 15:18:15.197176+00:00
+100,D,0F,Umsatzkostenverfahren-Buch,I,False,2022-04-21 15:18:15.197176+00:00
+100,D,0R,Export-Ledger für Ledger 0,I,False,2022-04-21 15:18:15.197176+00:00
+100,D,3I,ISSR: Meldewesen DE Bestand,I,False,2022-04-21 15:18:15.197176+00:00
+100,E,L0,Local direct posting ledger,I,False,2022-04-21 15:18:15.197176+00:00
+100,D,09,Zusatzledger Konsolidierung,I,False,2022-04-21 15:18:15.197176+00:00
+100,E,9C,Funds Management Controlling,I,False,2022-04-21 15:18:15.197176+00:00
+100,E,G0,Global direct posting ledger,I,False,2022-04-21 15:18:15.197176+00:00
+100,D,L0,Lokales Durchbuchungs-Ledger,I,False,2022-04-21 15:18:15.197176+00:00
+100,D,9D,Workflowledger Haushaltsmgm.,I,False,2022-04-21 15:18:15.197176+00:00
+100,D,9A,Zahlungsbudget Haushaltsmgm.,I,False,2022-04-21 15:18:15.197176+00:00
+100,E,09,Additnal Consolidation Ledger,I,False,2022-04-21 15:18:15.197176+00:00
+100,E,9N,Bud.Incr.Rev.: Commit. Budget,I,False,2022-04-21 15:18:15.197176+00:00
+100,E,9M,Bud.Incr.Rev.: Payment Budget,I,False,2022-04-21 15:18:15.197176+00:00
+100,E,0F,Cost of Sales Accounting Ldgr,I,False,2022-04-21 15:18:15.197176+00:00
+100,E,1A,FI-LC: Direct Postng Bus.Area,I,False,2022-04-21 15:18:15.197176+00:00
+100,E,9A,Funds Management Payment Bdgt,I,False,2022-04-21 15:18:15.197176+00:00
+100,E,00,G/L Accnt Transaction Figures,I,False,2022-04-21 15:18:15.197176+00:00
+100,D,G0,Globales Durchbuchungs-Ledger,I,False,2022-04-21 15:18:15.197176+00:00
+100,D,3K,ISSR: Meldewesen DE Forderung,I,False,2022-04-21 15:18:15.197176+00:00
+100,D,9B,Verpflichtungsb.Haushaltsmgm.,I,False,2022-04-21 15:18:15.197176+00:00
+100,D,9N,BEE Ledger: Verpflichtungsbdgt,I,False,2022-04-21 15:18:15.197176+00:00
+100,E,3B,Export Ledger for Recon.Ledger,I,False,2022-04-21 15:18:15.197176+00:00
+100,D,3B,Exportledger zum Abstimmledger,I,False,2022-04-21 15:18:15.197176+00:00
+100,E,1B,FI-LC: Dir.Pstng Bus.Ar.Rollup,I,False,2022-04-21 15:18:15.197176+00:00
+100,D,1A,FI-LC: dir. Durchbuchung Gsber,I,False,2022-04-21 15:18:15.197176+00:00
+100,D,1B,FI-LC: dir.Durch. Gsber Rollup,I,False,2022-04-21 15:18:15.197176+00:00
+100,E,9B,Funds Management Commit.Budget,I,False,2022-04-21 15:18:15.197176+00:00
+100,D,9K,GM ZB Verfügbarkeitskontrolle,I,False,2022-04-21 15:18:15.197176+00:00
+100,E,3J,ISSR: Reporting DE Profit&Loss,I,False,2022-04-21 15:18:15.197176+00:00
+100,D,9I,HHM VB Verfügbarkeitskontrolle,I,False,2022-04-21 15:18:15.197176+00:00
+100,D,9H,HHM ZB Verfügbarkeitskontrolle,I,False,2022-04-21 15:18:15.197176+00:00
+0,D,3A,Abstimmledger,L,False,2022-01-31 20:43:51.102548+00:00
+1,D,3A,Abstimmledger,L,False,2022-01-31 20:43:51.102548+00:00
+50,D,3A,Abstimmledger,L,False,2022-01-31 20:43:51.102548+00:00
+100,D,3A,Abstimmledger,L,False,2022-01-31 20:43:51.102548+00:00
+200,D,3A,Abstimmledger,L,False,2022-01-31 20:43:51.102548+00:00
+250,D,3A,Abstimmledger,L,False,2022-01-31 20:43:51.102548+00:00
+0,D,7R,Retail Ledger,L,False,2022-01-31 20:43:51.102548+00:00
+0,E,7R,Retail Ledger,L,False,2022-01-31 20:43:51.102548+00:00
+1,D,7R,Retail Ledger,L,False,2022-01-31 20:43:51.102548+00:00
+1,E,7R,Retail Ledger,L,False,2022-01-31 20:43:51.102548+00:00
+50,D,7R,Retail Ledger,L,False,2022-01-31 20:43:51.102548+00:00
+50,E,7R,Retail Ledger,L,False,2022-01-31 20:43:51.102548+00:00
+100,D,7R,Retail Ledger,L,False,2022-01-31 20:43:51.102548+00:00
+100,E,7R,Retail Ledger,L,False,2022-01-31 20:43:51.102548+00:00
+200,D,7R,Retail Ledger,L,False,2022-01-31 20:43:51.102548+00:00
+200,E,7R,Retail Ledger,L,False,2022-01-31 20:43:51.102548+00:00
+250,D,7R,Retail Ledger,L,False,2022-01-31 20:43:51.102548+00:00
+250,E,7R,Retail Ledger,L,False,2022-01-31 20:43:51.102548+00:00
+0,D,9J,HHM Finanzplan,L,False,2022-01-31 20:43:51.102548+00:00
+1,D,9J,HHM Finanzplan,L,False,2022-01-31 20:43:51.102548+00:00
+50,D,9J,HHM Finanzplan,L,False,2022-01-31 20:43:51.102548+00:00
+100,D,9J,HHM Finanzplan,L,False,2022-01-31 20:43:51.102548+00:00
+200,D,9J,HHM Finanzplan,L,False,2022-01-31 20:43:51.102548+00:00
+250,D,9J,HHM Finanzplan,L,False,2022-01-31 20:43:51.102548+00:00
+0,E,0L,Leading Ledger,L,False,2022-01-31 20:43:51.102548+00:00
+0,E,1L,Leading Ledger,L,False,2022-01-31 20:43:51.102548+00:00
+1,E,0L,Leading Ledger,L,False,2022-01-31 20:43:51.102548+00:00
+1,E,1L,Leading Ledger,L,False,2022-01-31 20:43:51.102548+00:00
+50,E,0L,Leading Ledger,L,False,2022-01-31 20:43:51.102548+00:00
+50,E,1L,Leading Ledger,L,False,2022-01-31 20:43:51.102548+00:00
+100,E,0L,Leading Ledger,L,False,2022-01-31 20:43:51.102548+00:00
+100,E,1L,Leading Ledger,L,False,2022-01-31 20:43:51.102548+00:00
+200,E,0L,Leading Ledger,L,False,2022-01-31 20:43:51.102548+00:00
+200,E,1L,Leading Ledger,L,False,2022-01-31 20:43:51.102548+00:00
+250,E,0L,Leading Ledger,L,False,2022-01-31 20:43:51.102548+00:00
+250,E,1L,Leading Ledger,L,False,2022-01-31 20:43:51.102548+00:00
+0,E,9F,FM Payment Budget,L,False,2022-01-31 20:43:51.102548+00:00
+1,E,9F,FM Payment Budget,L,False,2022-01-31 20:43:51.102548+00:00
+50,E,9F,FM Payment Budget,L,False,2022-01-31 20:43:51.102548+00:00
+100,E,9F,FM Payment Budget,L,False,2022-01-31 20:43:51.102548+00:00
+200,E,9F,FM Payment Budget,L,False,2022-01-31 20:43:51.102548+00:00
+250,E,9F,FM Payment Budget,L,False,2022-01-31 20:43:51.102548+00:00
+0,D,90,Grants Management,L,False,2022-01-31 20:43:51.102548+00:00
+0,E,90,Grants Management,L,False,2022-01-31 20:43:51.102548+00:00
+1,D,90,Grants Management,L,False,2022-01-31 20:43:51.102548+00:00
+1,E,90,Grants Management,L,False,2022-01-31 20:43:51.102548+00:00
+50,D,90,Grants Management,L,False,2022-01-31 20:43:51.102548+00:00
+50,E,90,Grants Management,L,False,2022-01-31 20:43:51.102548+00:00
+100,D,90,Grants Management,L,False,2022-01-31 20:43:51.102548+00:00
+100,E,90,Grants Management,L,False,2022-01-31 20:43:51.102548+00:00
+200,D,90,Grants Management,L,False,2022-01-31 20:43:51.102548+00:00
+200,E,90,Grants Management,L,False,2022-01-31 20:43:51.102548+00:00
+250,D,90,Grants Management,L,False,2022-01-31 20:43:51.102548+00:00
+250,E,90,Grants Management,L,False,2022-01-31 20:43:51.102548+00:00
+0,D,0L,führendes Ledger,L,False,2022-01-31 20:43:51.102548+00:00
+0,D,1L,führendes Ledger,L,False,2022-01-31 20:43:51.102548+00:00
+1,D,0L,führendes Ledger,L,False,2022-01-31 20:43:51.102548+00:00
+1,D,1L,führendes Ledger,L,False,2022-01-31 20:43:51.102548+00:00
+50,D,0L,führendes Ledger,L,False,2022-01-31 20:43:51.102548+00:00
+50,D,1L,führendes Ledger,L,False,2022-01-31 20:43:51.102548+00:00
+100,D,0L,führendes Ledger,L,False,2022-01-31 20:43:51.102548+00:00
+100,D,1L,führendes Ledger,L,False,2022-01-31 20:43:51.102548+00:00
+200,D,0L,führendes Ledger,L,False,2022-01-31 20:43:51.102548+00:00
+200,D,1L,führendes Ledger,L,False,2022-01-31 20:43:51.102548+00:00
+250,D,0L,führendes Ledger,L,False,2022-01-31 20:43:51.102548+00:00
+250,D,1L,führendes Ledger,L,False,2022-01-31 20:43:51.102548+00:00
+0,D,9F,HHM Zahlungsbudget,L,False,2022-01-31 20:43:51.102548+00:00
+1,D,9F,HHM Zahlungsbudget,L,False,2022-01-31 20:43:51.102548+00:00
+50,D,9F,HHM Zahlungsbudget,L,False,2022-01-31 20:43:51.102548+00:00
+100,D,9F,HHM Zahlungsbudget,L,False,2022-01-31 20:43:51.102548+00:00
+200,D,9F,HHM Zahlungsbudget,L,False,2022-01-31 20:43:51.102548+00:00
+250,D,9F,HHM Zahlungsbudget,L,False,2022-01-31 20:43:51.102548+00:00
+0,E,9J,FM Financial Budget,L,False,2022-01-31 20:43:51.102548+00:00
+1,E,9J,FM Financial Budget,L,False,2022-01-31 20:43:51.102548+00:00
+50,E,9J,FM Financial Budget,L,False,2022-01-31 20:43:51.102548+00:00
+100,E,9J,FM Financial Budget,L,False,2022-01-31 20:43:51.102548+00:00
+200,E,9J,FM Financial Budget,L,False,2022-01-31 20:43:51.102548+00:00
+250,E,9J,FM Financial Budget,L,False,2022-01-31 20:43:51.102548+00:00
+0,E,LR,Local rollup ledger,L,False,2022-01-31 20:43:51.102548+00:00
+1,E,LR,Local rollup ledger,L,False,2022-01-31 20:43:51.102548+00:00
+50,E,LR,Local rollup ledger,L,False,2022-01-31 20:43:51.102548+00:00
+100,E,LR,Local rollup ledger,L,False,2022-01-31 20:43:51.102548+00:00
+200,E,LR,Local rollup ledger,L,False,2022-01-31 20:43:51.102548+00:00
+250,E,LR,Local rollup ledger,L,False,2022-01-31 20:43:51.102548+00:00
+0,E,10,Consolidation Ledger,L,False,2022-01-31 20:43:51.102548+00:00
+0,E,1C,Consolidation Ledger,L,False,2022-01-31 20:43:51.102548+00:00
+1,E,10,Consolidation Ledger,L,False,2022-01-31 20:43:51.102548+00:00
+1,E,1C,Consolidation Ledger,L,False,2022-01-31 20:43:51.102548+00:00
+50,E,10,Consolidation Ledger,L,False,2022-01-31 20:43:51.102548+00:00
+50,E,1C,Consolidation Ledger,L,False,2022-01-31 20:43:51.102548+00:00
+100,E,10,Consolidation Ledger,L,False,2022-01-31 20:43:51.102548+00:00
+100,E,1C,Consolidation Ledger,L,False,2022-01-31 20:43:51.102548+00:00
+200,E,10,Consolidation Ledger,L,False,2022-01-31 20:43:51.102548+00:00
+200,E,1C,Consolidation Ledger,L,False,2022-01-31 20:43:51.102548+00:00
+250,E,10,Consolidation Ledger,L,False,2022-01-31 20:43:51.102548+00:00
+250,E,1C,Consolidation Ledger,L,False,2022-01-31 20:43:51.102548+00:00
+0,E,8E,Export Ledger for 8A,L,False,2022-01-31 20:43:51.102548+00:00
+1,E,8E,Export Ledger for 8A,L,False,2022-01-31 20:43:51.102548+00:00
+50,E,8E,Export Ledger for 8A,L,False,2022-01-31 20:43:51.102548+00:00
+100,E,8E,Export Ledger for 8A,L,False,2022-01-31 20:43:51.102548+00:00
+200,E,8E,Export Ledger for 8A,L,False,2022-01-31 20:43:51.102548+00:00
+250,E,8E,Export Ledger for 8A,L,False,2022-01-31 20:43:51.102548+00:00
+0,E,9G,FM Commitment Budget,L,False,2022-01-31 20:43:51.102548+00:00
+1,E,9G,FM Commitment Budget,L,False,2022-01-31 20:43:51.102548+00:00
+50,E,9G,FM Commitment Budget,L,False,2022-01-31 20:43:51.102548+00:00
+100,E,9G,FM Commitment Budget,L,False,2022-01-31 20:43:51.102548+00:00
+200,E,9G,FM Commitment Budget,L,False,2022-01-31 20:43:51.102548+00:00
+250,E,9G,FM Commitment Budget,L,False,2022-01-31 20:43:51.102548+00:00
+0,D,8C,Rollup Profit Center,L,False,2022-01-31 20:43:51.102548+00:00
+0,E,8C,Rollup Profit Center,L,False,2022-01-31 20:43:51.102548+00:00
+1,D,8C,Rollup Profit Center,L,False,2022-01-31 20:43:51.102548+00:00
+1,E,8C,Rollup Profit Center,L,False,2022-01-31 20:43:51.102548+00:00
+50,D,8C,Rollup Profit Center,L,False,2022-01-31 20:43:51.102548+00:00
+50,E,8C,Rollup Profit Center,L,False,2022-01-31 20:43:51.102548+00:00
+100,D,8C,Rollup Profit Center,L,False,2022-01-31 20:43:51.102548+00:00
+100,E,8C,Rollup Profit Center,L,False,2022-01-31 20:43:51.102548+00:00
+200,D,8C,Rollup Profit Center,L,False,2022-01-31 20:43:51.102548+00:00
+200,E,8C,Rollup Profit Center,L,False,2022-01-31 20:43:51.102548+00:00
+250,D,8C,Rollup Profit Center,L,False,2022-01-31 20:43:51.102548+00:00
+250,E,8C,Rollup Profit Center,L,False,2022-01-31 20:43:51.102548+00:00
+0,D,10,Konsolidierungsledger,L,False,2022-01-31 20:43:51.102548+00:00
+0,D,1C,Konsolidierungsledger,L,False,2022-01-31 20:43:51.102548+00:00
+1,D,10,Konsolidierungsledger,L,False,2022-01-31 20:43:51.102548+00:00
+1,D,1C,Konsolidierungsledger,L,False,2022-01-31 20:43:51.102548+00:00
+50,D,10,Konsolidierungsledger,L,False,2022-01-31 20:43:51.102548+00:00
+50,D,1C,Konsolidierungsledger,L,False,2022-01-31 20:43:51.102548+00:00
+100,D,10,Konsolidierungsledger,L,False,2022-01-31 20:43:51.102548+00:00
+100,D,1C,Konsolidierungsledger,L,False,2022-01-31 20:43:51.102548+00:00

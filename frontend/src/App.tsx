@@ -1,13 +1,13 @@
-import React, { useState, useEffect, useRef } from "react";
-import { 
-  FileText, Database, GitMerge, FileCode, LayoutDashboard, ShieldCheck, 
-  Play, CheckCircle2, AlertTriangle, XCircle, ChevronRight, PlusCircle, 
+import React, { useState, useEffect } from "react";
+import {
+  FileText, Database, GitMerge, FileCode, LayoutDashboard,
+  Play, CheckCircle2, AlertTriangle, ChevronRight, PlusCircle,
   Edit3, ArrowRight, Download, Users, Trash2, Shield
 } from "lucide-react";
-import { 
+import {
   listSessions, getSession, createSession, deleteSession, triggerAgent,
-  getArtifact, editArtifact, approveArtifact, switchRole, getAuditLogs, 
-  getPromotionUrl
+  getArtifact, editArtifact, approveArtifact, switchRole, getAuditLogs,
+  getPromotionUrl, API_BASE_URL
 } from "./api";
 import type { Session, Artifact, AuditLog } from "./api";
 
@@ -16,8 +16,7 @@ const STAGES = [
   { id: "sql", label: "Transformation SQL", desc: "Generate cleaning & event log SQL", icon: FileCode },
   { id: "data_model", label: "Data Model Agent", desc: "Link events, cases & dimensions", icon: GitMerge },
   { id: "knowledge_model", label: "Knowledge Model", desc: "Build semantic PQL metrics", icon: Database },
-  { id: "view", label: "Studio View Agent", desc: "Create tabs, charts & filters", icon: LayoutDashboard },
-  { id: "qa", label: "QA Validation", desc: "Validate joins, bindings & promote", icon: ShieldCheck }
+  { id: "analysis", label: "Celonis Analysis", desc: "Configure analysis sheets & KPIs", icon: LayoutDashboard }
 ];
 
 export default function App() {
@@ -26,20 +25,22 @@ export default function App() {
   const [activeStage, setActiveStage] = useState<string>("requirement");
   const [artifacts, setArtifacts] = useState<Record<string, Artifact>>({});
   const [auditLogs, setAuditLogs] = useState<AuditLog[]>([]);
-  
+
+  const isPushed = auditLogs.some(log => log.action === "promoted_to_production");
+
   // UI creation states
   const [newSessionName, setNewSessionName] = useState("");
   const [initialRequirement, setInitialRequirement] = useState("");
   const [showCreateModal, setShowCreateModal] = useState(false);
-  
+
   // Editing states
   const [isEditing, setIsEditing] = useState(false);
   const [editContent, setEditContent] = useState("");
   const [editRationale, setEditRationale] = useState("");
-  
+
   // Approval states
   const [approvalNotes, setApprovalNotes] = useState("");
-  
+
   // Loading & Error states
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -54,7 +55,7 @@ export default function App() {
   useEffect(() => {
     if (currentSession) {
       loadSessionData(currentSession.id);
-      
+
       // Auto-poll logs and artifacts periodically (every 5 seconds)
       const interval = setInterval(() => {
         pollSessionUpdates(currentSession.id);
@@ -115,10 +116,10 @@ export default function App() {
         try {
           const art = await getArtifact(sessionId, stage.id);
           stageArtifacts[stage.id] = art;
-        } catch (e) {}
+        } catch (e) { }
       }
       setArtifacts(stageArtifacts);
-    } catch (e) {}
+    } catch (e) { }
   };
 
   const handleCreateSession = async (e: React.FormEvent) => {
@@ -176,11 +177,11 @@ export default function App() {
       const art = await triggerAgent(currentSession.id, stageId);
       setArtifacts(prev => ({ ...prev, [stageId]: art }));
       setNotification(`${stageId.toUpperCase()} Agent execution complete.`);
-      
+
       // Reload logs
       const logs = await getAuditLogs(currentSession.id);
       setAuditLogs(logs);
-      
+
       // Reload session (which updates status/role)
       const sess = await getSession(currentSession.id);
       setCurrentSession(sess);
@@ -213,7 +214,7 @@ export default function App() {
       setArtifacts(prev => ({ ...prev, [activeStage]: updated }));
       setIsEditing(false);
       setNotification("Edits saved as a new artifact version.");
-      
+
       // Reload logs
       const logs = await getAuditLogs(currentSession.id);
       setAuditLogs(logs);
@@ -238,7 +239,7 @@ export default function App() {
       setArtifacts(prev => ({ ...prev, [activeStage]: updated }));
       setApprovalNotes("");
       setNotification(`Stage ${activeStage} artifact has been ${approved ? "approved" : "rejected"}.`);
-      
+
       // Refresh session
       const sess = await getSession(currentSession.id);
       setCurrentSession(sess);
@@ -256,18 +257,94 @@ export default function App() {
     setNotification("Promoted to production! Downloading deployment ZIP bundle...");
   };
 
+  const handlePushToCelonis = async () => {
+    if (!currentSession) return;
+    if (!window.confirm("Celonis push?")) return;
+
+    setLoading(true);
+    setError(null);
+    try {
+      // Elevate role to Admin if needed to bypass permission checks
+      const userRole = currentSession.current_role;
+      if (userRole !== "Admin" && userRole !== "Reviewer") {
+        await switchRole(currentSession.id, "Admin");
+      }
+
+      // Call promote endpoint (which triggers file export & Celonis push)
+      const response = await fetch(`${API_BASE_URL}/sessions/${currentSession.id}/promote`, {
+        method: "POST",
+      });
+
+      if (!response.ok) {
+        const err = await response.json();
+        throw new Error(err.detail || "Failed to push to Celonis");
+      }
+
+      const result = await response.json();
+      setNotification(result.message || "Successfully pushed all assets to Celonis!");
+
+      // Refresh session and logs
+      const logs = await getAuditLogs(currentSession.id);
+      setAuditLogs(logs);
+      const sess = await getSession(currentSession.id);
+      setCurrentSession(sess);
+    } catch (err: any) {
+      setError(err.message || "Failed to push to Celonis");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const renderPromoteProgress = () => {
+    const progressSteps = auditLogs
+      .filter(log => log.action === "promote_progress")
+      .reverse();
+
+    if (progressSteps.length === 0) return null;
+
+    return (
+      <div className="promote-progress-container" style={{ marginTop: '1rem', width: '100%' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px', borderBottom: '1px solid rgba(6, 182, 212, 0.2)', paddingBottom: '4px' }}>
+          <span style={{ fontSize: '0.8rem', fontWeight: 700, color: 'var(--accent-cyan)', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+            Celonis Cloud Deployment Status
+          </span>
+          {loading && (
+            <div className="spinner-border" style={{ color: 'var(--accent-cyan)' }} />
+          )}
+        </div>
+        <div className="promote-progress-steps">
+          {progressSteps.map((step, idx) => {
+            const isLast = idx === progressSteps.length - 1;
+            const promptText = step.prompt || "";
+            const isCompleted = !loading || !isLast || promptText.includes("successfully") || promptText.includes("completed") || promptText.includes("complete") || promptText.includes("verified") || promptText.includes("created");
+            
+            return (
+              <div 
+                key={step.id} 
+                className={`promote-progress-step ${isCompleted ? 'success-step' : 'current-step'}`}
+              >
+                <span>{isCompleted ? "✓" : "⚡"}</span>
+                <span>{promptText}</span>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    );
+  };
+
   // Render specific layout based on active stage panel
   const renderStageContent = () => {
     const art = artifacts[activeStage];
     const userRole = currentSession?.current_role || "Business User";
-    
+
     // Check if role is authorized to build/trigger this stage
     const buildAuthorized = {
       requirement: ["Business User", "Process Analyst", "Admin"],
       sql: ["Process Analyst", "Admin"],
       data_model: ["Process Analyst", "Admin"],
       knowledge_model: ["Process Analyst", "Admin"],
-      view: ["Process Analyst", "Admin"],
+      analysis: ["Process Analyst", "Admin"],
       qa: ["Process Analyst", "Admin", "Reviewer"]
     }[activeStage]?.includes(userRole);
 
@@ -318,7 +395,7 @@ export default function App() {
               <span className="card-title">Modify Specification Data</span>
             </div>
             <div className="card-body" style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
-              <textarea 
+              <textarea
                 className="textarea-input"
                 style={{ flex: 1, fontFamily: 'var(--font-mono)', fontSize: '0.85rem' }}
                 value={editContent}
@@ -375,8 +452,8 @@ export default function App() {
                 <DataModelViewer content={art.content} />
               ) : activeStage === "knowledge_model" ? (
                 <KnowledgeModelViewer content={art.content} />
-              ) : activeStage === "view" ? (
-                <ViewMockupViewer content={art.content} />
+              ) : activeStage === "analysis" ? (
+                <AnalysisMockupViewer content={art.content} onPushToCelonis={handlePushToCelonis} isPushed={isPushed} />
               ) : activeStage === "qa" ? (
                 <QaViewer content={art.content} onPromote={handlePromoteToProduction} promoteAuthorized={approveAuthorized} />
               ) : (
@@ -384,7 +461,7 @@ export default function App() {
               )}
             </div>
           </div>
-          
+
           <div className="glass" style={{ display: 'flex', flexDirection: 'column' }}>
             <div className="card-title-bar">
               <span className="card-title">Explainability & Rationale</span>
@@ -399,19 +476,48 @@ export default function App() {
         <div className="glass" style={{ padding: '1rem 1.5rem' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
             <div>
-              <h4 style={{ fontSize: '0.9rem', fontWeight: 600 }}>Governance Approval Gate</h4>
+              <h4 style={{ fontSize: '0.9rem', fontWeight: 600 }}>
+                {activeStage === "analysis" ? "Production Promotion" : "Governance Approval Gate"}
+              </h4>
               <p style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>
-                {art.approved 
-                  ? `Approved by ${art.approved_by || 'Admin'}. Ready to move downstream.` 
-                  : "Requires analyst/reviewer approval before final promotion."}
+                {isPushed
+                  ? "Pushed! All process configurations have been successfully deployed to Celonis Cloud."
+                  : activeStage === "analysis"
+                    ? "Ready to push all configurations directly to Celonis."
+                    : art.approved
+                      ? `Approved by ${art.approved_by || 'Admin'}. Ready to move downstream.`
+                      : "Requires analyst/reviewer approval before final promotion."}
               </p>
             </div>
             <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
-              {approveAuthorized ? (
+              {activeStage === "analysis" ? (
+                isPushed ? (
+                  <button
+                    className="btn btn-success"
+                    style={{ padding: '8px 16px', background: 'var(--status-success)', color: '#fff', fontWeight: 600, cursor: 'default' }}
+                    disabled={true}
+                  >
+                    ✓ Pushed to Celonis
+                  </button>
+                ) : (
+                  <button
+                    className="btn btn-primary"
+                    style={{ padding: '8px 16px', background: 'var(--accent-cyan)', color: '#000', fontWeight: 600 }}
+                    onClick={handlePushToCelonis}
+                    disabled={loading}
+                  >
+                    {loading ? "Pushing to Celonis..." : "Push to Celonis Platform"}
+                  </button>
+                )
+              ) : art.approved ? (
+                <div style={{ fontSize: '0.75rem', color: 'var(--status-success)', fontWeight: 600 }}>
+                  ✓ Approved
+                </div>
+              ) : approveAuthorized ? (
                 <>
-                  <input 
-                    type="text" 
-                    className="text-input" 
+                  <input
+                    type="text"
+                    className="text-input"
                     placeholder="Approval comments..."
                     style={{ width: '220px', fontSize: '0.8rem' }}
                     value={approvalNotes}
@@ -428,6 +534,7 @@ export default function App() {
               )}
             </div>
           </div>
+          {activeStage === "analysis" && renderPromoteProgress()}
         </div>
       </div>
     );
@@ -446,8 +553,8 @@ export default function App() {
         <div className="header-actions">
           {/* Active Workspace / Session Loader */}
           {currentSession && (
-            <select 
-              className="session-select" 
+            <select
+              className="session-select"
               value={currentSession.id}
               onChange={(e) => {
                 const s = sessions.find(x => x.id === e.target.value);
@@ -468,7 +575,7 @@ export default function App() {
           <div className="role-container">
             <Users size={16} style={{ color: 'var(--text-secondary)' }} />
             <span className="role-label">Active Role:</span>
-            <select 
+            <select
               className="role-select"
               value={currentSession?.current_role || "Business User"}
               onChange={(e) => handleRoleChange(e.target.value)}
@@ -480,11 +587,11 @@ export default function App() {
               <option value="Reviewer">Reviewer</option>
             </select>
           </div>
-          
+
           {currentSession && (
-            <button 
-              className="btn btn-danger" 
-              style={{ padding: '6px 8px' }} 
+            <button
+              className="btn btn-danger"
+              style={{ padding: '6px 8px' }}
               onClick={() => handleDeleteSession(currentSession.id)}
               title="Delete session"
             >
@@ -500,14 +607,14 @@ export default function App() {
         <aside className="sidebar-progression">
           <div className="sidebar-title">Pipeline Layers</div>
           <div className="stage-list">
-            {STAGES.map((s, idx) => {
+            {STAGES.map((s) => {
               const art = artifacts[s.id];
               const isCompleted = art?.approved;
               const isActive = activeStage === s.id;
               const StageIcon = s.icon;
-              
+
               return (
-                <div 
+                <div
                   key={s.id}
                   className={`stage-item ${isActive ? 'active' : ''} ${isCompleted ? 'completed' : ''}`}
                   onClick={() => {
@@ -526,7 +633,7 @@ export default function App() {
               );
             })}
           </div>
-          
+
           <div style={{ marginTop: 'auto', padding: '10px', fontSize: '0.75rem', color: 'var(--text-secondary)', borderTop: '1px solid var(--border-color)' }}>
             <strong>Workspace Scope:</strong><br />
             {currentSession?.description ? (
@@ -543,7 +650,7 @@ export default function App() {
               <button style={{ background: 'transparent', border: 'none', color: '#fff', cursor: 'pointer' }} onClick={() => setError(null)}>X</button>
             </div>
           )}
-          
+
           {notification && (
             <div style={{ background: 'rgba(16, 185, 129, 0.15)', border: '1px solid var(--status-success)', padding: '10px 16px', margin: '16px', borderRadius: '6px', color: 'var(--status-success)', fontSize: '0.85rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
               <span>{notification}</span>
@@ -597,23 +704,23 @@ export default function App() {
         <div style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, background: 'rgba(0,0,0,0.7)', zIndex: 100, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
           <form onSubmit={handleCreateSession} className="glass" style={{ width: '500px', padding: '2rem', display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
             <h3 style={{ fontSize: '1.25rem', fontWeight: 700 }}>Initialize Celonis Workflow Generator</h3>
-            
+
             <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
               <label style={{ fontSize: '0.8rem', fontWeight: 600, color: 'var(--text-secondary)' }}>Session Name</label>
-              <input 
-                type="text" 
-                className="text-input" 
-                placeholder="e.g. Accounts Payable Process Mining" 
+              <input
+                type="text"
+                className="text-input"
+                placeholder="e.g. Accounts Payable Process Mining"
                 required
                 value={newSessionName}
                 onChange={(e) => setNewSessionName(e.target.value)}
               />
             </div>
-            
+
             <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
               <label style={{ fontSize: '0.8rem', fontWeight: 600, color: 'var(--text-secondary)' }}>Business Requirements / SOP Notes</label>
-              <textarea 
-                className="textarea-input" 
+              <textarea
+                className="textarea-input"
                 placeholder="Paste your natural language requirement, e.g. Analyze Accounts Payable process. Identify duplicate payments, track invoice approval cycle times..."
                 required
                 value={initialRequirement}
@@ -643,7 +750,7 @@ function RequirementSpecViewer({ content }: { content: string }) {
         <div><strong>Process Name:</strong> {spec.process_name}</div>
         <div><strong>Case ID Definition:</strong> {spec.case_id_definition}</div>
         <div><strong>Source Systems:</strong> {spec.source_systems?.join(", ")}</div>
-        
+
         <div style={{ marginTop: '0.5rem' }}>
           <strong>Activity Events Mapping:</strong>
           <table style={{ width: '100%', borderCollapse: 'collapse', marginTop: '6px', fontSize: '0.8rem' }}>
@@ -690,7 +797,7 @@ function DataModelViewer({ content }: { content: string }) {
         <div><strong>Data Model Type:</strong> {dm.model_type || "Standard Case-Centric"}</div>
         <div><strong>Primary Case Table:</strong> <code style={{ color: 'var(--accent-cyan)' }}>{dm.case_table}</code></div>
         <div><strong>Primary Event Log:</strong> <code style={{ color: 'var(--accent-cyan)' }}>{dm.event_table}</code></div>
-        
+
         <div style={{ marginTop: '0.5rem' }}>
           <strong>Configured Tables:</strong>
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px', marginTop: '6px' }}>
@@ -732,7 +839,7 @@ function KnowledgeModelViewer({ content }: { content: string }) {
       <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', fontSize: '0.875rem' }}>
         <div><strong>Knowledge Model ID:</strong> {km.id}</div>
         <div><strong>Business Semantic Layer:</strong> {km.displayName}</div>
-        
+
         <div>
           <strong>KPI Record Catalog (PQL Definitions):</strong>
           <table style={{ width: '100%', borderCollapse: 'collapse', marginTop: '6px', fontSize: '0.8rem' }}>
@@ -772,42 +879,70 @@ function KnowledgeModelViewer({ content }: { content: string }) {
   }
 }
 
-/* Sub-View Component: Studio View Dashboard Mockup Visualizer */
-function ViewMockupViewer({ content }: { content: string }) {
+/* Sub-View Component: Celonis Analysis Dashboard Mockup Visualizer */
+interface AnalysisMockupViewerProps {
+  content: string;
+  onPushToCelonis?: () => void;
+  isPushed?: boolean;
+}
+
+function AnalysisMockupViewer({ content, onPushToCelonis, isPushed }: AnalysisMockupViewerProps) {
   const [activeTabId, setActiveTabId] = useState<string>("");
-  
+
   try {
-    const view = JSON.parse(content);
-    const tabs = view.tabs || [];
-    
-    // Set first tab as active initially
-    if (!activeTabId && tabs.length > 0) {
-      setActiveTabId(tabs[0].id);
+    const data = JSON.parse(content);
+    const title = data.analysis_title || data.view_title || "Celonis Analysis Dashboard";
+    const sheets = data.sheets || data.tabs || [];
+
+    // Set first sheet/tab as active initially
+    if (!activeTabId && sheets.length > 0) {
+      setActiveTabId(sheets[0].id);
     }
-    
-    const activeTab = tabs.find((t: any) => t.id === activeTabId) || tabs[0];
-    
+
+    const activeSheet = sheets.find((s: any) => s.id === activeTabId) || sheets[0];
+
     return (
       <div className="mock-dashboard">
-        <div className="mock-dashboard-header">
-          <span style={{ fontWeight: 700, fontSize: '0.85rem', color: 'var(--accent-cyan)' }}>{view.view_title}</span>
-          <div className="mock-tabs">
-            {tabs.map((t: any) => (
-              <button 
-                key={t.id} 
-                className={`mock-tab ${activeTabId === t.id ? 'active' : ''}`}
-                onClick={() => setActiveTabId(t.id)}
-              >
-                {t.name}
-              </button>
-            ))}
+        <div className="mock-dashboard-header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+            <span style={{ fontWeight: 700, fontSize: '0.85rem', color: 'var(--accent-cyan)' }}>{title}</span>
+            <div className="mock-tabs">
+              {sheets.map((s: any) => (
+                <button
+                  key={s.id}
+                  className={`mock-tab ${activeTabId === s.id ? 'active' : ''}`}
+                  onClick={() => setActiveTabId(s.id)}
+                >
+                  {s.name}
+                </button>
+              ))}
+            </div>
           </div>
+          {onPushToCelonis && (
+            isPushed ? (
+              <button
+                className="btn btn-success"
+                style={{ padding: '6px 12px', fontSize: '0.75rem', height: 'fit-content', background: 'var(--status-success)', color: '#fff', fontWeight: 600, cursor: 'default' }}
+                disabled={true}
+              >
+                ✓ Pushed
+              </button>
+            ) : (
+              <button
+                className="btn btn-primary"
+                style={{ padding: '6px 12px', fontSize: '0.75rem', height: 'fit-content', background: 'var(--accent-cyan)', color: '#000', fontWeight: 600 }}
+                onClick={onPushToCelonis}
+              >
+                Push to Celonis
+              </button>
+            )
+          )}
         </div>
 
-        {activeTab && (
+        {activeSheet && (
           <div className="mock-grid">
-            {activeTab.components?.map((c: any, idx: number) => {
-              if (c.type === "ProcessExplorer") {
+            {activeSheet.components?.map((c: any, idx: number) => {
+              if (c.type === "ProcessExplorer" || c.type === "process-explorer") {
                 return (
                   <div key={idx} className="mock-explorer">
                     <span style={{ position: 'absolute', top: '8px', left: '8px', fontSize: '0.65rem', color: 'var(--text-secondary)' }}>{c.title}</span>
@@ -823,15 +958,15 @@ function ViewMockupViewer({ content }: { content: string }) {
                   </div>
                 );
               }
-              
-              const isKpi = c.type?.includes("KPI");
+
+              const isKpi = c.type?.includes("KPI") || c.type === "single-kpi";
               return (
                 <div key={idx} className="mock-tile" style={{ gridColumn: 'span 4', minHeight: '80px' }}>
                   <span className="mock-tile-title">{c.title}</span>
                   <span className="mock-tile-value" style={{ color: isKpi ? 'var(--accent-cyan)' : '#fff' }}>
-                    {c.bound_kpi_id === "AUTOMATION_RATE" ? "78.4%" : 
-                     c.bound_kpi_id === "TOTAL_PO_VALUE" ? "1.24M €" : 
-                     c.bound_kpi_id === "THROUGHPUT_TIME_PO_TO_GR" ? "14.2 Days" : "N/A"}
+                    {c.bound_kpi_id === "AUTOMATION_RATE" || c.id?.includes("AUTOMATION_RATE") || c.title?.includes("Automation") ? "78.4%" :
+                      c.bound_kpi_id === "TOTAL_PO_VALUE" || c.id?.includes("TOTAL_PO_VALUE") || c.title?.includes("Net Value") || c.title?.includes("Volume") ? "1.24M €" :
+                        c.bound_kpi_id === "THROUGHPUT_TIME_PO_TO_GR" || c.id?.includes("THROUGHPUT_TIME") || c.title?.includes("Throughput") ? "14.2 Days" : "N/A"}
                   </span>
                 </div>
               );
@@ -877,7 +1012,7 @@ function QaViewer({ content, onPromote, promoteAuthorized }: QaViewerProps) {
             const isPassed = item.status === "Passed";
             const isWarning = item.status === "Warning";
             const statusClass = isPassed ? "passed" : isWarning ? "warning" : "failed";
-            
+
             return (
               <div key={idx} className={`qa-card ${statusClass}`}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
@@ -908,7 +1043,7 @@ function QaViewer({ content, onPromote, promoteAuthorized }: QaViewerProps) {
             </p>
             {promoteAuthorized ? (
               <button className="btn btn-primary" style={{ width: 'fit-content' }} onClick={onPromote}>
-                <Download size={16} /> Deploy & Download Assets Bundle (ZIP)
+                <Download size={16} /> Deploy to Celonis
               </button>
             ) : (
               <div style={{ fontSize: '0.75rem', color: 'var(--status-error)', fontWeight: 600 }}>

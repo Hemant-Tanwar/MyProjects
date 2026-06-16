@@ -1,0 +1,201 @@
+mandt,spras,msehi,mseh3,mseh6,mseht,msehl,operation_flag,is_deleted,recordstamp
+100,D,%,%,%,%,Prozent,I,False,2022-04-21 15:05:21.148410+00:00
+100,E,%,%,%,%,Percentage,I,False,2022-04-21 15:05:21.148410+00:00
+100,E,1,ONE,One,One,One,I,False,2022-04-21 15:05:21.148410+00:00
+100,D,1,ONE,one,Eins,Eins,I,False,2022-04-21 15:05:21.148410+00:00
+100,D,A,A,A,A,Ampere,I,False,2022-04-21 15:05:21.148410+00:00
+100,E,A,A,A,A,Ampere,I,False,2022-04-21 15:05:21.148410+00:00
+100,D,F,F,F,F,Farad,I,False,2022-04-21 15:05:21.148410+00:00
+100,E,F,F,F,F,Farad,I,False,2022-04-21 15:05:21.148410+00:00
+100,E,G,G,g,g,Gram,I,False,2022-04-21 15:05:21.148410+00:00
+100,D,G,G,g,g,Gramm,I,False,2022-04-21 15:05:21.148410+00:00
+100,E,H,H,h,Hour,Hour,I,False,2022-04-21 15:05:21.148410+00:00
+100,D,H,H,h,Stunde,Stunde,I,False,2022-04-21 15:05:21.148410+00:00
+100,D,J,J,J,J,Joule,I,False,2022-04-21 15:05:21.148410+00:00
+100,E,J,J,J,J,Joule,I,False,2022-04-21 15:05:21.148410+00:00
+100,D,K,K,K,K,Kelvin,I,False,2022-04-21 15:05:21.148410+00:00
+100,E,K,K,K,K,Kelvin,I,False,2022-04-21 15:05:21.148410+00:00
+100,D,L,L,l,l,Liter,I,False,2022-04-21 15:05:21.148410+00:00
+100,E,L,L,l,l,Liter,I,False,2022-04-21 15:05:21.148410+00:00
+100,D,M,M,m,m,Meter,I,False,2022-04-21 15:05:21.148410+00:00
+100,E,M,M,m,m,Meter,I,False,2022-04-21 15:05:21.148410+00:00
+100,D,N,N,N,N,Newton,I,False,2022-04-21 15:05:21.148410+00:00
+100,E,N,N,N,N,Newton,I,False,2022-04-21 15:05:21.148410+00:00
+100,E,P,P,P,Points,Points,I,False,2022-04-21 15:05:21.148410+00:00
+100,D,P,P,P,Punkte,Punkte,I,False,2022-04-21 15:05:21.148410+00:00
+100,E,S,S,s,s,Second,I,False,2022-04-21 15:05:21.148410+00:00
+100,D,S,S,s,s,Sekunde,I,False,2022-04-21 15:05:21.148410+00:00
+100,D,V,V,V,V,Volt,I,False,2022-04-21 15:05:21.148410+00:00
+100,E,V,V,V,V,Volt,I,False,2022-04-21 15:05:21.148410+00:00
+100,D,W,W,W,W,Watt,I,False,2022-04-21 15:05:21.148410+00:00
+100,E,W,W,W,W,Watt,I,False,2022-04-21 15:05:21.148410+00:00
+100,D,%O,%O,%O,%0,Promille,I,False,2022-04-21 15:05:21.148410+00:00
+100,E,%O,%O,%O,%0,Per mille,I,False,2022-04-21 15:05:21.148410+00:00
+100,E,10,D,d,Days,Days,I,False,2022-04-21 15:05:21.148410+00:00
+100,D,10,T,d,Tage,Tage,I,False,2022-04-21 15:05:21.148410+00:00
+100,E,2M,CMS,cm/s,cm/s,Centimeter/second,I,False,2022-04-21 15:05:21.148410+00:00
+100,D,2M,CMS,cm/s,cm/s,Zentimeter/Sekunde,I,False,2022-04-21 15:05:21.148410+00:00
+100,D,2X,000,m/min,m/min,Meter/Minute,I,False,2022-04-21 15:05:21.148410+00:00
+100,E,2X,000,m/min,m/min,Meter/Minute,I,False,2022-04-21 15:05:21.148410+00:00
+100,E,4G,µL,µl,µl,Microliter,I,False,2022-04-21 15:05:21.148410+00:00
+100,D,4G,µL,µl,µl,Mikroliter,I,False,2022-04-21 15:05:21.148410+00:00
+100,E,4O,µF,µF,µF,Microfarad,I,False,2022-04-21 15:05:21.148410+00:00
+100,D,4O,µF,µF,µF,Mikrofarad,I,False,2022-04-21 15:05:21.148410+00:00
+100,D,4T,PF,pF,pF,Pikofarad,I,False,2022-04-21 15:05:21.148410+00:00
+100,E,4T,PF,pF,pF,Pikofarad,I,False,2022-04-21 15:05:21.148410+00:00
+100,D,CD,CD,Cd,Cd,Candela,I,False,2022-04-21 15:05:21.148410+00:00
+100,E,CD,CD,cd,cd,Candela,I,False,2022-04-21 15:05:21.148410+00:00
+100,E,CM,CM,cm,cm,Centimeter,I,False,2022-04-21 15:05:21.148410+00:00
+100,D,CM,CM,cm,cm,Zentimeter,I,False,2022-04-21 15:05:21.148410+00:00
+100,E,CS,CV,Case,Case,Case,I,False,2022-04-21 15:05:21.148410+00:00
+100,D,CS,KS,KS,Kasten,Kasten,I,False,2022-04-21 15:05:21.148410+00:00
+100,E,DM,DM,dm,dm,Decimeter,I,False,2022-04-21 15:05:21.148410+00:00
+100,D,DM,DM,dm,dm,Dezimeter,I,False,2022-04-21 15:05:21.148410+00:00
+100,E,DR,DR,Dr,Drum,Drum,I,False,2022-04-21 15:05:21.148410+00:00
+100,D,DR,TR,tr,Trommel,Trommel,I,False,2022-04-21 15:05:21.148410+00:00
+100,E,DZ,DZ,dz,Dozen,Dozen,I,False,2022-04-21 15:05:21.148410+00:00
+100,D,DZ,DZ,dz,Dutzend,Dutzend,I,False,2022-04-21 15:05:21.148410+00:00
+100,D,EA,EA,EA,each,each,I,False,2022-04-21 15:05:21.148410+00:00
+100,E,EA,EA,EA,each,each,I,False,2022-04-21 15:05:21.148410+00:00
+100,D,EE,EE,EE,Einh. Enzy,Einheiten Enzyme,I,False,2022-04-21 15:05:21.148410+00:00
+100,E,EE,EU,EU,Enzy.Units,Enzyme Units,I,False,2022-04-21 15:05:21.148410+00:00
+100,D,FA,°F,°F,°F,Fahrenheit,I,False,2022-04-21 15:05:21.148410+00:00
+100,E,FA,°F,°F,°F,Fahrenheit,I,False,2022-04-21 15:05:21.148410+00:00
+100,E,FT,FT,Foot,Foot,Foot,I,False,2022-04-21 15:05:21.148410+00:00
+100,D,FT,FT,Fuß,Fuß,Fuß,I,False,2022-04-21 15:05:21.148410+00:00
+100,D,GC,°C,°C,°C,Grad Celsius,I,False,2022-04-21 15:05:21.148410+00:00
+100,E,GC,°C,°C,°C,Degrees Celsius,I,False,2022-04-21 15:05:21.148410+00:00
+100,D,GJ,GJ,GJ,GJ,Gigajoule,I,False,2022-04-21 15:05:21.148410+00:00
+100,E,GJ,GJ,GJ,Gigajoule,Gigajoule,I,False,2022-04-21 15:05:21.148410+00:00
+100,E,GM,GM,g/mol,g/mol,Gram/Mole,I,False,2022-04-21 15:05:21.148410+00:00
+100,D,GM,GM,g/mol,g/mol,Gramm/Mol,I,False,2022-04-21 15:05:21.148410+00:00
+100,E,GQ,µGQ,µg/m3,µg/m3,Microgram/cubic meter,I,False,2022-04-21 15:05:21.148410+00:00
+100,D,GQ,µGQ,µg/m3,µg/m3,Mikrogramm/Kubikmeter,I,False,2022-04-21 15:05:21.148410+00:00
+100,D,GW,GW,gw,g Wirkst.,Gramm Wirkstoff,I,False,2022-04-21 15:05:21.148410+00:00
+100,E,GW,GAI,gai,g act.ing.,Gram Active Ingredient,I,False,2022-04-21 15:05:21.148410+00:00
+100,E,HL,HL,hl,hl,Hectoliter,I,False,2022-04-21 15:05:21.148410+00:00
+100,D,HL,HL,hl,hl,Hektoliter,I,False,2022-04-21 15:05:21.148410+00:00
+100,E,HZ,HZ,Hz,Hz,Hertz (1/second),I,False,2022-04-21 15:05:21.148410+00:00
+100,D,HZ,HZ,Hz,Hz,Hertz (1/Sekunde),I,False,2022-04-21 15:05:21.148410+00:00
+100,E,IN,"""","""",Inches,Inch,I,False,2022-04-21 15:05:21.148410+00:00
+100,D,IN,"""","""",Zoll,Zoll (inch),I,False,2022-04-21 15:05:21.148410+00:00
+100,D,KA,KA,kA,kA,Kiloampere,I,False,2022-04-21 15:05:21.148410+00:00
+100,E,KA,KA,kA,kA,Kiloampere,I,False,2022-04-21 15:05:21.148410+00:00
+100,E,KG,KG,kg,kg,Kilogram,I,False,2022-04-21 15:05:21.148410+00:00
+100,D,KG,KG,kg,kg,Kilogramm,I,False,2022-04-21 15:05:21.148410+00:00
+100,D,KI,KI,Kiste,Kiste,Kiste,I,False,2022-04-21 15:05:21.148410+00:00
+100,E,KI,CRT,Crate,Crate,Crate,I,False,2022-04-21 15:05:21.148410+00:00
+100,D,KJ,KJ,kJ,kJ,Kilojoule,I,False,2022-04-21 15:05:21.148410+00:00
+100,E,KJ,KJ,kJ,kJ,Kilojoule,I,False,2022-04-21 15:05:21.148410+00:00
+100,D,KM,KM,km,km,Kilometer,I,False,2022-04-21 15:05:21.148410+00:00
+100,E,KM,KM,km,km,Kilometer,I,False,2022-04-21 15:05:21.148410+00:00
+100,E,KT,KT,kt,kt,Kiloton,I,False,2022-04-21 15:05:21.148410+00:00
+100,D,KT,KT,kt,kt,Kilotonne,I,False,2022-04-21 15:05:21.148410+00:00
+100,D,KV,KV,kV,kV,Kilovolt,I,False,2022-04-21 15:05:21.148410+00:00
+100,E,KV,KV,kV,kV,Kilovolt,I,False,2022-04-21 15:05:21.148410+00:00
+100,E,KW,KW,KW,KW,Kilowatt,I,False,2022-04-21 15:05:21.148410+00:00
+100,D,KW,KW,kW,kW,Kilowatt,I,False,2022-04-21 15:05:21.148410+00:00
+100,D,L2,LMI,l/min,l/min,Liter/Minute,I,False,2022-04-21 15:05:21.148410+00:00
+100,E,L2,LMI,l/min,l/min,Liter/Minute,I,False,2022-04-21 15:05:21.148410+00:00
+100,E,LB,LB,lb,Pound,Pound,I,False,2022-04-21 15:05:21.148410+00:00
+100,D,LB,LB,lb,Pound,Pfund (Pound),I,False,2022-04-21 15:05:21.148410+00:00
+100,E,LE,AU,AU,AU,Activity unit,I,False,2022-04-21 15:05:21.148410+00:00
+100,D,LE,LE,LE,LeistEinh.,Leistungseinheit,I,False,2022-04-21 15:05:21.148410+00:00
+100,E,M%,M%,%(m),%(m),Percent mass,I,False,2022-04-21 15:05:21.148410+00:00
+100,D,M%,M%,%(m),%(m),Massenprozent,I,False,2022-04-21 15:05:21.148410+00:00
+100,D,M2,M2,m2,m2,Quadratmeter,I,False,2022-04-21 15:05:21.148410+00:00
+100,E,M2,M2,m2,m2,Square meter,I,False,2022-04-21 15:05:21.148410+00:00
+100,D,M3,M3,m3,m3,Kubikmeter,I,False,2022-04-21 15:05:21.148410+00:00
+100,E,M3,M3,m3,m3,Cubic meter,I,False,2022-04-21 15:05:21.148410+00:00
+100,D,MA,MA,mA,mA,Milliampere,I,False,2022-04-21 15:05:21.148410+00:00
+100,E,MA,MA,mA,mA,Milliampere,I,False,2022-04-21 15:05:21.148410+00:00
+100,E,MG,MG,mg,mg,Milligram,I,False,2022-04-21 15:05:21.148410+00:00
+100,D,MG,MG,mg,mg,Milligramm,I,False,2022-04-21 15:05:21.148410+00:00
+100,E,MI,MI,mile,Mile,Mile,I,False,2022-04-21 15:05:21.148410+00:00
+100,D,MI,MI,meile,Meile,Meile,I,False,2022-04-21 15:05:21.148410+00:00
+100,D,MJ,MIJ,mJ,mJ,Millijoule,I,False,2022-04-21 15:05:21.148410+00:00
+100,E,MJ,MIJ,mJ,mJ,Millijoule,I,False,2022-04-21 15:05:21.148410+00:00
+100,D,ML,ML,ml,ml,Milliliter,I,False,2022-04-21 15:05:21.148410+00:00
+100,E,ML,ML,ml,ml,Milliliter,I,False,2022-04-21 15:05:21.148410+00:00
+100,D,MM,MM,mm,mm,Millimeter,I,False,2022-04-21 15:05:21.148410+00:00
+100,E,MM,MM,mm,mm,Millimeter,I,False,2022-04-21 15:05:21.148410+00:00
+100,D,MS,MS,ms,ms,Millisekunde,I,False,2022-04-21 15:05:21.148410+00:00
+100,E,MS,MSE,ms,ms,Millisecond,I,False,2022-04-21 15:05:21.148410+00:00
+100,D,MV,MV,mV,mV,Millivolt,I,False,2022-04-21 15:05:21.148410+00:00
+100,E,MV,MV,mV,mV,Millivolt,I,False,2022-04-21 15:05:21.148410+00:00
+100,D,MW,MW,mW,mW,Milliwatt,I,False,2022-04-21 15:05:21.148410+00:00
+100,E,MW,MW,mW,mW,Milliwatt,I,False,2022-04-21 15:05:21.148410+00:00
+100,D,NM,NM,N/m,N/m,Newton/Meter,I,False,2022-04-21 15:05:21.148410+00:00
+100,E,NM,NM,N/m,N/m,Newton/meter,I,False,2022-04-21 15:05:21.148410+00:00
+100,E,NS,NS,ns,ns,Nanosecond,I,False,2022-04-21 15:05:21.148410+00:00
+100,D,NS,NS,ns,ns,Nanosekunde,I,False,2022-04-21 15:05:21.148410+00:00
+100,D,OM,OM,Ohmm,Ohm*m,Spez. elek. Widerstand,I,False,2022-04-21 15:05:21.148410+00:00
+100,E,OM,OM,Ohmm,Ohm*m,Specific Electrical Resistance,I,False,2022-04-21 15:05:21.148410+00:00
+100,D,OZ,OZ,oz,Unze,Unze,I,False,2022-04-21 15:05:21.148410+00:00
+100,E,OZ,OZ,oz,Ounce,Ounce,I,False,2022-04-21 15:05:21.148410+00:00
+100,D,PA,PA,Pa,Pa,Pascal,I,False,2022-04-21 15:05:21.148410+00:00
+100,E,PA,PA,Pa,Pa,Pascal,I,False,2022-04-21 15:05:21.148410+00:00
+100,E,PS,PS,ps,ps,Picosecond,I,False,2022-04-21 15:05:21.148410+00:00
+100,D,PS,PS,ps,ps,Pikosekunde,I,False,2022-04-21 15:05:21.148410+00:00
+100,E,PT,PT,pt US,Pint US l,"Pint, US liquid",I,False,2022-04-21 15:05:21.148410+00:00
+100,D,PT,PT,pt us,Pint US l,"Pint, U.S. liquid",I,False,2022-04-21 15:05:21.148410+00:00
+100,E,QT,QT,qt US,Quart US l,"Quart, US liquid",I,False,2022-04-21 15:05:21.148410+00:00
+100,D,QT,QT,qt us,Quart US l,"Quart, U.S. liquid",I,False,2022-04-21 15:05:21.148410+00:00
+100,E,ST,PC,PC,Piece,Piece,I,False,2022-04-21 15:05:21.148410+00:00
+100,D,ST,ST,ST,Stück,Stück,I,False,2022-04-21 15:05:21.148410+00:00
+100,E,TH,TS,thou,Thousands,Thousands,I,False,2022-04-21 15:05:21.148410+00:00
+100,D,TH,TS,tausnd,Tausend,Tausend,I,False,2022-04-21 15:05:21.148410+00:00
+100,E,TO,TO,t,t,Ton,I,False,2022-04-21 15:05:21.148410+00:00
+100,D,TO,TO,t,t,Tonne,I,False,2022-04-21 15:05:21.148410+00:00
+100,E,V%,V%,%(V),%(V),Percent volume,I,False,2022-04-21 15:05:21.148410+00:00
+100,D,V%,V%,%(V),%(V),Volumenprozent,I,False,2022-04-21 15:05:21.148410+00:00
+100,D,YD,YD,yd,Yard,Yard,I,False,2022-04-21 15:05:21.148410+00:00
+100,E,YD,YD,yd,Yards,Yards,I,False,2022-04-21 15:05:21.148410+00:00
+100,E,tt,tt,t/t,t/t,Ton/Ton,I,False,2022-04-21 15:05:21.148410+00:00
+100,D,tt,tt,t/t,t/t,Tonne/Tonne,I,False,2022-04-21 15:05:21.148410+00:00
+100,E,22S,22S,mm2/s,mm2/s,Square millimeter/second,I,False,2022-04-21 15:05:21.148410+00:00
+100,D,22S,22S,mm2/s,mm2/s,Quadratmillimeter/Sekunde,I,False,2022-04-21 15:05:21.148410+00:00
+100,D,A87,GOH,GOhm,GOhm,Gigaohm,I,False,2022-04-21 15:05:21.148410+00:00
+100,E,A87,GOH,GOhm,GOhm,Gigaohm,I,False,2022-04-21 15:05:21.148410+00:00
+100,E,A93,GM3,g/m3,g/m3,Gram/Cubic meter,I,False,2022-04-21 15:05:21.148410+00:00
+100,D,A93,GM3,g/m3,g/m3,Gramm/Kubikmeter,I,False,2022-04-21 15:05:21.148410+00:00
+100,D,ACR,ACR,acre,Acre,Acre,I,False,2022-04-21 15:05:21.148410+00:00
+100,E,ACR,ACR,acre,Acre,Acre,I,False,2022-04-21 15:05:21.148410+00:00
+100,E,B34,KD3,kg/dm3,kg/dm3,Kilogram/cubic decimeter,I,False,2022-04-21 15:05:21.148410+00:00
+100,D,B34,KD3,kg/dm3,kg/dm3,Kilogramm/Kubikdezimeter,I,False,2022-04-21 15:05:21.148410+00:00
+100,D,B45,KML,kmol,kmol,Kilomol,I,False,2022-04-21 15:05:21.148410+00:00
+100,E,B45,KML,kmol,kmol,Kilomol,I,False,2022-04-21 15:05:21.148410+00:00
+100,D,B47,KN,kN,kN,Kilonewton,I,False,2022-04-21 15:05:21.148410+00:00
+100,E,B47,NI,ND,ND,Kilonewton,I,False,2022-04-21 15:05:21.148410+00:00
+100,D,B73,MN,MN,MN,Meganewton,I,False,2022-04-21 15:05:21.148410+00:00
+100,E,B73,MN,MN,MN,Meganewton,I,False,2022-04-21 15:05:21.148410+00:00
+100,E,B75,MGO,MOhm,MOhm,Megohm,I,False,2022-04-21 15:05:21.148410+00:00
+100,D,B75,MGO,MOhm,MOhm,Megaohm,I,False,2022-04-21 15:05:21.148410+00:00
+100,D,B78,MAV,MV,MV,Megavolt,I,False,2022-04-21 15:05:21.148410+00:00
+100,E,B78,MHV,MV,MV,Megavolt,I,False,2022-04-21 15:05:21.148410+00:00
+100,E,B84,µA,µA,µA,Microampere,I,False,2022-04-21 15:05:21.148410+00:00
+100,D,B84,µA,µA,µA,Mikroampere,I,False,2022-04-21 15:05:21.148410+00:00
+100,E,BAG,BAG,Bag,Bag,Bag,I,False,2022-04-21 15:05:21.148410+00:00
+100,D,BAG,TTE,Tüte,Tüte,Tüte,I,False,2022-04-21 15:05:21.148410+00:00
+100,D,BAR,BAR,bar,bar,bar,I,False,2022-04-21 15:05:21.148410+00:00
+100,E,BAR,BAR,bar,bar,bar,I,False,2022-04-21 15:05:21.148410+00:00
+100,E,BOT,BT,Bt.,Bottle,Bottle,I,False,2022-04-21 15:05:21.148410+00:00
+100,D,BOT,FL,Fl,Flasche,Flasche,I,False,2022-04-21 15:05:21.148410+00:00
+100,E,BQK,BQK,Bq/kg,Bq/kg,Becquerel/kilogram,I,False,2022-04-21 15:05:21.148410+00:00
+100,D,BQK,BQK,Bq/kg,Bq/kg,Becquerel/Kilogramm,I,False,2022-04-21 15:05:21.148410+00:00
+100,D,C10,MF,mF,mF,Millifarad,I,False,2022-04-21 15:05:21.148410+00:00
+100,E,C10,RF,mF,mF,Millifarad,I,False,2022-04-21 15:05:21.148410+00:00
+100,D,C36,M/M,mol/m3,Mo/m3,Mol pro Kubikmeter,I,False,2022-04-21 15:05:21.148410+00:00
+100,E,C36,M/M,mol/m3,Mo/m3,Mole per Cubic Meter,I,False,2022-04-21 15:05:21.148410+00:00
+100,D,C38,M/L,Mol/l,Mol/Liter,Mol pro Liter,I,False,2022-04-21 15:05:21.148410+00:00
+100,E,C38,M/L,Mol/l,Mol/Liter,Mole per Liter,I,False,2022-04-21 15:05:21.148410+00:00
+100,D,C39,,nA,nA,Nanoampere,I,False,2022-04-21 15:05:21.148410+00:00
+100,E,C39,,nA,nA,Nanoampere,I,False,2022-04-21 15:05:21.148410+00:00
+100,E,C3S,C3S,cm3/s,cm3/s,Cubic centimeter/second,I,False,2022-04-21 15:05:21.148410+00:00
+100,D,C3S,C3S,cm3/s,cm3/s,Kubikzentimeter/Sekunde,I,False,2022-04-21 15:05:21.148410+00:00
+100,D,C41,NF,nF,nF,Nanofarad,I,False,2022-04-21 15:05:21.148410+00:00
+100,E,C41,R-U,nF,nF,Nanofarad,I,False,2022-04-21 15:05:21.148410+00:00
+100,D,C56,NMM,N/mm2,N/mm2,Newton/Quadratmillimeter,I,False,2022-04-21 15:05:21.148410+00:00
+100,E,C56,NMM,N/mm2,N/mm2,Newton/Square millimeter,I,False,2022-04-21 15:05:21.148410+00:00
+100,E,CCM,CCM,cm3,cm3,Cubic centimeter,I,False,2022-04-21 15:05:21.148410+00:00
+100,D,CCM,CM3,cm3,cm3,Kubikzentimeter,I,False,2022-04-21 15:05:21.148410+00:00
