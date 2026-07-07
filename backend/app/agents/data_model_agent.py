@@ -8,7 +8,12 @@ class DataModelAgent(BaseAgent):
     def generate(self, requirement_spec: str, sql_transformations: str) -> tuple[str, str]:
         system_prompt = (
             "You are an expert Celonis Data Architect Agent. Your job is to define the Celonis Data Model "
-            "based on SQL staging tables and user specifications.\n"
+            "based on SQL staging tables and user specifications.\n\n"
+            "=== RELATIONSHIP JOIN RULES ===\n"
+            "- A relationship join between the Case Table (e.g., P2P_CASES) and any other source table (e.g., EKKO, EKPO, EKBE) MUST use the correct matching key columns.\n"
+            "- DO NOT join CASE_ID directly to a single key (like EBELN or VBELN) if CASE_ID is a composite/concatenated key (like EBELN-EBELP or VBELN-POSNR). This would result in zero matching records.\n"
+            "- Instead, use the individual constituent columns (e.g., join P2P_CASES.EBELN to EKKO.EBELN; join P2P_CASES.EBELN and P2P_CASES.EBELP to EKPO.EBELN and EKPO.EBELP respectively).\n"
+            "- Celonis Data Model relationships support composite keys or single key columns. Map them precisely to avoid invalid joins.\n\n"
             "Format the output strictly as:\n"
             "---RATIONALE---\n"
             "<Your explanation of tables, primary keys, foreign keys, and event-to-case cardinality>\n"
@@ -29,6 +34,41 @@ class DataModelAgent(BaseAgent):
 
         response, model_used = self.invoke(system_prompt, prompt)
         
+        rationale, model_content = self._parse_structured_response(response)
+        return rationale, model_content
+
+    def fix_error(self, requirement_spec: str, sql_transformations: str, failing_model: str, error_msg: str) -> tuple[str, str]:
+        system_prompt = (
+            "You are an expert Celonis Data Architect Agent. Your job is to fix a failing Celonis Data Model configuration JSON.\n"
+            "Below is the original requirements specification, the SQL transformations, the failing Data Model JSON, and the error message received from the platform/database.\n"
+            "Analyze the error carefully, fix the structural or semantic issues, and output the corrected rationale and Data Model JSON.\n\n"
+            "=== RELATIONSHIP JOIN RULES ===\n"
+            "- A relationship join between the Case Table (e.g., P2P_CASES) and any other source table (e.g., EKKO, EKPO, EKBE) MUST use the correct matching key columns.\n"
+            "- DO NOT join CASE_ID directly to a single key (like EBELN or VBELN) if CASE_ID is a composite/concatenated key (like EBELN-EBELP or VBELN-POSNR). This would result in zero matching records.\n"
+            "- Instead, use the individual constituent columns (e.g., join P2P_CASES.EBELN to EKKO.EBELN; join P2P_CASES.EBELN and P2P_CASES.EBELP to EKPO.EBELN and EKPO.EBELP respectively).\n"
+            "- Celonis Data Model relationships support composite keys or single key columns. Map them precisely to avoid invalid joins.\n\n"
+            "Format the output strictly as:\n"
+            "---RATIONALE---\n"
+            "<Your explanation of the fix and what was corrected. KEEP THIS EXTREMELY BRIEF (under 4 sentences) to avoid token limits!>\n"
+            "---MODEL---\n"
+            "<Valid JSON configuration describing the Celonis data model schema, relationships, and case table binding>\n\n"
+            "The JSON structure must include:\n"
+            "- case_table: String (identifying case master table)\n"
+            "- event_table: String (identifying event log table)\n"
+            "- tables: List of objects containing name, type (Case, Event, Dimension), primary_keys, and description.\n"
+            "- relationships: List of objects specifying source_table, target_table, source_column, target_column, and cardinality (e.g. 1:N).\n"
+            "- model_type: String"
+        )
+
+        prompt = (
+            f"### Original Requirements:\n{requirement_spec}\n\n"
+            f"### SQL Transformations:\n{sql_transformations}\n\n"
+            f"### Failing Data Model JSON:\n```json\n{failing_model}\n```\n\n"
+            f"### Error Message:\n{error_msg}\n\n"
+            f"Please identify and correct the error in the Data Model configuration JSON."
+        )
+
+        response, model_used = self.invoke(system_prompt, prompt)
         rationale, model_content = self._parse_structured_response(response)
         return rationale, model_content
 
@@ -60,111 +100,3 @@ class DataModelAgent(BaseAgent):
                 pass
             return rationale, model_content
 
-    def _mock_response(self, prompt: str) -> str:
-        p_lower = prompt.lower()
-        if "o2c" in p_lower or "order-to-cash" in p_lower or "order to cash" in p_lower or "sales" in p_lower:
-            mock_model = {
-                "model_name": "O2C_Order_to_Cash_Data_Model",
-                "model_type": "Case-centric (Process Mining standard)",
-                "case_table": "TEMP_O2C_CASES",
-                "event_table": "TEMP_O2C_EVENT_LOG",
-                "tables": [
-                    {
-                        "name": "TEMP_O2C_CASES",
-                        "type": "Case Table / Master Data",
-                        "primary_keys": ["CASE_KEY"],
-                        "description": "Sales order items representing the main process cases."
-                    },
-                    {
-                        "name": "TEMP_O2C_EVENT_LOG",
-                        "type": "Activity / Event Log Table",
-                        "primary_keys": ["CASE_KEY", "ACTIVITY", "SORT_INDEX"],
-                        "description": "Process events (SO Creation, Delivery, GI, Invoice, Clearing) with timestamps."
-                    },
-                    {
-                        "name": "KNA1",
-                        "type": "Dimension Table (Customer master)",
-                        "primary_keys": ["KUNNR"],
-                        "description": "Customer master attributes: Name, Country, Account Group."
-                    }
-                ],
-                "relationships": [
-                    {
-                        "source_table": "TEMP_O2C_CASES",
-                        "target_table": "TEMP_O2C_EVENT_LOG",
-                        "source_column": "CASE_KEY",
-                        "target_column": "CASE_KEY",
-                        "cardinality": "1:N",
-                        "description": "Every sales order item has zero, one, or multiple transaction activities."
-                    },
-                    {
-                        "source_table": "KNA1",
-                        "target_table": "TEMP_O2C_CASES",
-                        "source_column": "KUNNR",
-                        "target_column": "CUSTOMER_ID",
-                        "cardinality": "1:N",
-                        "description": "A single customer can place multiple sales orders."
-                    }
-                ]
-            }
-            return (
-                "---RATIONALE---\n"
-                "Configured a case-centric process mining model with `TEMP_O2C_CASES` bound as the Case table, "
-                "and `TEMP_O2C_EVENT_LOG` bound as the Event Table. "
-                "Primary keys are defined uniquely. A 1:N relationship from `TEMP_O2C_CASES` to `TEMP_O2C_EVENT_LOG` "
-                "is mapped on the composite column `CASE_KEY`. Customer master details are connected as a lookup dimension.\n"
-                "---MODEL---\n" + json.dumps(mock_model, indent=2)
-            )
-        else:
-            mock_model = {
-                "model_name": "P2P_Procurement_Data_Model",
-                "model_type": "Case-centric (Process Mining standard)",
-                "case_table": "TEMP_P2P_CASES",
-                "event_table": "TEMP_P2P_EVENT_LOG",
-                "tables": [
-                    {
-                        "name": "TEMP_P2P_CASES",
-                        "type": "Case Table / Master Data",
-                        "primary_keys": ["CASE_KEY"],
-                        "description": "Purchase order items representing the main process cases."
-                    },
-                    {
-                        "name": "TEMP_P2P_EVENT_LOG",
-                        "type": "Activity / Event Log Table",
-                        "primary_keys": ["CASE_KEY", "ACTIVITY", "SORT_INDEX"],
-                        "description": "Process events (PO Creation, GR, IR, Clearing) with timestamps."
-                    },
-                    {
-                        "name": "LFA1",
-                        "type": "Dimension Table (Vendor master)",
-                        "primary_keys": ["LIFNR"],
-                        "description": "Vendor master attributes: Name, Country, Industry."
-                    }
-                ],
-                "relationships": [
-                    {
-                        "source_table": "TEMP_P2P_CASES",
-                        "target_table": "TEMP_P2P_EVENT_LOG",
-                        "source_column": "CASE_KEY",
-                        "target_column": "CASE_KEY",
-                        "cardinality": "1:N",
-                        "description": "Every case has zero, one, or multiple transaction activities."
-                    },
-                    {
-                        "source_table": "LFA1",
-                        "target_table": "TEMP_P2P_CASES",
-                        "source_column": "LIFNR",
-                        "target_column": "VENDOR_ID",
-                        "cardinality": "1:N",
-                        "description": "A single vendor can be linked to multiple purchase orders."
-                    }
-                ]
-            }
-            return (
-                "---RATIONALE---\n"
-                "Configured a case-centric process mining model with `TEMP_P2P_CASES` bound as the Case table, "
-                "and `TEMP_P2P_EVENT_LOG` bound as the Event Table. "
-                "Primary keys are defined uniquely. A 1:N relationship from `TEMP_P2P_CASES` to `TEMP_P2P_EVENT_LOG` "
-                "is mapped on the composite column `CASE_KEY`. Vendor master details are connected as a lookup dimension.\n"
-                "---MODEL---\n" + json.dumps(mock_model, indent=2)
-            )

@@ -130,6 +130,33 @@ export async function getAuditLogs(id: string): Promise<AuditLog[]> {
   return response.json();
 }
 
+export async function pushArtifact(id: string, stage: string): Promise<Artifact> {
+  const response = await fetch(`${API_BASE_URL}/sessions/${id}/artifacts/${stage}/push`, {
+    method: "POST"
+  });
+  if (!response.ok) {
+    const err = await response.json();
+    throw new Error(err.detail || `Failed to push stage '${stage}' to Celonis.`);
+  }
+  return response.json();
+}
+
 export function getPromotionUrl(id: string): string {
   return `${API_BASE_URL}/sessions/${id}/promote`;
 }
+
+export async function uploadRequirementFile(id: string, file: File): Promise<{ message: string; filename: string; file_path: string }> {
+  const formData = new FormData();
+  formData.append("file", file);
+
+  const response = await fetch(`${API_BASE_URL}/sessions/${id}/upload_requirement_file`, {
+    method: "POST",
+    body: formData,
+  });
+  if (!response.ok) {
+    const err = await response.json();
+    throw new Error(err.detail || "Failed to upload PowerPoint requirement file");
+  }
+  return response.json();
+}
+

@@ -1,0 +1,2884 @@
+{
+  "metadata": {
+    "type": "CCPM",
+    "platform": "Celonis",
+    "source_system": "SAP ECC / S4HANA",
+    "description": "Standard SAP Classic Case and Process Mining knowledge base — source tables, columns, and activities per process",
+    "generated": "2026-06-16"
+  },
+  "source_tables": [
+    {
+      "table": "BKPF",
+      "description": "Accounting Document Header",
+      "sap_module": "FI",
+      "key_columns": [
+        {
+          "column": "BUKRS",
+          "description": "Company Code",
+          "type": "CHAR(4)"
+        },
+        {
+          "column": "BELNR",
+          "description": "Accounting Document Number",
+          "type": "CHAR(10)"
+        },
+        {
+          "column": "GJAHR",
+          "description": "Fiscal Year",
+          "type": "NUMC(4)"
+        },
+        {
+          "column": "BLART",
+          "description": "Document Type (e.g. RE=Invoice, ZP=Payment)",
+          "type": "CHAR(2)"
+        },
+        {
+          "column": "BLDAT",
+          "description": "Document Date",
+          "type": "DATS(8)"
+        },
+        {
+          "column": "BUDAT",
+          "description": "Posting Date",
+          "type": "DATS(8)"
+        },
+        {
+          "column": "MONAT",
+          "description": "Fiscal Period",
+          "type": "NUMC(2)"
+        },
+        {
+          "column": "CPUDT",
+          "description": "Entry Date",
+          "type": "DATS(8)"
+        },
+        {
+          "column": "CPUTM",
+          "description": "Time of Entry",
+          "type": "TIMS(6)"
+        },
+        {
+          "column": "USNAM",
+          "description": "User Name who posted document",
+          "type": "CHAR(12)"
+        },
+        {
+          "column": "TCODE",
+          "description": "Transaction Code used",
+          "type": "CHAR(20)"
+        },
+        {
+          "column": "BKTXT",
+          "description": "Document Header Text",
+          "type": "CHAR(25)"
+        },
+        {
+          "column": "XBLNR",
+          "description": "Reference Document Number",
+          "type": "CHAR(16)"
+        },
+        {
+          "column": "WAERS",
+          "description": "Currency Key",
+          "type": "CUKY(5)"
+        },
+        {
+          "column": "KURSF",
+          "description": "Exchange Rate",
+          "type": "DEC"
+        },
+        {
+          "column": "STBLG",
+          "description": "Reversal Document Number",
+          "type": "CHAR(10)"
+        },
+        {
+          "column": "STJAH",
+          "description": "Reversal Fiscal Year",
+          "type": "NUMC(4)"
+        }
+      ]
+    },
+    {
+      "table": "BSEG",
+      "description": "Accounting Document Segment (Line Items)",
+      "sap_module": "FI",
+      "key_columns": [
+        {
+          "column": "BUKRS",
+          "description": "Company Code",
+          "type": "CHAR(4)"
+        },
+        {
+          "column": "BELNR",
+          "description": "Document Number",
+          "type": "CHAR(10)"
+        },
+        {
+          "column": "GJAHR",
+          "description": "Fiscal Year",
+          "type": "NUMC(4)"
+        },
+        {
+          "column": "BUZEI",
+          "description": "Line Item Number",
+          "type": "NUMC(3)"
+        },
+        {
+          "column": "KOART",
+          "description": "Account Type (D=Customer, K=Vendor, S=GL, A=Asset, M=Material)",
+          "type": "CHAR(1)"
+        },
+        {
+          "column": "LIFNR",
+          "description": "Vendor Number",
+          "type": "CHAR(10)"
+        },
+        {
+          "column": "KUNNR",
+          "description": "Customer Number",
+          "type": "CHAR(10)"
+        },
+        {
+          "column": "HKONT",
+          "description": "General Ledger Account",
+          "type": "CHAR(10)"
+        },
+        {
+          "column": "DMBTR",
+          "description": "Amount in Local Currency",
+          "type": "CURR"
+        },
+        {
+          "column": "WRBTR",
+          "description": "Amount in Document Currency",
+          "type": "CURR"
+        },
+        {
+          "column": "WAERS",
+          "description": "Currency Key",
+          "type": "CUKY(5)"
+        },
+        {
+          "column": "BSCHL",
+          "description": "Posting Key",
+          "type": "CHAR(2)"
+        },
+        {
+          "column": "SHKZG",
+          "description": "Debit/Credit Indicator (S=Debit, H=Credit)",
+          "type": "CHAR(1)"
+        },
+        {
+          "column": "ZTERM",
+          "description": "Payment Terms Key",
+          "type": "CHAR(4)"
+        },
+        {
+          "column": "ZFBDT",
+          "description": "Baseline Date for Payment",
+          "type": "DATS(8)"
+        },
+        {
+          "column": "ZBD1T",
+          "description": "Days for Cash Discount 1",
+          "type": "DEC"
+        },
+        {
+          "column": "ZBD2T",
+          "description": "Days for Cash Discount 2",
+          "type": "DEC"
+        },
+        {
+          "column": "AUGDT",
+          "description": "Clearing Date",
+          "type": "DATS(8)"
+        },
+        {
+          "column": "AUGBL",
+          "description": "Clearing Document Number",
+          "type": "CHAR(10)"
+        },
+        {
+          "column": "REBZG",
+          "description": "Document Number of Invoiced Document",
+          "type": "CHAR(10)"
+        },
+        {
+          "column": "SGTXT",
+          "description": "Item Text",
+          "type": "CHAR(50)"
+        },
+        {
+          "column": "ZUONR",
+          "description": "Assignment (Sort Key)",
+          "type": "CHAR(18)"
+        },
+        {
+          "column": "EBELN",
+          "description": "Purchase Order Number",
+          "type": "CHAR(10)"
+        },
+        {
+          "column": "EBELP",
+          "description": "Purchase Order Item",
+          "type": "NUMC(5)"
+        }
+      ]
+    },
+    {
+      "table": "RSEG",
+      "description": "Invoice Verification Document Line Items (Logistics Invoice Verification)",
+      "sap_module": "MM-IV",
+      "key_columns": [
+        {
+          "column": "BELNR",
+          "description": "Invoice Document Number",
+          "type": "CHAR(10)"
+        },
+        {
+          "column": "GJAHR",
+          "description": "Fiscal Year",
+          "type": "NUMC(4)"
+        },
+        {
+          "column": "BUZEI",
+          "description": "Item in Document",
+          "type": "NUMC(4)"
+        },
+        {
+          "column": "EBELN",
+          "description": "Purchase Order Number",
+          "type": "CHAR(10)"
+        },
+        {
+          "column": "EBELP",
+          "description": "Purchase Order Item",
+          "type": "NUMC(5)"
+        },
+        {
+          "column": "MATNR",
+          "description": "Material Number",
+          "type": "CHAR(18)"
+        },
+        {
+          "column": "WERKS",
+          "description": "Plant",
+          "type": "CHAR(4)"
+        },
+        {
+          "column": "WRBTR",
+          "description": "Amount in Document Currency",
+          "type": "CURR"
+        },
+        {
+          "column": "DMBTR",
+          "description": "Amount in Local Currency",
+          "type": "CURR"
+        },
+        {
+          "column": "MENGE",
+          "description": "Invoice Quantity",
+          "type": "QUAN"
+        },
+        {
+          "column": "BWART",
+          "description": "Movement Type",
+          "type": "CHAR(3)"
+        }
+      ]
+    },
+    {
+      "table": "LFA1",
+      "description": "Vendor Master — General Data",
+      "sap_module": "MM",
+      "key_columns": [
+        {
+          "column": "LIFNR",
+          "description": "Vendor Number",
+          "type": "CHAR(10)"
+        },
+        {
+          "column": "NAME1",
+          "description": "Vendor Name 1",
+          "type": "CHAR(35)"
+        },
+        {
+          "column": "NAME2",
+          "description": "Vendor Name 2",
+          "type": "CHAR(35)"
+        },
+        {
+          "column": "LAND1",
+          "description": "Country Key",
+          "type": "CHAR(3)"
+        },
+        {
+          "column": "ORT01",
+          "description": "City",
+          "type": "CHAR(35)"
+        },
+        {
+          "column": "STRAS",
+          "description": "Street and House Number",
+          "type": "CHAR(35)"
+        },
+        {
+          "column": "REGIO",
+          "description": "Region (State/Province)",
+          "type": "CHAR(3)"
+        },
+        {
+          "column": "KTOKK",
+          "description": "Vendor Account Group",
+          "type": "CHAR(4)"
+        },
+        {
+          "column": "LOEVM",
+          "description": "Central Deletion Flag",
+          "type": "CHAR(1)"
+        },
+        {
+          "column": "ERDAT",
+          "description": "Date on which record was created",
+          "type": "DATS(8)"
+        }
+      ]
+    },
+    {
+      "table": "LFB1",
+      "description": "Vendor Master — Company Code Data",
+      "sap_module": "FI",
+      "key_columns": [
+        {
+          "column": "LIFNR",
+          "description": "Vendor Number",
+          "type": "CHAR(10)"
+        },
+        {
+          "column": "BUKRS",
+          "description": "Company Code",
+          "type": "CHAR(4)"
+        },
+        {
+          "column": "AKONT",
+          "description": "Reconciliation Account in General Ledger",
+          "type": "CHAR(10)"
+        },
+        {
+          "column": "ZTERM",
+          "description": "Payment Terms Key",
+          "type": "CHAR(4)"
+        },
+        {
+          "column": "ZWELS",
+          "description": "Permitted Payment Methods",
+          "type": "CHAR(10)"
+        },
+        {
+          "column": "LOEVM",
+          "description": "Deletion Flag for Company Code",
+          "type": "CHAR(1)"
+        },
+        {
+          "column": "REPRF",
+          "description": "Check for Duplicate Invoices",
+          "type": "CHAR(1)"
+        }
+      ]
+    },
+    {
+      "table": "LFM1",
+      "description": "Vendor Master — Purchasing Organization Data",
+      "sap_module": "MM",
+      "key_columns": [
+        {
+          "column": "LIFNR",
+          "description": "Vendor Number",
+          "type": "CHAR(10)"
+        },
+        {
+          "column": "EKORG",
+          "description": "Purchasing Organization",
+          "type": "CHAR(4)"
+        },
+        {
+          "column": "WAERS",
+          "description": "Currency",
+          "type": "CUKY(5)"
+        },
+        {
+          "column": "ZTERM",
+          "description": "Payment Terms",
+          "type": "CHAR(4)"
+        },
+        {
+          "column": "INCO1",
+          "description": "Incoterms (Part 1)",
+          "type": "CHAR(3)"
+        },
+        {
+          "column": "INCO2",
+          "description": "Incoterms (Part 2)",
+          "type": "CHAR(28)"
+        }
+      ]
+    },
+    {
+      "table": "EKKO",
+      "description": "Purchase Order Header",
+      "sap_module": "MM-PUR",
+      "key_columns": [
+        {
+          "column": "EBELN",
+          "description": "Purchase Order Number",
+          "type": "CHAR(10)"
+        },
+        {
+          "column": "BUKRS",
+          "description": "Company Code",
+          "type": "CHAR(4)"
+        },
+        {
+          "column": "BSTYP",
+          "description": "Purchasing Document Category (F=PO, A=RFQ, K=Contract)",
+          "type": "CHAR(1)"
+        },
+        {
+          "column": "BSART",
+          "description": "Purchasing Document Type",
+          "type": "CHAR(4)"
+        },
+        {
+          "column": "LIFNR",
+          "description": "Vendor Number",
+          "type": "CHAR(10)"
+        },
+        {
+          "column": "BEDAT",
+          "description": "Purchase Order Date",
+          "type": "DATS(8)"
+        },
+        {
+          "column": "EKGRP",
+          "description": "Purchasing Group",
+          "type": "CHAR(3)"
+        },
+        {
+          "column": "EKORG",
+          "description": "Purchasing Organization",
+          "type": "CHAR(4)"
+        },
+        {
+          "column": "WAERS",
+          "description": "Currency Key",
+          "type": "CUKY(5)"
+        },
+        {
+          "column": "LOEKZ",
+          "description": "Deletion Indicator",
+          "type": "CHAR(1)"
+        },
+        {
+          "column": "FRGKE",
+          "description": "Release Status",
+          "type": "CHAR(1)"
+        },
+        {
+          "column": "ERNAM",
+          "description": "Created By",
+          "type": "CHAR(12)"
+        },
+        {
+          "column": "AEDAT",
+          "description": "Last Changed On",
+          "type": "DATS(8)"
+        }
+      ]
+    },
+    {
+      "table": "EKPO",
+      "description": "Purchase Order Item",
+      "sap_module": "MM-PUR",
+      "key_columns": [
+        {
+          "column": "EBELN",
+          "description": "Purchase Order Number",
+          "type": "CHAR(10)"
+        },
+        {
+          "column": "EBELP",
+          "description": "Purchase Order Item",
+          "type": "NUMC(5)"
+        },
+        {
+          "column": "LOEKZ",
+          "description": "Deletion Indicator",
+          "type": "CHAR(1)"
+        },
+        {
+          "column": "MATNR",
+          "description": "Material Number",
+          "type": "CHAR(18)"
+        },
+        {
+          "column": "WERKS",
+          "description": "Plant",
+          "type": "CHAR(4)"
+        },
+        {
+          "column": "MENGE",
+          "description": "PO Quantity",
+          "type": "QUAN"
+        },
+        {
+          "column": "MEINS",
+          "description": "Purchase Order Unit of Measure",
+          "type": "UNIT(3)"
+        },
+        {
+          "column": "NETPR",
+          "description": "Net Price in PO Currency",
+          "type": "CURR"
+        },
+        {
+          "column": "PEINH",
+          "description": "Price Unit",
+          "type": "DEC"
+        },
+        {
+          "column": "NETWR",
+          "description": "Net Order Value",
+          "type": "CURR"
+        },
+        {
+          "column": "EINDT",
+          "description": "Item Delivery Date",
+          "type": "DATS(8)"
+        },
+        {
+          "column": "BANFN",
+          "description": "Purchase Requisition Number",
+          "type": "CHAR(10)"
+        },
+        {
+          "column": "BNFPO",
+          "description": "Purchase Requisition Item",
+          "type": "NUMC(5)"
+        },
+        {
+          "column": "AFNAM",
+          "description": "Requisitioner / Requester",
+          "type": "CHAR(12)"
+        }
+      ]
+    },
+    {
+      "table": "EKET",
+      "description": "Purchase Order Schedule Lines",
+      "sap_module": "MM-PUR",
+      "key_columns": [
+        {
+          "column": "EBELN",
+          "description": "Purchase Order Number",
+          "type": "CHAR(10)"
+        },
+        {
+          "column": "EBELP",
+          "description": "Purchase Order Item",
+          "type": "NUMC(5)"
+        },
+        {
+          "column": "ETENR",
+          "description": "Schedule Line Number",
+          "type": "NUMC(4)"
+        },
+        {
+          "column": "EINDT",
+          "description": "Scheduled Delivery Date",
+          "type": "DATS(8)"
+        },
+        {
+          "column": "MENGE",
+          "description": "Scheduled Quantity",
+          "type": "QUAN"
+        },
+        {
+          "column": "WEMNG",
+          "description": "Goods Receipt Quantity",
+          "type": "QUAN"
+        },
+        {
+          "column": "REMNG",
+          "description": "Invoice Receipt Quantity",
+          "type": "QUAN"
+        }
+      ]
+    },
+    {
+      "table": "EKKN",
+      "description": "Purchase Order Account Assignment",
+      "sap_module": "MM-PUR",
+      "key_columns": [
+        {
+          "column": "EBELN",
+          "description": "Purchase Order Number",
+          "type": "CHAR(10)"
+        },
+        {
+          "column": "EBELP",
+          "description": "Purchase Order Item",
+          "type": "NUMC(5)"
+        },
+        {
+          "column": "ZEKKN",
+          "description": "Sequential Account Assignment Number",
+          "type": "NUMC(2)"
+        },
+        {
+          "column": "KOSTL",
+          "description": "Cost Center",
+          "type": "CHAR(10)"
+        },
+        {
+          "column": "SAKTO",
+          "description": "G/L Account",
+          "type": "CHAR(10)"
+        },
+        {
+          "column": "AUFNR",
+          "description": "Order Number",
+          "type": "CHAR(12)"
+        },
+        {
+          "column": "PS_PSP_PNR",
+          "description": "WBS Element",
+          "type": "NUMC(8)"
+        }
+      ]
+    },
+    {
+      "table": "EKBE",
+      "description": "History per Purchase Document (GR/IR/Invoice postings)",
+      "sap_module": "MM-PUR",
+      "key_columns": [
+        {
+          "column": "EBELN",
+          "description": "Purchase Order Number",
+          "type": "CHAR(10)"
+        },
+        {
+          "column": "EBELP",
+          "description": "Purchase Order Item",
+          "type": "NUMC(5)"
+        },
+        {
+          "column": "VGABE",
+          "description": "Transaction/Event Type (1=GR, 2=Invoice, 3=Reversal, 4=Transfer, 6=SubsequentDebit)",
+          "type": "CHAR(1)"
+        },
+        {
+          "column": "GJAHR",
+          "description": "Fiscal Year",
+          "type": "NUMC(4)"
+        },
+        {
+          "column": "BELNR",
+          "description": "Accounting Document Number",
+          "type": "CHAR(10)"
+        },
+        {
+          "column": "BUDAT",
+          "description": "Posting Date",
+          "type": "DATS(8)"
+        },
+        {
+          "column": "MENGE",
+          "description": "Quantity",
+          "type": "QUAN"
+        },
+        {
+          "column": "WRBTR",
+          "description": "Amount in Document Currency",
+          "type": "CURR"
+        },
+        {
+          "column": "DMBTR",
+          "description": "Amount in Local Currency",
+          "type": "CURR"
+        },
+        {
+          "column": "MATNR",
+          "description": "Material Number",
+          "type": "CHAR(18)"
+        }
+      ]
+    },
+    {
+      "table": "EBAN",
+      "description": "Purchase Requisition",
+      "sap_module": "MM-PUR",
+      "key_columns": [
+        {
+          "column": "BANFN",
+          "description": "Purchase Requisition Number",
+          "type": "CHAR(10)"
+        },
+        {
+          "column": "BNFPO",
+          "description": "Purchase Requisition Item",
+          "type": "NUMC(5)"
+        },
+        {
+          "column": "BSART",
+          "description": "Purchase Requisition Type",
+          "type": "CHAR(4)"
+        },
+        {
+          "column": "MATNR",
+          "description": "Material Number",
+          "type": "CHAR(18)"
+        },
+        {
+          "column": "WERKS",
+          "description": "Plant",
+          "type": "CHAR(4)"
+        },
+        {
+          "column": "MENGE",
+          "description": "Requested Quantity",
+          "type": "QUAN"
+        },
+        {
+          "column": "BADAT",
+          "description": "Requisition Date",
+          "type": "DATS(8)"
+        },
+        {
+          "column": "AFNAM",
+          "description": "Requisitioner",
+          "type": "CHAR(12)"
+        },
+        {
+          "column": "FRGKZ",
+          "description": "Release Indicator",
+          "type": "CHAR(1)"
+        },
+        {
+          "column": "EBELN",
+          "description": "Purchase Order Number (assigned)",
+          "type": "CHAR(10)"
+        }
+      ]
+    },
+    {
+      "table": "KNA1",
+      "description": "Customer Master — General Data",
+      "sap_module": "SD / FI",
+      "key_columns": [
+        {
+          "column": "KUNNR",
+          "description": "Customer Number",
+          "type": "CHAR(10)"
+        },
+        {
+          "column": "NAME1",
+          "description": "Customer Name 1",
+          "type": "CHAR(35)"
+        },
+        {
+          "column": "LAND1",
+          "description": "Country Key",
+          "type": "CHAR(3)"
+        },
+        {
+          "column": "ORT01",
+          "description": "City",
+          "type": "CHAR(35)"
+        },
+        {
+          "column": "STRAS",
+          "description": "Street and House Number",
+          "type": "CHAR(35)"
+        },
+        {
+          "column": "KTOKD",
+          "description": "Customer Account Group",
+          "type": "CHAR(4)"
+        },
+        {
+          "column": "LOEVM",
+          "description": "Central Deletion Flag",
+          "type": "CHAR(1)"
+        },
+        {
+          "column": "ERDAT",
+          "description": "Date on which record was created",
+          "type": "DATS(8)"
+        }
+      ]
+    },
+    {
+      "table": "KNB1",
+      "description": "Customer Master — Company Code Data",
+      "sap_module": "FI",
+      "key_columns": [
+        {
+          "column": "KUNNR",
+          "description": "Customer Number",
+          "type": "CHAR(10)"
+        },
+        {
+          "column": "BUKRS",
+          "description": "Company Code",
+          "type": "CHAR(4)"
+        },
+        {
+          "column": "AKONT",
+          "description": "Reconciliation Account in General Ledger",
+          "type": "CHAR(10)"
+        },
+        {
+          "column": "ZTERM",
+          "description": "Payment Terms Key",
+          "type": "CHAR(4)"
+        },
+        {
+          "column": "ZWELS",
+          "description": "Permitted Payment Methods",
+          "type": "CHAR(10)"
+        },
+        {
+          "column": "LOEVM",
+          "description": "Deletion Flag for Company Code",
+          "type": "CHAR(1)"
+        }
+      ]
+    },
+    {
+      "table": "KNB5",
+      "description": "Customer Master — Dunning Data",
+      "sap_module": "FI",
+      "key_columns": [
+        {
+          "column": "KUNNR",
+          "description": "Customer Number",
+          "type": "CHAR(10)"
+        },
+        {
+          "column": "BUKRS",
+          "description": "Company Code",
+          "type": "CHAR(4)"
+        },
+        {
+          "column": "MABER",
+          "description": "Dunning Procedure",
+          "type": "CHAR(4)"
+        },
+        {
+          "column": "MANSP",
+          "description": "Dunning Block",
+          "type": "CHAR(1)"
+        },
+        {
+          "column": "MADAT",
+          "description": "Date of Last Dunning Notice",
+          "type": "DATS(8)"
+        },
+        {
+          "column": "MAHNS",
+          "description": "Dunning Level",
+          "type": "NUMC(1)"
+        }
+      ]
+    },
+    {
+      "table": "KNKK",
+      "description": "Customer Master — Credit Management",
+      "sap_module": "FI-AR",
+      "key_columns": [
+        {
+          "column": "KUNNR",
+          "description": "Customer Number",
+          "type": "CHAR(10)"
+        },
+        {
+          "column": "KKBER",
+          "description": "Credit Control Area",
+          "type": "CHAR(4)"
+        },
+        {
+          "column": "KLIMK",
+          "description": "Customer Credit Limit",
+          "type": "CURR"
+        },
+        {
+          "column": "SKFOR",
+          "description": "Total Open Receivables",
+          "type": "CURR"
+        },
+        {
+          "column": "CRBLB",
+          "description": "Credit Exposure",
+          "type": "CURR"
+        },
+        {
+          "column": "CTLPC",
+          "description": "Risk Category",
+          "type": "CHAR(3)"
+        },
+        {
+          "column": "WAERS",
+          "description": "Currency",
+          "type": "CUKY(5)"
+        }
+      ]
+    },
+    {
+      "table": "KNVV",
+      "description": "Customer Master — Sales Area Data",
+      "sap_module": "SD",
+      "key_columns": [
+        {
+          "column": "KUNNR",
+          "description": "Customer Number",
+          "type": "CHAR(10)"
+        },
+        {
+          "column": "VKORG",
+          "description": "Sales Organization",
+          "type": "CHAR(4)"
+        },
+        {
+          "column": "VTWEG",
+          "description": "Distribution Channel",
+          "type": "CHAR(2)"
+        },
+        {
+          "column": "SPART",
+          "description": "Division",
+          "type": "CHAR(2)"
+        },
+        {
+          "column": "ZTERM",
+          "description": "Terms of Payment Key",
+          "type": "CHAR(4)"
+        },
+        {
+          "column": "VKBUR",
+          "description": "Sales Office",
+          "type": "CHAR(4)"
+        },
+        {
+          "column": "VKGRP",
+          "description": "Sales Group",
+          "type": "CHAR(3)"
+        },
+        {
+          "column": "KDGRP",
+          "description": "Customer Group",
+          "type": "CHAR(2)"
+        },
+        {
+          "column": "AUFSD",
+          "description": "Order Block for Customer",
+          "type": "CHAR(2)"
+        },
+        {
+          "column": "LIFSD",
+          "description": "Delivery Block for Customer",
+          "type": "CHAR(2)"
+        },
+        {
+          "column": "FAKSD",
+          "description": "Billing Block for Customer",
+          "type": "CHAR(2)"
+        }
+      ]
+    },
+    {
+      "table": "VBAK",
+      "description": "Sales Order Header",
+      "sap_module": "SD",
+      "key_columns": [
+        {
+          "column": "VBELN",
+          "description": "Sales Document Number",
+          "type": "CHAR(10)"
+        },
+        {
+          "column": "ERDAT",
+          "description": "Date Document Created",
+          "type": "DATS(8)"
+        },
+        {
+          "column": "ERNAM",
+          "description": "Created By",
+          "type": "CHAR(12)"
+        },
+        {
+          "column": "AUART",
+          "description": "Sales Document Type",
+          "type": "CHAR(4)"
+        },
+        {
+          "column": "VKORG",
+          "description": "Sales Organization",
+          "type": "CHAR(4)"
+        },
+        {
+          "column": "VTWEG",
+          "description": "Distribution Channel",
+          "type": "CHAR(2)"
+        },
+        {
+          "column": "SPART",
+          "description": "Division",
+          "type": "CHAR(2)"
+        },
+        {
+          "column": "KUNNR",
+          "description": "Sold-To Party",
+          "type": "CHAR(10)"
+        },
+        {
+          "column": "NETWR",
+          "description": "Net Value of Sales Order",
+          "type": "CURR"
+        },
+        {
+          "column": "WAERK",
+          "description": "Currency",
+          "type": "CUKY(5)"
+        },
+        {
+          "column": "VDATU",
+          "description": "Requested Delivery Date (Header)",
+          "type": "DATS(8)"
+        },
+        {
+          "column": "GBSTK",
+          "description": "Overall Processing Status",
+          "type": "CHAR(1)"
+        },
+        {
+          "column": "FAKSK",
+          "description": "Billing Block",
+          "type": "CHAR(2)"
+        },
+        {
+          "column": "LIFSK",
+          "description": "Delivery Block",
+          "type": "CHAR(2)"
+        }
+      ]
+    },
+    {
+      "table": "VBAP",
+      "description": "Sales Order Item",
+      "sap_module": "SD",
+      "key_columns": [
+        {
+          "column": "VBELN",
+          "description": "Sales Document Number",
+          "type": "CHAR(10)"
+        },
+        {
+          "column": "POSNR",
+          "description": "Sales Document Item",
+          "type": "NUMC(6)"
+        },
+        {
+          "column": "MATNR",
+          "description": "Material Number",
+          "type": "CHAR(18)"
+        },
+        {
+          "column": "MENGE",
+          "description": "Order Quantity",
+          "type": "QUAN"
+        },
+        {
+          "column": "MEINS",
+          "description": "Base Unit of Measure",
+          "type": "UNIT(3)"
+        },
+        {
+          "column": "NETPR",
+          "description": "Net Price",
+          "type": "CURR"
+        },
+        {
+          "column": "NETWR",
+          "description": "Net Value",
+          "type": "CURR"
+        },
+        {
+          "column": "WERKS",
+          "description": "Plant (Delivering Plant)",
+          "type": "CHAR(4)"
+        },
+        {
+          "column": "EDATU",
+          "description": "Delivery Date (Scheduled)",
+          "type": "DATS(8)"
+        },
+        {
+          "column": "ABGRU",
+          "description": "Reason for Rejection",
+          "type": "CHAR(2)"
+        },
+        {
+          "column": "GBSTA",
+          "description": "Overall Processing Status of Item",
+          "type": "CHAR(1)"
+        },
+        {
+          "column": "LFSTA",
+          "description": "Delivery Status",
+          "type": "CHAR(1)"
+        },
+        {
+          "column": "FKSTA",
+          "description": "Billing Status",
+          "type": "CHAR(1)"
+        }
+      ]
+    },
+    {
+      "table": "VBEP",
+      "description": "Sales Order Schedule Lines",
+      "sap_module": "SD",
+      "key_columns": [
+        {
+          "column": "VBELN",
+          "description": "Sales Document Number",
+          "type": "CHAR(10)"
+        },
+        {
+          "column": "POSNR",
+          "description": "Sales Document Item",
+          "type": "NUMC(6)"
+        },
+        {
+          "column": "ETENR",
+          "description": "Schedule Line Number",
+          "type": "NUMC(4)"
+        },
+        {
+          "column": "ETTYP",
+          "description": "Schedule Line Category",
+          "type": "CHAR(2)"
+        },
+        {
+          "column": "EDATU",
+          "description": "Confirmed Delivery Date",
+          "type": "DATS(8)"
+        },
+        {
+          "column": "WMENG",
+          "description": "Confirmed Quantity",
+          "type": "QUAN"
+        },
+        {
+          "column": "AMENG",
+          "description": "Required Quantity",
+          "type": "QUAN"
+        }
+      ]
+    },
+    {
+      "table": "VBFA",
+      "description": "Sales Document Flow (links SO → Delivery → Billing → Accounting)",
+      "sap_module": "SD",
+      "key_columns": [
+        {
+          "column": "VBELV",
+          "description": "Preceding Document Number",
+          "type": "CHAR(10)"
+        },
+        {
+          "column": "POSNV",
+          "description": "Preceding Item Number",
+          "type": "NUMC(6)"
+        },
+        {
+          "column": "VBELN",
+          "description": "Subsequent Document Number",
+          "type": "CHAR(10)"
+        },
+        {
+          "column": "POSNN",
+          "description": "Subsequent Item Number",
+          "type": "NUMC(6)"
+        },
+        {
+          "column": "VBTYP_V",
+          "description": "Document Category Preceding (A=Inquiry, B=Quotation, C=Order, J=Delivery, M=Invoice)",
+          "type": "CHAR(1)"
+        },
+        {
+          "column": "VBTYP_N",
+          "description": "Document Category Subsequent",
+          "type": "CHAR(1)"
+        },
+        {
+          "column": "ERDAT",
+          "description": "Created On",
+          "type": "DATS(8)"
+        }
+      ]
+    },
+    {
+      "table": "VBRK",
+      "description": "Billing Document Header",
+      "sap_module": "SD",
+      "key_columns": [
+        {
+          "column": "VBELN",
+          "description": "Billing Document Number",
+          "type": "CHAR(10)"
+        },
+        {
+          "column": "FKART",
+          "description": "Billing Type",
+          "type": "CHAR(4)"
+        },
+        {
+          "column": "FKDAT",
+          "description": "Billing Date",
+          "type": "DATS(8)"
+        },
+        {
+          "column": "ERDAT",
+          "description": "Created On",
+          "type": "DATS(8)"
+        },
+        {
+          "column": "ERNAM",
+          "description": "Created By",
+          "type": "CHAR(12)"
+        },
+        {
+          "column": "KUNRG",
+          "description": "Payer",
+          "type": "CHAR(10)"
+        },
+        {
+          "column": "NETWR",
+          "description": "Net Value of Billing Document",
+          "type": "CURR"
+        },
+        {
+          "column": "MWSBP",
+          "description": "Tax Amount",
+          "type": "CURR"
+        },
+        {
+          "column": "WAERK",
+          "description": "Currency",
+          "type": "CUKY(5)"
+        },
+        {
+          "column": "BELNR",
+          "description": "Accounting Document Number",
+          "type": "CHAR(10)"
+        },
+        {
+          "column": "FKSTO",
+          "description": "Billing Document is Cancelled",
+          "type": "CHAR(1)"
+        }
+      ]
+    },
+    {
+      "table": "VBRP",
+      "description": "Billing Document Item",
+      "sap_module": "SD",
+      "key_columns": [
+        {
+          "column": "VBELN",
+          "description": "Billing Document Number",
+          "type": "CHAR(10)"
+        },
+        {
+          "column": "POSNR",
+          "description": "Billing Item",
+          "type": "NUMC(6)"
+        },
+        {
+          "column": "MATNR",
+          "description": "Material Number",
+          "type": "CHAR(18)"
+        },
+        {
+          "column": "FKIMG",
+          "description": "Billing Quantity",
+          "type": "QUAN"
+        },
+        {
+          "column": "MEINS",
+          "description": "Base Unit of Measure",
+          "type": "UNIT(3)"
+        },
+        {
+          "column": "NETWR",
+          "description": "Net Value",
+          "type": "CURR"
+        },
+        {
+          "column": "AUBEL",
+          "description": "Sales Document (Reference)",
+          "type": "CHAR(10)"
+        },
+        {
+          "column": "AUPOS",
+          "description": "Sales Document Item (Reference)",
+          "type": "NUMC(6)"
+        }
+      ]
+    },
+    {
+      "table": "LIKP",
+      "description": "Delivery Header",
+      "sap_module": "SD-SHP",
+      "key_columns": [
+        {
+          "column": "VBELN",
+          "description": "Delivery Number",
+          "type": "CHAR(10)"
+        },
+        {
+          "column": "LFART",
+          "description": "Delivery Type",
+          "type": "CHAR(4)"
+        },
+        {
+          "column": "ERDAT",
+          "description": "Created On",
+          "type": "DATS(8)"
+        },
+        {
+          "column": "ERNAM",
+          "description": "Created By",
+          "type": "CHAR(12)"
+        },
+        {
+          "column": "WADAT",
+          "description": "Planned Goods Movement Date",
+          "type": "DATS(8)"
+        },
+        {
+          "column": "WADAT_IST",
+          "description": "Actual Goods Issue Date",
+          "type": "DATS(8)"
+        },
+        {
+          "column": "KUNNR",
+          "description": "Ship-To Party",
+          "type": "CHAR(10)"
+        },
+        {
+          "column": "VSTEL",
+          "description": "Shipping Point",
+          "type": "CHAR(4)"
+        }
+      ]
+    },
+    {
+      "table": "LIPS",
+      "description": "Delivery Item",
+      "sap_module": "SD-SHP",
+      "key_columns": [
+        {
+          "column": "VBELN",
+          "description": "Delivery Number",
+          "type": "CHAR(10)"
+        },
+        {
+          "column": "POSNR",
+          "description": "Delivery Item",
+          "type": "NUMC(6)"
+        },
+        {
+          "column": "MATNR",
+          "description": "Material Number",
+          "type": "CHAR(18)"
+        },
+        {
+          "column": "LFIMG",
+          "description": "Actual Delivered Quantity",
+          "type": "QUAN"
+        },
+        {
+          "column": "MEINS",
+          "description": "Base Unit of Measure",
+          "type": "UNIT(3)"
+        },
+        {
+          "column": "WERKS",
+          "description": "Delivering Plant",
+          "type": "CHAR(4)"
+        },
+        {
+          "column": "LGORT",
+          "description": "Storage Location",
+          "type": "CHAR(4)"
+        },
+        {
+          "column": "CHARG",
+          "description": "Batch Number",
+          "type": "CHAR(10)"
+        },
+        {
+          "column": "VGBEL",
+          "description": "Reference Document (Sales Order)",
+          "type": "CHAR(10)"
+        },
+        {
+          "column": "VGPOS",
+          "description": "Reference Item",
+          "type": "NUMC(6)"
+        }
+      ]
+    },
+    {
+      "table": "MARA",
+      "description": "General Material Data",
+      "sap_module": "MM",
+      "key_columns": [
+        {
+          "column": "MATNR",
+          "description": "Material Number",
+          "type": "CHAR(18)"
+        },
+        {
+          "column": "MTART",
+          "description": "Material Type",
+          "type": "CHAR(4)"
+        },
+        {
+          "column": "MATKL",
+          "description": "Material Group",
+          "type": "CHAR(9)"
+        },
+        {
+          "column": "MEINS",
+          "description": "Base Unit of Measure",
+          "type": "UNIT(3)"
+        },
+        {
+          "column": "MBRSH",
+          "description": "Industry Sector",
+          "type": "CHAR(1)"
+        },
+        {
+          "column": "ERSDA",
+          "description": "Created On",
+          "type": "DATS(8)"
+        },
+        {
+          "column": "ERNAM",
+          "description": "Created By",
+          "type": "CHAR(12)"
+        },
+        {
+          "column": "LAEDA",
+          "description": "Date of Last Change",
+          "type": "DATS(8)"
+        }
+      ]
+    },
+    {
+      "table": "MARC",
+      "description": "Plant Data for Material",
+      "sap_module": "MM",
+      "key_columns": [
+        {
+          "column": "MATNR",
+          "description": "Material Number",
+          "type": "CHAR(18)"
+        },
+        {
+          "column": "WERKS",
+          "description": "Plant",
+          "type": "CHAR(4)"
+        },
+        {
+          "column": "MMSTA",
+          "description": "Plant-Specific Material Status",
+          "type": "CHAR(2)"
+        },
+        {
+          "column": "BESKZ",
+          "description": "Procurement Type (E=In-house, F=External, X=Both)",
+          "type": "CHAR(1)"
+        },
+        {
+          "column": "STLAN",
+          "description": "BOM Usage",
+          "type": "CHAR(1)"
+        },
+        {
+          "column": "STLAL",
+          "description": "Alternative BOM",
+          "type": "CHAR(2)"
+        },
+        {
+          "column": "VERID",
+          "description": "Production Version",
+          "type": "CHAR(4)"
+        },
+        {
+          "column": "MTVFP",
+          "description": "Checking Rule for Availability",
+          "type": "CHAR(2)"
+        }
+      ]
+    },
+    {
+      "table": "MCHA",
+      "description": "Batches (Batch Master per Plant and Material)",
+      "sap_module": "MM-QM",
+      "key_columns": [
+        {
+          "column": "MATNR",
+          "description": "Material Number",
+          "type": "CHAR(18)"
+        },
+        {
+          "column": "WERKS",
+          "description": "Plant",
+          "type": "CHAR(4)"
+        },
+        {
+          "column": "CHARG",
+          "description": "Batch Number",
+          "type": "CHAR(10)"
+        },
+        {
+          "column": "HSDAT",
+          "description": "Manufacturing Date",
+          "type": "DATS(8)"
+        },
+        {
+          "column": "VFDAT",
+          "description": "Shelf Life Expiration Date",
+          "type": "DATS(8)"
+        },
+        {
+          "column": "CLABS",
+          "description": "Unrestricted-Use Stock",
+          "type": "QUAN"
+        },
+        {
+          "column": "CINSM",
+          "description": "Stock in Quality Inspection",
+          "type": "QUAN"
+        },
+        {
+          "column": "CUMLM",
+          "description": "Blocked Stock",
+          "type": "QUAN"
+        },
+        {
+          "column": "BESCHB",
+          "description": "Batch Status (0=Unrestricted, 1=Restricted)",
+          "type": "CHAR(1)"
+        },
+        {
+          "column": "ERDAT",
+          "description": "Created On",
+          "type": "DATS(8)"
+        },
+        {
+          "column": "ERNAM",
+          "description": "Created By",
+          "type": "CHAR(12)"
+        }
+      ]
+    },
+    {
+      "table": "MSEG",
+      "description": "Material Document Segment (Goods Movement Line Items)",
+      "sap_module": "MM",
+      "key_columns": [
+        {
+          "column": "MBLNR",
+          "description": "Material Document Number",
+          "type": "CHAR(10)"
+        },
+        {
+          "column": "MJAHR",
+          "description": "Material Document Year",
+          "type": "NUMC(4)"
+        },
+        {
+          "column": "ZEILE",
+          "description": "Item in Material Document",
+          "type": "NUMC(4)"
+        },
+        {
+          "column": "BWART",
+          "description": "Movement Type (101=GR, 261=GI, 321=QualityRelease, 601=GoodsIssueDelivery)",
+          "type": "CHAR(3)"
+        },
+        {
+          "column": "MATNR",
+          "description": "Material Number",
+          "type": "CHAR(18)"
+        },
+        {
+          "column": "WERKS",
+          "description": "Plant",
+          "type": "CHAR(4)"
+        },
+        {
+          "column": "LGORT",
+          "description": "Storage Location",
+          "type": "CHAR(4)"
+        },
+        {
+          "column": "CHARG",
+          "description": "Batch Number",
+          "type": "CHAR(10)"
+        },
+        {
+          "column": "MENGE",
+          "description": "Quantity",
+          "type": "QUAN"
+        },
+        {
+          "column": "MEINS",
+          "description": "Unit of Entry",
+          "type": "UNIT(3)"
+        },
+        {
+          "column": "EBELN",
+          "description": "Purchase Order Number",
+          "type": "CHAR(10)"
+        },
+        {
+          "column": "EBELP",
+          "description": "Purchase Order Item",
+          "type": "NUMC(5)"
+        },
+        {
+          "column": "AUFNR",
+          "description": "Order Number (Production Order)",
+          "type": "CHAR(12)"
+        },
+        {
+          "column": "LIFNR",
+          "description": "Vendor/Customer Account Number",
+          "type": "CHAR(10)"
+        }
+      ]
+    },
+    {
+      "table": "MKPF",
+      "description": "Material Document Header",
+      "sap_module": "MM",
+      "key_columns": [
+        {
+          "column": "MBLNR",
+          "description": "Material Document Number",
+          "type": "CHAR(10)"
+        },
+        {
+          "column": "MJAHR",
+          "description": "Material Document Year",
+          "type": "NUMC(4)"
+        },
+        {
+          "column": "BUDAT",
+          "description": "Posting Date",
+          "type": "DATS(8)"
+        },
+        {
+          "column": "BLDAT",
+          "description": "Document Date",
+          "type": "DATS(8)"
+        },
+        {
+          "column": "USNAM",
+          "description": "User Name",
+          "type": "CHAR(12)"
+        },
+        {
+          "column": "TCODE",
+          "description": "Transaction Code",
+          "type": "CHAR(20)"
+        }
+      ]
+    },
+    {
+      "table": "AUFK",
+      "description": "Order Master Data (Production / Process / Maintenance Orders)",
+      "sap_module": "CO-OM / PP",
+      "key_columns": [
+        {
+          "column": "AUFNR",
+          "description": "Order Number",
+          "type": "CHAR(12)"
+        },
+        {
+          "column": "AUART",
+          "description": "Order Type",
+          "type": "CHAR(4)"
+        },
+        {
+          "column": "ERDAT",
+          "description": "Created On",
+          "type": "DATS(8)"
+        },
+        {
+          "column": "ERNAM",
+          "description": "Created By",
+          "type": "CHAR(12)"
+        },
+        {
+          "column": "WERKS",
+          "description": "Plant",
+          "type": "CHAR(4)"
+        },
+        {
+          "column": "MATNR",
+          "description": "Material to be Produced",
+          "type": "CHAR(18)"
+        },
+        {
+          "column": "GAMNG",
+          "description": "Total Order Quantity",
+          "type": "QUAN"
+        },
+        {
+          "column": "GLTRP",
+          "description": "Scheduled Finish Date",
+          "type": "DATS(8)"
+        },
+        {
+          "column": "GSTRP",
+          "description": "Scheduled Start Date",
+          "type": "DATS(8)"
+        },
+        {
+          "column": "OBJNR",
+          "description": "Object Number (for status reads)",
+          "type": "CHAR(22)"
+        }
+      ]
+    },
+    {
+      "table": "AFKO",
+      "description": "Production Order Header Data (PP-specific extension of AUFK)",
+      "sap_module": "PP",
+      "key_columns": [
+        {
+          "column": "AUFNR",
+          "description": "Order Number",
+          "type": "CHAR(12)"
+        },
+        {
+          "column": "PLNBEZ",
+          "description": "Material to be Produced",
+          "type": "CHAR(18)"
+        },
+        {
+          "column": "GLTRP",
+          "description": "Scheduled Finish Date",
+          "type": "DATS(8)"
+        },
+        {
+          "column": "GSTRP",
+          "description": "Scheduled Start Date",
+          "type": "DATS(8)"
+        },
+        {
+          "column": "GLTRS",
+          "description": "Actual Finish Date",
+          "type": "DATS(8)"
+        },
+        {
+          "column": "GSTRS",
+          "description": "Actual Start Date",
+          "type": "DATS(8)"
+        },
+        {
+          "column": "FTRMS",
+          "description": "Scheduled Release Date",
+          "type": "DATS(8)"
+        },
+        {
+          "column": "AUFPL",
+          "description": "Routing Number for Operations",
+          "type": "NUMC(10)"
+        }
+      ]
+    },
+    {
+      "table": "AFPO",
+      "description": "Production Order Item",
+      "sap_module": "PP",
+      "key_columns": [
+        {
+          "column": "AUFNR",
+          "description": "Order Number",
+          "type": "CHAR(12)"
+        },
+        {
+          "column": "POSNR",
+          "description": "Order Item Number",
+          "type": "NUMC(4)"
+        },
+        {
+          "column": "DWERK",
+          "description": "Production Plant",
+          "type": "CHAR(4)"
+        },
+        {
+          "column": "MATNR",
+          "description": "Material Number",
+          "type": "CHAR(18)"
+        },
+        {
+          "column": "PSMNG",
+          "description": "Planned Total Quantity",
+          "type": "QUAN"
+        },
+        {
+          "column": "WEMNG",
+          "description": "Confirmed Yield to Date",
+          "type": "QUAN"
+        },
+        {
+          "column": "CHARG",
+          "description": "Batch for the Order",
+          "type": "CHAR(10)"
+        }
+      ]
+    },
+    {
+      "table": "CDHDR",
+      "description": "Change Document Header",
+      "sap_module": "BC",
+      "key_columns": [
+        {
+          "column": "CHANGENR",
+          "description": "Change Document Number",
+          "type": "CHAR(10)"
+        },
+        {
+          "column": "OBJECTCLAS",
+          "description": "Object Class",
+          "type": "CHAR(15)"
+        },
+        {
+          "column": "OBJECTID",
+          "description": "Object Value (e.g. Vendor Number)",
+          "type": "CHAR(90)"
+        },
+        {
+          "column": "UDATE",
+          "description": "Changed On (Date)",
+          "type": "DATS(8)"
+        },
+        {
+          "column": "UTIME",
+          "description": "Changed On (Time)",
+          "type": "TIMS(6)"
+        },
+        {
+          "column": "USERNAME",
+          "description": "User Who Made Change",
+          "type": "CHAR(12)"
+        },
+        {
+          "column": "TCODE",
+          "description": "Transaction Code",
+          "type": "CHAR(20)"
+        }
+      ]
+    },
+    {
+      "table": "CDPOS",
+      "description": "Change Document Items (field-level changes)",
+      "sap_module": "BC",
+      "key_columns": [
+        {
+          "column": "CHANGENR",
+          "description": "Change Document Number",
+          "type": "CHAR(10)"
+        },
+        {
+          "column": "TABNAME",
+          "description": "Table Name changed",
+          "type": "CHAR(10)"
+        },
+        {
+          "column": "FNAME",
+          "description": "Field Name changed",
+          "type": "CHAR(10)"
+        },
+        {
+          "column": "VALUE_NEW",
+          "description": "New Field Value",
+          "type": "CHAR(255)"
+        },
+        {
+          "column": "VALUE_OLD",
+          "description": "Old Field Value",
+          "type": "CHAR(255)"
+        },
+        {
+          "column": "CHNGIND",
+          "description": "Change Indicator (U=Update, I=Insert, D=Delete)",
+          "type": "CHAR(1)"
+        }
+      ]
+    },
+    {
+      "table": "T001",
+      "description": "Company Codes",
+      "sap_module": "FI",
+      "key_columns": [
+        {
+          "column": "BUKRS",
+          "description": "Company Code",
+          "type": "CHAR(4)"
+        },
+        {
+          "column": "BUTXT",
+          "description": "Company Name",
+          "type": "CHAR(25)"
+        },
+        {
+          "column": "ORT01",
+          "description": "City",
+          "type": "CHAR(25)"
+        },
+        {
+          "column": "LAND1",
+          "description": "Country Key",
+          "type": "CHAR(3)"
+        },
+        {
+          "column": "WAERS",
+          "description": "Currency Key",
+          "type": "CUKY(5)"
+        }
+      ]
+    },
+    {
+      "table": "T001W",
+      "description": "Plants",
+      "sap_module": "MM",
+      "key_columns": [
+        {
+          "column": "WERKS",
+          "description": "Plant",
+          "type": "CHAR(4)"
+        },
+        {
+          "column": "NAME1",
+          "description": "Plant Name",
+          "type": "CHAR(30)"
+        },
+        {
+          "column": "LAND1",
+          "description": "Country Key",
+          "type": "CHAR(3)"
+        },
+        {
+          "column": "ORT01",
+          "description": "City",
+          "type": "CHAR(25)"
+        },
+        {
+          "column": "BUKRS",
+          "description": "Company Code",
+          "type": "CHAR(4)"
+        }
+      ]
+    }
+  ],
+  "processes": [
+    {
+      "id": "AP",
+      "name": "Accounts Payable",
+      "sap_module": "FI-AP",
+      "description": "Tracks vendor invoice lifecycle from creation or scanning through payment clearing.",
+      "case_definition": {
+        "object": "Vendor Invoice Document",
+        "primary_table": "BKPF",
+        "case_key": "BELNR + BUKRS + GJAHR",
+        "description": "One case per accounting document header where account type is Vendor (KOART = 'K')"
+      },
+      "source_tables_used": [
+        "BKPF",
+        "BSEG",
+        "RSEG",
+        "LFA1",
+        "LFB1",
+        "MARA",
+        "T001",
+        "CDHDR",
+        "CDPOS"
+      ],
+      "activities": [
+        {
+          "name": "Create Invoice",
+          "description": "Vendor invoice first posted in SAP (transaction MIRO or FB60)",
+          "source_table": "BKPF",
+          "timestamp_column": "BUDAT",
+          "trigger": "First posting of document with BLART = invoice type (e.g. RE, KR)"
+        },
+        {
+          "name": "Scan Invoice",
+          "description": "Invoice captured via OCR or document management system before SAP entry",
+          "source_table": "BKPF",
+          "timestamp_column": "CPUDT",
+          "trigger": "OCR document creation timestamp"
+        },
+        {
+          "name": "Enter in SAP",
+          "description": "Invoice manually keyed into SAP",
+          "source_table": "BKPF",
+          "timestamp_column": "CPUDT",
+          "trigger": "TCODE = FB60 / MIRO and first creation of document"
+        },
+        {
+          "name": "Change Invoice",
+          "description": "Vendor invoice header or line item amended after posting",
+          "source_table": "CDHDR",
+          "timestamp_column": "UDATE",
+          "trigger": "Change document created for OBJECTCLAS = BELEG"
+        },
+        {
+          "name": "Set Payment Block",
+          "description": "Payment block flag set on vendor open item",
+          "source_table": "CDHDR",
+          "timestamp_column": "UDATE",
+          "trigger": "CDPOS.FNAME = 'ZLSPR' and VALUE_NEW is not empty"
+        },
+        {
+          "name": "Release Payment Block",
+          "description": "Payment block removed from vendor open item",
+          "source_table": "CDHDR",
+          "timestamp_column": "UDATE",
+          "trigger": "CDPOS.FNAME = 'ZLSPR' and VALUE_NEW is empty"
+        },
+        {
+          "name": "Due Date",
+          "description": "Payment due date milestone — calculated from baseline date and payment terms",
+          "source_table": "BSEG",
+          "timestamp_column": "ZFBDT + ZTERM (calculated)",
+          "trigger": "Derived from ZFBDT + net payment days from payment terms"
+        },
+        {
+          "name": "Cash Discount Due Date",
+          "description": "Last day to take cash discount",
+          "source_table": "BSEG",
+          "timestamp_column": "ZFBDT + ZBD1T (calculated)",
+          "trigger": "Derived from ZFBDT + ZBD1T days"
+        },
+        {
+          "name": "Clear Invoice",
+          "description": "Vendor invoice cleared — payment posted and matched to invoice",
+          "source_table": "BSEG",
+          "timestamp_column": "AUGDT",
+          "trigger": "BSEG.AUGBL is populated (clearing document assigned)"
+        },
+        {
+          "name": "Check Issued",
+          "description": "Payment check generated and issued",
+          "source_table": "PAYR",
+          "timestamp_column": "ZALDT",
+          "trigger": "Payment run creates PAYR record"
+        },
+        {
+          "name": "Check Encashment",
+          "description": "Issued check encashed by vendor",
+          "source_table": "PAYR",
+          "timestamp_column": "VALUT",
+          "trigger": "Bank statement processed and check cleared"
+        },
+        {
+          "name": "Vendor Master Change (General)",
+          "description": "LFA1 vendor general data changed (name, address, etc.)",
+          "source_table": "CDHDR",
+          "timestamp_column": "UDATE",
+          "trigger": "OBJECTCLAS = 'KRED', change to LFA1 fields"
+        },
+        {
+          "name": "Vendor Master Change (Company Code)",
+          "description": "LFB1 vendor company code data changed (payment terms, payment method)",
+          "source_table": "CDHDR",
+          "timestamp_column": "UDATE",
+          "trigger": "OBJECTCLAS = 'KRED', change to LFB1 fields"
+        }
+      ]
+    },
+    {
+      "id": "AR",
+      "name": "Accounts Receivable",
+      "sap_module": "FI-AR",
+      "description": "Tracks customer invoice lifecycle from creation through payment clearing, including dunning and credit management.",
+      "case_definition": {
+        "object": "Customer Invoice Document",
+        "primary_table": "BKPF",
+        "case_key": "BELNR + BUKRS + GJAHR",
+        "description": "One case per accounting document where account type is Customer (KOART = 'D')"
+      },
+      "source_tables_used": [
+        "BKPF",
+        "BSEG",
+        "KNA1",
+        "KNB1",
+        "KNB5",
+        "KNKK",
+        "T001",
+        "CDHDR",
+        "CDPOS"
+      ],
+      "activities": [
+        {
+          "name": "Create Invoice",
+          "description": "Customer invoice created (transaction VF01 or FB70)",
+          "source_table": "BKPF",
+          "timestamp_column": "BUDAT",
+          "trigger": "First posting of customer document (BLART = DR, RV, etc.)"
+        },
+        {
+          "name": "Enter in SAP",
+          "description": "Customer invoice manually entered into SAP FI",
+          "source_table": "BKPF",
+          "timestamp_column": "CPUDT",
+          "trigger": "TCODE = FB70 and first creation"
+        },
+        {
+          "name": "Cancel Invoice",
+          "description": "Customer invoice cancelled/reversed",
+          "source_table": "BKPF",
+          "timestamp_column": "BUDAT",
+          "trigger": "Reversal document: STBLG is populated on original, or new document references original"
+        },
+        {
+          "name": "Clear Invoice",
+          "description": "Customer invoice cleared — incoming payment matched",
+          "source_table": "BSEG",
+          "timestamp_column": "AUGDT",
+          "trigger": "BSEG.AUGBL populated (clearing document number assigned)"
+        },
+        {
+          "name": "Dunning",
+          "description": "Dunning notice issued for overdue invoice",
+          "source_table": "KNB5",
+          "timestamp_column": "MADAT",
+          "trigger": "KNB5.MADAT updated by dunning run (F150)"
+        },
+        {
+          "name": "Overdue Notice",
+          "description": "Overdue payment notice sent to customer",
+          "source_table": "CDHDR",
+          "timestamp_column": "UDATE",
+          "trigger": "Dunning correspondence generated"
+        },
+        {
+          "name": "Due Date Passed",
+          "description": "Invoice due date has passed without payment",
+          "source_table": "BSEG",
+          "timestamp_column": "ZFBDT + ZTERM (calculated)",
+          "trigger": "Derived — net due date < current date and AUGDT is null"
+        },
+        {
+          "name": "Cash Discount Due Date Passed",
+          "description": "Cash discount window has expired",
+          "source_table": "BSEG",
+          "timestamp_column": "ZFBDT + ZBD1T (calculated)",
+          "trigger": "Derived — ZBD1T days from ZFBDT"
+        },
+        {
+          "name": "Change Payment Block",
+          "description": "Payment block on customer open item changed",
+          "source_table": "CDHDR",
+          "timestamp_column": "UDATE",
+          "trigger": "CDPOS.FNAME = 'MANSP' changed"
+        },
+        {
+          "name": "Change Payment Terms",
+          "description": "Payment terms on customer changed",
+          "source_table": "CDHDR",
+          "timestamp_column": "UDATE",
+          "trigger": "CDPOS.FNAME = 'ZTERM' changed on KNB1 or document"
+        },
+        {
+          "name": "Change Credit Control Amount",
+          "description": "Customer credit limit or exposure updated",
+          "source_table": "CDHDR",
+          "timestamp_column": "UDATE",
+          "trigger": "Change to KNKK fields (KLIMK, SKFOR, CRBLB)"
+        },
+        {
+          "name": "Record Goods Issue",
+          "description": "Goods issued against delivery for customer order",
+          "source_table": "MKPF",
+          "timestamp_column": "BUDAT",
+          "trigger": "MSEG.BWART = 601 (goods issue for delivery)"
+        }
+      ]
+    },
+    {
+      "id": "P2P",
+      "name": "Procure to Pay",
+      "sap_module": "MM-PUR / FI-AP",
+      "description": "End-to-end procurement process from purchase requisition through purchase order, goods receipt, invoice verification, and payment.",
+      "case_definition": {
+        "object": "Purchase Order",
+        "primary_table": "EKKO",
+        "case_key": "EBELN",
+        "description": "One case per Purchase Order. Item-level variant uses EBELN + EBELP as case key."
+      },
+      "source_tables_used": [
+        "EKKO",
+        "EKPO",
+        "EKET",
+        "EKKN",
+        "EKBE",
+        "EBAN",
+        "BKPF",
+        "BSEG",
+        "RSEG",
+        "LFA1",
+        "LFB1",
+        "LFM1",
+        "MARA",
+        "T001",
+        "CDHDR",
+        "CDPOS"
+      ],
+      "activities": [
+        {
+          "name": "Create Purchase Requisition",
+          "description": "Purchase Requisition created (manually or via MRP)",
+          "source_table": "EBAN",
+          "timestamp_column": "BADAT",
+          "trigger": "New EBAN record created (transaction ME51N or automatic MRP run)"
+        },
+        {
+          "name": "Change Purchase Requisition",
+          "description": "Purchase Requisition header or item amended",
+          "source_table": "CDHDR",
+          "timestamp_column": "UDATE",
+          "trigger": "Change document for OBJECTCLAS = BANF"
+        },
+        {
+          "name": "Release Purchase Requisition",
+          "description": "Purchase Requisition approved/released through release strategy",
+          "source_table": "CDHDR",
+          "timestamp_column": "UDATE",
+          "trigger": "EBAN.FRGKZ changes to released state"
+        },
+        {
+          "name": "Refuse Purchase Requisition",
+          "description": "Purchase Requisition rejected in release strategy",
+          "source_table": "CDHDR",
+          "timestamp_column": "UDATE",
+          "trigger": "EBAN release indicator set to rejected"
+        },
+        {
+          "name": "Create Purchase Order Item",
+          "description": "Purchase Order created referencing PR or directly (transaction ME21N)",
+          "source_table": "EKKO",
+          "timestamp_column": "BEDAT",
+          "trigger": "New EKKO / EKPO record created"
+        },
+        {
+          "name": "Change Purchase Order",
+          "description": "PO header data changed",
+          "source_table": "CDHDR",
+          "timestamp_column": "UDATE",
+          "trigger": "Change document for OBJECTCLAS = EINKBELEG"
+        },
+        {
+          "name": "Change Purchase Order Item",
+          "description": "PO line item data changed (price, quantity, delivery date)",
+          "source_table": "CDHDR",
+          "timestamp_column": "UDATE",
+          "trigger": "CDPOS changes on EKPO fields"
+        },
+        {
+          "name": "Change Schedule Line",
+          "description": "PO schedule line delivery date or quantity changed",
+          "source_table": "CDHDR",
+          "timestamp_column": "UDATE",
+          "trigger": "CDPOS changes on EKET fields"
+        },
+        {
+          "name": "PO Approval Step",
+          "description": "Purchase Order release strategy approval step completed",
+          "source_table": "CDHDR",
+          "timestamp_column": "UDATE",
+          "trigger": "EKKO.FRGKE changes to approved / next release level"
+        },
+        {
+          "name": "Record Goods Receipt",
+          "description": "Goods received against purchase order (transaction MIGO, movement type 101)",
+          "source_table": "MKPF",
+          "timestamp_column": "BUDAT",
+          "trigger": "MSEG.BWART = 101 and EBELN is populated"
+        },
+        {
+          "name": "First Invoice Created",
+          "description": "First vendor invoice posted referencing the PO",
+          "source_table": "EKBE",
+          "timestamp_column": "BUDAT",
+          "trigger": "EKBE.VGABE = 2 (invoice posting) — first occurrence per PO"
+        },
+        {
+          "name": "Clear Invoice",
+          "description": "Vendor invoice cleared through payment",
+          "source_table": "BSEG",
+          "timestamp_column": "AUGDT",
+          "trigger": "BSEG.AUGBL populated for vendor invoice line"
+        },
+        {
+          "name": "Payment Block",
+          "description": "Payment block set or removed on vendor invoice",
+          "source_table": "CDHDR",
+          "timestamp_column": "UDATE",
+          "trigger": "CDPOS.FNAME = 'ZLSPR' changed on invoice document"
+        },
+        {
+          "name": "Order Messages",
+          "description": "Purchase Order output message sent to vendor (email, EDI, print)",
+          "source_table": "NAST",
+          "timestamp_column": "DATVR",
+          "trigger": "NAST record with KAPPL = EF (Purchasing) and sent status"
+        }
+      ]
+    },
+    {
+      "id": "O2C",
+      "name": "Order to Cash",
+      "sap_module": "SD / FI-AR",
+      "description": "End-to-end process from sales order creation through delivery, billing, and cash receipt.",
+      "case_definition": {
+        "object": "Sales Order",
+        "primary_table": "VBAK",
+        "case_key": "VBELN",
+        "description": "One case per Sales Order header. Document flow (VBFA) links to delivery, billing, and accounting documents."
+      },
+      "source_tables_used": [
+        "VBAK",
+        "VBAP",
+        "VBEP",
+        "VBFA",
+        "VBRK",
+        "VBRP",
+        "LIKP",
+        "LIPS",
+        "BKPF",
+        "BSEG",
+        "KNA1",
+        "KNB1",
+        "KNKK",
+        "KNVV",
+        "MARA",
+        "CDHDR",
+        "CDPOS"
+      ],
+      "activities": [
+        {
+          "name": "Create Sales Order",
+          "description": "Sales order header created (transaction VA01)",
+          "source_table": "VBAK",
+          "timestamp_column": "ERDAT",
+          "trigger": "New VBAK record created"
+        },
+        {
+          "name": "Create Sales Order Item",
+          "description": "Sales order line item created",
+          "source_table": "VBAP",
+          "timestamp_column": "ERDAT",
+          "trigger": "New VBAP record created"
+        },
+        {
+          "name": "Change Sales Order",
+          "description": "Sales order header data changed",
+          "source_table": "CDHDR",
+          "timestamp_column": "UDATE",
+          "trigger": "Change document for OBJECTCLAS = VERKBELEG on VBAK level"
+        },
+        {
+          "name": "Change Sales Order Item",
+          "description": "Sales order item data changed (quantity, price, delivery date)",
+          "source_table": "CDHDR",
+          "timestamp_column": "UDATE",
+          "trigger": "CDPOS changes on VBAP fields"
+        },
+        {
+          "name": "Change Schedule Lines",
+          "description": "Delivery schedule line changed",
+          "source_table": "CDHDR",
+          "timestamp_column": "UDATE",
+          "trigger": "CDPOS changes on VBEP fields"
+        },
+        {
+          "name": "Credit Check",
+          "description": "Credit limit check run for customer",
+          "source_table": "VBAK",
+          "timestamp_column": "ERDAT",
+          "trigger": "Credit check performed — KNKK credit exposure evaluated"
+        },
+        {
+          "name": "Record Goods Issue",
+          "description": "Goods issued for outbound delivery (movement type 601)",
+          "source_table": "LIKP",
+          "timestamp_column": "WADAT_IST",
+          "trigger": "MSEG.BWART = 601 and delivery (LIKP) goods issue date populated"
+        },
+        {
+          "name": "Cancel Goods Issue",
+          "description": "Goods issue reversal posted",
+          "source_table": "MKPF",
+          "timestamp_column": "BUDAT",
+          "trigger": "MSEG.BWART = 602 (reversal of goods issue)"
+        },
+        {
+          "name": "Sales Order Status Change",
+          "description": "Overall processing status of sales order changed",
+          "source_table": "VBAK",
+          "timestamp_column": "AEDAT",
+          "trigger": "VBAK.GBSTK changes (A=Not processed, B=Partially, C=Fully processed)"
+        }
+      ]
+    },
+    {
+      "id": "BILLING",
+      "name": "Billing",
+      "sap_module": "SD-BIL",
+      "description": "SD billing document lifecycle from creation to customer payment clearing.",
+      "case_definition": {
+        "object": "Billing Document",
+        "primary_table": "VBRK",
+        "case_key": "VBELN",
+        "description": "One case per billing document header (VBRK)"
+      },
+      "source_tables_used": [
+        "VBRK",
+        "VBRP",
+        "VBFA",
+        "KNA1",
+        "KNVV",
+        "BKPF",
+        "BSEG",
+        "T001",
+        "CDHDR",
+        "CDPOS"
+      ],
+      "activities": [
+        {
+          "name": "Create Billing Document",
+          "description": "Billing document header created (transaction VF01)",
+          "source_table": "VBRK",
+          "timestamp_column": "ERDAT",
+          "trigger": "New VBRK record created"
+        },
+        {
+          "name": "Create Billing Item",
+          "description": "Billing document item created",
+          "source_table": "VBRP",
+          "timestamp_column": "ERDAT",
+          "trigger": "New VBRP record created"
+        },
+        {
+          "name": "Change Billing Document",
+          "description": "Billing document header changed",
+          "source_table": "CDHDR",
+          "timestamp_column": "UDATE",
+          "trigger": "Change document on VBRK"
+        },
+        {
+          "name": "Change Billing Item",
+          "description": "Billing document item changed",
+          "source_table": "CDHDR",
+          "timestamp_column": "UDATE",
+          "trigger": "Change document on VBRP fields"
+        },
+        {
+          "name": "Post Billing Document",
+          "description": "Billing document posted to Financial Accounting — creates FI document",
+          "source_table": "BKPF",
+          "timestamp_column": "BUDAT",
+          "trigger": "BKPF document created with reference to VBRK (XBLNR = VBELN)"
+        },
+        {
+          "name": "Clear Invoice",
+          "description": "Customer invoice cleared by incoming payment",
+          "source_table": "BSEG",
+          "timestamp_column": "AUGDT",
+          "trigger": "BSEG.AUGBL populated on customer FI line item"
+        }
+      ]
+    },
+    {
+      "id": "R2R",
+      "name": "Record to Report",
+      "sap_module": "FI-GL",
+      "description": "GL journal entry lifecycle — posting, review, approval, and potential reversal of general ledger documents.",
+      "case_definition": {
+        "object": "GL Journal Entry Document",
+        "primary_table": "BKPF",
+        "case_key": "BELNR + BUKRS + GJAHR",
+        "description": "One case per accounting document where account type is GL (KOART = 'S')"
+      },
+      "source_tables_used": [
+        "BKPF",
+        "BSEG",
+        "SKA1",
+        "SKAT",
+        "SKB1",
+        "T001",
+        "CDHDR",
+        "CDPOS"
+      ],
+      "activities": [
+        {
+          "name": "Post Journal Entry",
+          "description": "GL journal entry posted (transaction FB50, F-02, FB01)",
+          "source_table": "BKPF",
+          "timestamp_column": "BUDAT",
+          "trigger": "New BKPF created with KOART = 'S' lines"
+        },
+        {
+          "name": "Change Journal Entry",
+          "description": "Posted journal entry amended (limited fields editable after posting)",
+          "source_table": "CDHDR",
+          "timestamp_column": "UDATE",
+          "trigger": "Change document created for OBJECTCLAS = BELEG"
+        },
+        {
+          "name": "Reverse Journal Entry",
+          "description": "Journal entry reversed (creates a new document with opposite postings)",
+          "source_table": "BKPF",
+          "timestamp_column": "BUDAT",
+          "trigger": "BKPF.STBLG is populated on original — reversal document links back"
+        },
+        {
+          "name": "GL Account Master Change",
+          "description": "G/L account master data changed",
+          "source_table": "CDHDR",
+          "timestamp_column": "UDATE",
+          "trigger": "Change document on SKA1 / SKB1 (OBJECTCLAS = GLACCOUNT)"
+        }
+      ]
+    },
+    {
+      "id": "BATCH",
+      "name": "Batch Lifecycle",
+      "sap_module": "MM-QM / PP",
+      "description": "Pharmaceutical or chemical batch lifecycle from creation through production, goods movements, quality inspection, and dispatch.",
+      "case_definition": {
+        "object": "SAP Batch",
+        "primary_table": "MCHA",
+        "case_key": "MATNR + WERKS + CHARG",
+        "description": "One case per batch (material / plant / batch number combination)"
+      },
+      "source_tables_used": [
+        "MCHA",
+        "MSEG",
+        "MKPF",
+        "EKKO",
+        "EKPO",
+        "AFKO",
+        "AFPO",
+        "LIKP",
+        "LIPS",
+        "MARA",
+        "T001W",
+        "CDHDR",
+        "CDPOS"
+      ],
+      "activities": [
+        {
+          "name": "Create Batch",
+          "description": "Batch master record created in SAP (transaction MSC1N or automatic on GR)",
+          "source_table": "MCHA",
+          "timestamp_column": "ERDAT",
+          "trigger": "New MCHA record created"
+        },
+        {
+          "name": "Create Purchase Order",
+          "description": "Purchase order created to procure raw material for this batch",
+          "source_table": "EKKO",
+          "timestamp_column": "BEDAT",
+          "trigger": "EKKO created for material linked to batch"
+        },
+        {
+          "name": "Change Purchase Order",
+          "description": "Purchase order header changed",
+          "source_table": "CDHDR",
+          "timestamp_column": "UDATE",
+          "trigger": "Change document on EKKO (OBJECTCLAS = EINKBELEG)"
+        },
+        {
+          "name": "Change Purchase Order Item",
+          "description": "Purchase order item changed",
+          "source_table": "CDHDR",
+          "timestamp_column": "UDATE",
+          "trigger": "Change document on EKPO fields"
+        },
+        {
+          "name": "Goods Receipt",
+          "description": "Raw material or batch goods receipt posted (movement type 101)",
+          "source_table": "MKPF",
+          "timestamp_column": "BUDAT",
+          "trigger": "MSEG.BWART = 101 and MSEG.CHARG matches batch"
+        },
+        {
+          "name": "Planned Goods Movement",
+          "description": "MRP-planned goods movement milestone",
+          "source_table": "EKPO",
+          "timestamp_column": "EINDT",
+          "trigger": "EKPO.EINDT — planned delivery date from PO"
+        },
+        {
+          "name": "Start Production Order",
+          "description": "Production order status set to Started (AFKO.GSTRS populated or status flag set)",
+          "source_table": "AFKO",
+          "timestamp_column": "GSTRS",
+          "trigger": "AUFK status changes to I0003 (Released) or I0010 (Started)"
+        },
+        {
+          "name": "Scheduled Start Production Order",
+          "description": "Planned start date for production order",
+          "source_table": "AFKO",
+          "timestamp_column": "GSTRP",
+          "trigger": "AFKO.GSTRP — planned start date from order"
+        },
+        {
+          "name": "Scheduled Finish Production Order",
+          "description": "Planned finish date for production order",
+          "source_table": "AFKO",
+          "timestamp_column": "GLTRP",
+          "trigger": "AFKO.GLTRP — planned finish date from order"
+        },
+        {
+          "name": "Finish Production Order",
+          "description": "Production order technically completed",
+          "source_table": "AFKO",
+          "timestamp_column": "GLTRS",
+          "trigger": "AUFK status changes to I0045 (Technically Completed) or GLTRS populated"
+        },
+        {
+          "name": "Goods Issue to Production",
+          "description": "Raw materials issued to production order (movement type 261)",
+          "source_table": "MKPF",
+          "timestamp_column": "BUDAT",
+          "trigger": "MSEG.BWART = 261 and MSEG.AUFNR is populated"
+        },
+        {
+          "name": "Quality Release",
+          "description": "Batch released from quality inspection stock to unrestricted (movement type 321)",
+          "source_table": "MKPF",
+          "timestamp_column": "BUDAT",
+          "trigger": "MSEG.BWART = 321 and MSEG.CHARG matches batch"
+        },
+        {
+          "name": "Create Delivery Document",
+          "description": "Outbound delivery created to ship batch to customer",
+          "source_table": "LIKP",
+          "timestamp_column": "ERDAT",
+          "trigger": "LIKP created with reference to sales order, LIPS.CHARG matches batch"
+        },
+        {
+          "name": "Deliver Goods",
+          "description": "Goods dispatched — goods issue posted against delivery (movement type 601)",
+          "source_table": "LIKP",
+          "timestamp_column": "WADAT_IST",
+          "trigger": "LIKP.WADAT_IST populated (actual goods issue date)"
+        },
+        {
+          "name": "Create Movement Type Document",
+          "description": "Any other goods movement document posted for this batch",
+          "source_table": "MKPF",
+          "timestamp_column": "BUDAT",
+          "trigger": "MSEG with CHARG matching batch and any other BWART"
+        }
+      ]
+    },
+    {
+      "id": "PROD_ORDER",
+      "name": "Production Order",
+      "sap_module": "PP",
+      "description": "Manufacturing production order lifecycle from creation through operations, goods movements, quality inspection, and completion.",
+      "case_definition": {
+        "object": "Production Order",
+        "primary_table": "AUFK",
+        "case_key": "AUFNR",
+        "description": "One case per production order (AUFK.AUFNR)"
+      },
+      "source_tables_used": [
+        "AUFK",
+        "AFKO",
+        "AFPO",
+        "MARA",
+        "MARC",
+        "MSEG",
+        "MKPF",
+        "CDHDR",
+        "CDPOS"
+      ],
+      "activities": [
+        {
+          "name": "Create Production Order",
+          "description": "Production order created (transaction CO01 or via MRP conversion of planned order)",
+          "source_table": "AUFK",
+          "timestamp_column": "ERDAT",
+          "trigger": "New AUFK record created with AUART = process/production order type"
+        },
+        {
+          "name": "Scheduled Start Production Order",
+          "description": "Planned start date for the production order",
+          "source_table": "AFKO",
+          "timestamp_column": "GSTRP",
+          "trigger": "AFKO.GSTRP — scheduled start from order planning"
+        },
+        {
+          "name": "Scheduled Finish Production Order",
+          "description": "Planned finish date for the production order",
+          "source_table": "AFKO",
+          "timestamp_column": "GLTRP",
+          "trigger": "AFKO.GLTRP — scheduled finish from order planning"
+        },
+        {
+          "name": "Start Production Order",
+          "description": "Production order actually started — status set to Started",
+          "source_table": "AFKO",
+          "timestamp_column": "GSTRS",
+          "trigger": "AUFK system status includes I0010 (Partly delivered) or GSTRS populated via confirmation"
+        },
+        {
+          "name": "Start Operation",
+          "description": "Individual routing operation started in production",
+          "source_table": "AFVV",
+          "timestamp_column": "IST_BEGINN",
+          "trigger": "Operation confirmation posted (transaction CO11N)"
+        },
+        {
+          "name": "End Operation",
+          "description": "Individual routing operation completed",
+          "source_table": "AFVV",
+          "timestamp_column": "IST_END",
+          "trigger": "Operation confirmation with final confirmation flag"
+        },
+        {
+          "name": "Material Movement",
+          "description": "Any goods movement against the production order (GI, GR, reversal)",
+          "source_table": "MKPF",
+          "timestamp_column": "BUDAT",
+          "trigger": "MSEG.AUFNR = production order number"
+        },
+        {
+          "name": "Goods Issue to Order",
+          "description": "Components issued to production order (movement type 261)",
+          "source_table": "MKPF",
+          "timestamp_column": "BUDAT",
+          "trigger": "MSEG.BWART = 261 and MSEG.AUFNR populated"
+        },
+        {
+          "name": "Goods Receipt from Order",
+          "description": "Finished goods received from production order (movement type 101)",
+          "source_table": "MKPF",
+          "timestamp_column": "BUDAT",
+          "trigger": "MSEG.BWART = 101 and MSEG.AUFNR populated"
+        },
+        {
+          "name": "Inspection End",
+          "description": "Quality inspection for production order completed",
+          "source_table": "MKPF",
+          "timestamp_column": "BUDAT",
+          "trigger": "MSEG.BWART = 321 (quality stock to unrestricted) for production batch"
+        },
+        {
+          "name": "Production Order Status Change",
+          "description": "Order system status changes (Created → Released → Started → Completed → Technically Closed)",
+          "source_table": "CDHDR",
+          "timestamp_column": "UDATE",
+          "trigger": "Status object (AUFK.OBJNR) status history changes"
+        },
+        {
+          "name": "Finish Production Order",
+          "description": "Production order technically completed",
+          "source_table": "AFKO",
+          "timestamp_column": "GLTRS",
+          "trigger": "AUFK status I0045 (Technically Completed) set, GLTRS populated"
+        },
+        {
+          "name": "Create Production Order Item",
+          "description": "Component item (AFPO) created or modified in the order",
+          "source_table": "AFPO",
+          "timestamp_column": "ERDAT",
+          "trigger": "New AFPO record created for the order"
+        }
+      ]
+    },
+    {
+      "id": "MMC",
+      "name": "Material Master Creation",
+      "sap_module": "MM / MDG",
+      "description": "Material master data creation process — from initial request through approval (MDG workflow) to activation across all SAP organizational levels.",
+      "case_definition": {
+        "object": "Material Master Record",
+        "primary_table": "MARA",
+        "case_key": "MATNR",
+        "description": "One case per material number (MARA.MATNR)"
+      },
+      "source_tables_used": [
+        "MARA",
+        "MARC",
+        "CDHDR",
+        "CDPOS",
+        "T001W"
+      ],
+      "activities": [
+        {
+          "name": "Material Created",
+          "description": "Material master basic record created in SAP (transaction MM01)",
+          "source_table": "MARA",
+          "timestamp_column": "ERSDA",
+          "trigger": "New MARA record created"
+        },
+        {
+          "name": "Plant Data Extended",
+          "description": "Material extended to a plant — MARC record created",
+          "source_table": "MARC",
+          "timestamp_column": "LAEDA",
+          "trigger": "New MARC record created for MATNR + WERKS"
+        },
+        {
+          "name": "Material Master Change",
+          "description": "Material master field changed after creation",
+          "source_table": "CDHDR",
+          "timestamp_column": "UDATE",
+          "trigger": "Change document created for OBJECTCLAS = MATERIAL"
+        },
+        {
+          "name": "Material Status Change",
+          "description": "Plant-specific material status (MARC.MMSTA) changed — affects availability for procurement/production",
+          "source_table": "CDHDR",
+          "timestamp_column": "UDATE",
+          "trigger": "CDPOS.FNAME = 'MMSTA' changed"
+        },
+        {
+          "name": "Material Deletion Flag Set",
+          "description": "Deletion flag set on material master to mark for decommission",
+          "source_table": "CDHDR",
+          "timestamp_column": "UDATE",
+          "trigger": "CDPOS change on MARA.LVORM or MARC.LVORM"
+        }
+      ]
+    }
+  ]
+}

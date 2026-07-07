@@ -740,7 +740,8 @@ def build_4_sheet_analysis(
     filter_items: list,
     event_log_table: str,
     case_table: str,
-    process_name: str = "Process"
+    process_name: str = "Process",
+    case_col: str = "CASE_ID"
 ) -> list:
     """
     Build the complete 4-sheet Celonis Analysis document.
@@ -887,7 +888,7 @@ def build_4_sheet_analysis(
         axis1_cols=[
             {"name": "Occurrence Count", "text": f"COUNT({event_log_table}.ACTIVITY)",
              "sorting": "DESC", "sortingIndex": 0},
-            {"name": "Affected Cases",   "text": f"COUNT_DISTINCT({event_log_table}.CASE_KEY)",
+            {"name": "Affected Cases",   "text": f"COUNT_DISTINCT({event_log_table}.{case_col})",
              "sorting": None, "sortingIndex": None}
         ],
         x=0, y=tables_start_y, w=12, h=6
@@ -899,7 +900,7 @@ def build_4_sheet_analysis(
         component_id="analytics-case-table",
         title="Case Detail Overview",
         axis0_cols=[
-            {"name": "Case ID", "text": f"{case_table}.CASE_KEY",
+            {"name": "Case ID", "text": f"{case_table}.{case_col}",
              "sorting": None, "sortingIndex": None}
         ],
         axis1_cols=[

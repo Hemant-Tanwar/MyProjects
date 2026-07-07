@@ -16,6 +16,7 @@ class SessionModel(Base):
     description = Column(Text, nullable=True)
     status = Column(String(50), default="requirement_analysis")  # stages: requirement_analysis, sql_transformation, data_modeling, knowledge_modeling, view_generation, qa_validation, completed
     current_role = Column(String(50), default="Business User")
+    requirement_file = Column(String(255), nullable=True)
     created_at = Column(DateTime, default=datetime.datetime.utcnow)
     updated_at = Column(DateTime, default=datetime.datetime.utcnow, onupdate=datetime.datetime.utcnow)
 

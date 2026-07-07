@@ -13,6 +13,7 @@ class SessionResponse(BaseModel):
     description: Optional[str]
     status: str
     current_role: str
+    requirement_file: Optional[str] = None
     created_at: datetime
     updated_at: datetime
 

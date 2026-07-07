@@ -28,7 +28,7 @@ def run():
     print("2. Switching role to Admin...")
     api_post(f"/sessions/{session_id}/role", {"role": "Admin"})
 
-    stages = ["sql", "data_model", "knowledge_model", "view", "qa"]
+    stages = ["sql", "data_model", "knowledge_model", "analysis", "qa"]
     for stage in stages:
         print(f"3. Running pipeline stage: {stage}...")
         api_post(f"/sessions/{session_id}/trigger", {"stage": stage})

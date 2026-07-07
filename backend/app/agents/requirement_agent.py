@@ -6,12 +6,69 @@ class RequirementAnalyzerAgent(BaseAgent):
         super().__init__(name="Requirement Analyzer Agent")
 
     def analyze(self, business_requirement: str) -> tuple[str, str]:
+        kb = self._load_sap_knowledge_base()
+        processes = kb.get("processes", [])
+        
+        # Match process based on keywords in the business requirement text
+        matched_processes = []
+        text_lower = business_requirement.lower()
+        for p in processes:
+            name_lower = p.get("name", "").lower()
+            id_lower = p.get("id", "").lower()
+            module_lower = p.get("sap_module", "").lower()
+            
+            # Synonyms mapping to help catch process context
+            synonyms = []
+            if id_lower == "p2p":
+                synonyms = ["purchase-to-pay", "purchase to pay", "procurement", "po", "ekko", "ekpo", "p2p", "purchase order"]
+            elif id_lower == "o2c":
+                synonyms = ["order-to-cash", "order to cash", "sales", "so", "vbak", "vbap", "o2c", "sales order"]
+            elif id_lower == "ap":
+                synonyms = ["accounts payable", "ap", "vendor invoice", "bkpf", "bseg", "miro", "invoice verification"]
+            elif id_lower == "ar":
+                synonyms = ["accounts receivable", "ar", "customer invoice", "billing", "vbrk", "vbrp"]
+                
+            is_match = False
+            if id_lower in text_lower or name_lower in text_lower or module_lower in text_lower:
+                is_match = True
+            else:
+                for syn in synonyms:
+                    if syn in text_lower:
+                        is_match = True
+                        break
+            if is_match:
+                matched_processes.append(p)
+                
+        # Fallback to dynamic custom modeling if no standard process was matched
+        if not matched_processes:
+            kb_text = (
+                "No standard predefined SAP processes match this requirement. "
+                "Please analyze this custom business requirement dynamically. Use general process mining best practices "
+                "to define the process_name, case_id_definition, activity_definitions, key_timestamp_fields, and KPIs "
+                "based entirely on the user's business description."
+            )
+        else:
+            kb_summary = []
+            for p in matched_processes:
+                p_desc = f"- Process: {p.get('name')} ({p.get('id')}) - Module: {p.get('sap_module')}\n"
+                p_desc += f"  Case Key: {p.get('case_definition', {}).get('case_key')} ({p.get('case_definition', {}).get('description')})\n"
+                p_desc += "  Standard Activities:\n"
+                for act in p.get("activities", []):
+                    p_desc += f"    * {act.get('name')}: Triggered by {act.get('source_table')}.{act.get('timestamp_column')} ({act.get('trigger')})\n"
+                kb_summary.append(p_desc)
+            kb_text = "\n".join(kb_summary)
+            
         system_prompt = (
             "You are an expert Celonis Requirement Analyzer Agent. Your job is to parse raw business requirements "
-            "and convert them into a highly structured Process Mining Specification JSON format. "
-            "Your output must contain exactly two sections: \n"
-            "1. RATIONALE: A concise explanation of your design choices, process identification, and scope.\n"
-            "2. SPECIFICATION: A valid JSON object representing the structured process mining requirements.\n"
+            "(which may include detailed slide contents from PowerPoint/PPTX files) and convert them into a highly "
+            "comprehensive Process Mining Specification JSON format.\n\n"
+            "=== CRITICAL REQUIREMENTS RULE ===\n"
+            "- You MUST read the entire business requirement, including any slides labeled 'ADDITIONAL PPTX REQUIREMENTS'.\n"
+            "- Do NOT truncate, ignore, or drop any activities, KPIs, source fields, or business rules mentioned in the slides.\n"
+            "- Ensure every activity and data mapping defined in the slides is captured in the activity_definitions and key_timestamp_fields.\n\n"
+            "=== PROCESS MINING REFERENCE / SYSTEM INSTRUCTIONS ===\n"
+            f"{kb_text}\n\n"
+            "=== OUTPUT FORMAT ===\n"
             "Format the output strictly as:\n"
             "---RATIONALE---\n"
             "<Your explanation and traceability notes here>\n"
@@ -65,90 +122,3 @@ class RequirementAnalyzerAgent(BaseAgent):
                 pass
             return rationale, spec
 
-    def _mock_response(self, prompt: str) -> str:
-        p_lower = prompt.lower()
-        if "o2c" in p_lower or "order-to-cash" in p_lower or "order to cash" in p_lower or "sales" in p_lower:
-            mock_spec = {
-                "process_name": "Order-to-Cash (O2C) Optimization",
-                "source_systems": ["SAP ECC / S4HANA"],
-                "case_id_definition": "VBAP.VBELN (Sales Order Document Number) + VBAP.POSNR (Sales Order Line Item Number)",
-                "activity_definitions": [
-                    {"name": "Create Sales Order Item", "trigger_condition": "Creation of sales order item in VBAP table"},
-                    {"name": "Approve Sales Order Item", "trigger_condition": "Credit check release or billing block removal in VBAK / VBUK"},
-                    {"name": "Create Delivery Item", "trigger_condition": "Post outbound delivery item in LIPS table"},
-                    {"name": "Ship Goods", "trigger_condition": "Goods issue posting in MKPF / MSEG or LIPS.WADAT_IST"},
-                    {"name": "Create Invoice", "trigger_condition": "Billing document posting in VBRK / VBRP"},
-                    {"name": "Clear Invoice Payment", "trigger_condition": "Customer payment clearing in BSAD / BKPF"}
-                ],
-                "key_timestamp_fields": [
-                    {"activity_name": "Create Sales Order Item", "source_field": "VBAK.ERDAT or CDHDR.UDATE"},
-                    {"activity_name": "Approve Sales Order Item", "source_field": "CDHDR.UDATE"},
-                    {"activity_name": "Create Delivery Item", "source_field": "LIPS.ERDAT"},
-                    {"activity_name": "Ship Goods", "source_field": "LIPS.WADAT_IST"},
-                    {"activity_name": "Create Invoice", "source_field": "VBRK.FKDAT"},
-                    {"activity_name": "Clear Invoice Payment", "source_field": "BSAD.BUDAT"}
-                ],
-                "kpis": [
-                    {"name": "Order-to-Shipping Throughput Time", "description": "Time elapsed between creating sales order item and shipping goods", "calculation_idea": "AVG(Timestamp(Ship Goods) - Timestamp(Create Sales Order Item))"},
-                    {"name": "Touchless Order Rate", "description": "Percentage of sales orders processed without manual touches or billing blocks", "calculation_idea": "COUNT(cases with no changes/blocks) / Total SO Cases"},
-                    {"name": "Delivery Delay", "description": "Time delay between planned delivery date and actual goods issue", "calculation_idea": "AVG(Timestamp(Ship Goods) - Timestamp(Planned Delivery Date))"}
-                ],
-                "business_filters": [
-                    {"name": "High Value Sales Orders", "rule": "Sales Order Item net value (VBAP.NETWR) > 20,000 EUR"},
-                    {"name": "Late Deliveries", "rule": "Actual Goods Issue (LIPS.WADAT_IST) > Planned Delivery Date (EPAS.MBDAT)"}
-                ],
-                "acceptance_rules": [
-                    "Case ID must never be null",
-                    "Activities must follow sequential timestamps (Create SO <= Create Delivery <= Ship Goods <= Create Invoice <= Clear Payment)",
-                    "Billing document must reference the sales order item (VBRP.AUBEL = VBAP.VBELN and VBRP.AUPOS = VBAP.POSNR)"
-                ]
-            }
-            return (
-                "---RATIONALE---\n"
-                "The requirement is mapped to an Order-to-Cash process flow extraction based on typical SAP SD schema constructs. "
-                "The Case ID is established at the Line Item level (VBELN + POSNR) because transaction actions occur at the item level. "
-                "Identified key entities: VBAK, VBAP, LIPS, VBRK, VBRP, BSAD.\n"
-                "---SPECIFICATION---\n" + json.dumps(mock_spec, indent=2)
-            )
-        else:
-            # Generate rich response simulating Bedrock output for a generic P2P process
-            mock_spec = {
-                "process_name": "Purchase-to-Pay (P2P) Optimization",
-                "source_systems": ["SAP ECC / S4HANA"],
-                "case_id_definition": "EKPO.EBELN (Purchase Order Document Number) + EKPO.EBELP (Purchase Order Line Item Number)",
-                "activity_definitions": [
-                    {"name": "Create Purchase Order Item", "trigger_condition": "Creation of purchase order item in EKPO table"},
-                    {"name": "Approve Purchase Order Item", "trigger_condition": "Release indicator update in EKKO or CDHDR tracking"},
-                    {"name": "Receive Goods", "trigger_condition": "Post goods receipt in MSEG table with transaction type 101"},
-                    {"name": "Receive Invoice", "trigger_condition": "Register vendor invoice in RBKP / RSEG tables"},
-                    {"name": "Pay Invoice", "trigger_condition": "Clear payment in BSAK / BKPF financial ledger"}
-                ],
-                "key_timestamp_fields": [
-                    {"activity_name": "Create Purchase Order Item", "source_field": "EKKO.AEDAT or CDHDR.UDATE"},
-                    {"activity_name": "Approve Purchase Order Item", "source_field": "CDHDR.UDATE"},
-                    {"activity_name": "Receive Goods", "source_field": "MSEG.BUDAT"},
-                    {"activity_name": "Receive Invoice", "source_field": "RBKP.BUDAT"},
-                    {"activity_name": "Pay Invoice", "source_field": "BKPF.BUDAT"}
-                ],
-                "kpis": [
-                    {"name": "PO-to-GR Throughput Time", "description": "Time elapsed between creating PO item and receiving goods", "calculation_idea": "AVG(Timestamp(Receive Goods) - Timestamp(Create Purchase Order Item))"},
-                    {"name": "Touchless PO Rate", "description": "Percentage of POs that did not require manual approval changes", "calculation_idea": "COUNT(cases with no changes) / Total PO Cases"},
-                    {"name": "Invoice Verification Time", "description": "Time to post an invoice since goods receipt", "calculation_idea": "AVG(Timestamp(Receive Invoice) - Timestamp(Receive Goods))"}
-                ],
-                "business_filters": [
-                    {"name": "High Value Orders", "rule": "PO Item net value (EKPO.NETPR) > 10,000 EUR"},
-                    {"name": "Maverick Buying", "rule": "Invoice posting occurs before PO creation date"}
-                ],
-                "acceptance_rules": [
-                    "Case ID must never be null",
-                    "Activities must follow sequential timestamps (Create PO <= Receive Goods <= Receive Invoice <= Clear Payment)",
-                    "Goods receipt must link to the purchase order reference (MSEG.EBELN = EKPO.EBELN)"
-                ]
-            }
-            return (
-                "---RATIONALE---\n"
-                "The requirement is mapped to a Purchase-to-Pay process flow extraction based on typical SAP schema constructs. "
-                "The Case ID is established at the Line Item level (EBELN + EBELP) because transaction actions occur at the item level. "
-                "Identified key entities: EKKO, EKPO, MSEG, RBKP, BSAK.\n"
-                "---SPECIFICATION---\n" + json.dumps(mock_spec, indent=2)
-            )

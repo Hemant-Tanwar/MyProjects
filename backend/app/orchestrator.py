@@ -8,6 +8,8 @@ from app.agents.data_model_agent import DataModelAgent
 from app.agents.knowledge_model_agent import KnowledgeModelAgent
 from app.agents.analysis_agent import AnalysisAgent
 from app.agents.qa_agent import QAAgent
+from app.utils.pptx_parser import extract_text_from_pptx
+import os
 
 logger = logging.getLogger(__name__)
 
@@ -33,6 +35,12 @@ class WorkflowOrchestrator:
             if stage == "requirement":
                 # Get initial requirement description
                 req_text = session.description or "Analyze the Procurement Process"
+                
+                # Check for uploaded requirement PPTX file
+                if session.requirement_file and os.path.exists(session.requirement_file):
+                    pptx_text = extract_text_from_pptx(session.requirement_file)
+                    req_text = f"{req_text}\n\n=== ADDITIONAL PPTX REQUIREMENTS ===\n{pptx_text}"
+                
                 rationale, content = self.requirement_agent.analyze(req_text)
                 
             # 2. SQL Stage

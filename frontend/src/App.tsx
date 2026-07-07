@@ -7,22 +7,23 @@ import {
 import {
   listSessions, getSession, createSession, deleteSession, triggerAgent,
   getArtifact, editArtifact, approveArtifact, switchRole, getAuditLogs,
-  getPromotionUrl, API_BASE_URL
+  pushArtifact, getPromotionUrl, uploadRequirementFile, API_BASE_URL
 } from "./api";
 import type { Session, Artifact, AuditLog } from "./api";
 
 const STAGES = [
   { id: "requirement", label: "Requirement Analyzer", desc: "Extract business spec & case notion", icon: FileText },
-  { id: "sql", label: "Transformation SQL", desc: "Generate cleaning & event log SQL", icon: FileCode },
-  { id: "data_model", label: "Data Model Agent", desc: "Link events, cases & dimensions", icon: GitMerge },
+  { id: "sql_data_model", label: "SQL & Data Model", desc: "SQL transformations & relationships", icon: GitMerge },
   { id: "knowledge_model", label: "Knowledge Model", desc: "Build semantic PQL metrics", icon: Database },
-  { id: "analysis", label: "Celonis Analysis", desc: "Configure analysis sheets & KPIs", icon: LayoutDashboard }
+  { id: "analysis", label: "Celonis Analysis", desc: "Configure analysis sheets & KPIs", icon: LayoutDashboard },
+  { id: "qa", label: "QA Validation", desc: "Perform compliance & quality checks", icon: CheckCircle2 }
 ];
 
 export default function App() {
   const [sessions, setSessions] = useState<Session[]>([]);
   const [currentSession, setCurrentSession] = useState<Session | null>(null);
   const [activeStage, setActiveStage] = useState<string>("requirement");
+  const [editingStage, setEditingStage] = useState<string | null>(null);
   const [artifacts, setArtifacts] = useState<Record<string, Artifact>>({});
   const [auditLogs, setAuditLogs] = useState<AuditLog[]>([]);
 
@@ -31,10 +32,10 @@ export default function App() {
   // UI creation states
   const [newSessionName, setNewSessionName] = useState("");
   const [initialRequirement, setInitialRequirement] = useState("");
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [showCreateModal, setShowCreateModal] = useState(false);
 
   // Editing states
-  const [isEditing, setIsEditing] = useState(false);
   const [editContent, setEditContent] = useState("");
   const [editRationale, setEditRationale] = useState("");
 
@@ -64,6 +65,20 @@ export default function App() {
     }
   }, [currentSession?.id]);
 
+  // Poll audit logs more frequently (every 1.5s) during loading states to show real-time progress
+  useEffect(() => {
+    if (!loading || !currentSession) return;
+    const interval = setInterval(async () => {
+      try {
+        const logs = await getAuditLogs(currentSession.id);
+        setAuditLogs(logs);
+      } catch (err) {
+        // Ignore polling errors
+      }
+    }, 1500);
+    return () => clearInterval(interval);
+  }, [loading, currentSession?.id]);
+
   const loadSessions = async () => {
     try {
       const data = await listSessions();
@@ -90,10 +105,10 @@ export default function App() {
 
       // Fetch latest artifacts for each stage
       const stageArtifacts: Record<string, Artifact> = {};
-      for (const stage of STAGES) {
+      for (const stageId of ["requirement", "sql", "data_model", "knowledge_model", "analysis", "qa"]) {
         try {
-          const art = await getArtifact(sessionId, stage.id);
-          stageArtifacts[stage.id] = art;
+          const art = await getArtifact(sessionId, stageId);
+          stageArtifacts[stageId] = art;
         } catch (e) {
           // Artifact doesn't exist yet for this stage
         }
@@ -112,10 +127,10 @@ export default function App() {
       setAuditLogs(logs);
 
       const stageArtifacts: Record<string, Artifact> = {};
-      for (const stage of STAGES) {
+      for (const stageId of ["requirement", "sql", "data_model", "knowledge_model", "analysis", "qa"]) {
         try {
-          const art = await getArtifact(sessionId, stage.id);
-          stageArtifacts[stage.id] = art;
+          const art = await getArtifact(sessionId, stageId);
+          stageArtifacts[stageId] = art;
         } catch (e) { }
       }
       setArtifacts(stageArtifacts);
@@ -129,11 +144,18 @@ export default function App() {
     setError(null);
     try {
       const newSess = await createSession(newSessionName, initialRequirement);
+      if (selectedFile) {
+        await uploadRequirementFile(newSess.id, selectedFile);
+      }
       setNewSessionName("");
       setInitialRequirement("");
+      setSelectedFile(null);
       setShowCreateModal(false);
       await loadSessions();
-      setCurrentSession(newSess);
+      // Fetch fresh details with requirement_file
+      const freshSess = await getSession(newSess.id);
+      setCurrentSession(freshSess);
+      await handleSelectSession(freshSess);
       setNotification("Session created and requirement analyzer launched!");
     } catch (err: any) {
       setError(err.message || "Failed to create session");
@@ -192,28 +214,28 @@ export default function App() {
     }
   };
 
-  const handleStartEdit = () => {
-    const art = artifacts[activeStage];
+  const handleStartEdit = (stageKey: string) => {
+    const art = artifacts[stageKey];
     if (!art) return;
     setEditContent(art.content);
     setEditRationale(art.rationale || "");
-    setIsEditing(true);
+    setEditingStage(stageKey);
   };
 
-  const handleSaveEdit = async () => {
+  const handleSaveEdit = async (stageKey: string) => {
     if (!currentSession) return;
     setLoading(true);
     setError(null);
     try {
       const updated = await editArtifact(
         currentSession.id,
-        activeStage,
+        stageKey,
         editContent,
         editRationale || "Manual overrides applied by process analyst."
       );
-      setArtifacts(prev => ({ ...prev, [activeStage]: updated }));
-      setIsEditing(false);
-      setNotification("Edits saved as a new artifact version.");
+      setArtifacts(prev => ({ ...prev, [stageKey]: updated }));
+      setEditingStage(null);
+      setNotification(`Edits saved as a new artifact version for ${stageKey.toUpperCase()}.`);
 
       // Reload logs
       const logs = await getAuditLogs(currentSession.id);
@@ -225,20 +247,20 @@ export default function App() {
     }
   };
 
-  const handleApproveArtifact = async (approved: boolean) => {
+  const handleApproveArtifact = async (stageKey: string, approved: boolean) => {
     if (!currentSession) return;
     setLoading(true);
     setError(null);
     try {
       const updated = await approveArtifact(
         currentSession.id,
-        activeStage,
+        stageKey,
         approved,
         approvalNotes
       );
-      setArtifacts(prev => ({ ...prev, [activeStage]: updated }));
+      setArtifacts(prev => ({ ...prev, [stageKey]: updated }));
       setApprovalNotes("");
-      setNotification(`Stage ${activeStage} artifact has been ${approved ? "approved" : "rejected"}.`);
+      setNotification(`Stage ${stageKey.toUpperCase()} artifact has been ${approved ? "approved" : "rejected"}.`);
 
       // Refresh session
       const sess = await getSession(currentSession.id);
@@ -257,9 +279,9 @@ export default function App() {
     setNotification("Promoted to production! Downloading deployment ZIP bundle...");
   };
 
-  const handlePushToCelonis = async () => {
+  const handlePushToCelonis = async (stage: string) => {
     if (!currentSession) return;
-    if (!window.confirm("Celonis push?")) return;
+    if (!window.confirm(`Are you sure you want to push stage '${stage}' configurations to Celonis?`)) return;
 
     setLoading(true);
     setError(null);
@@ -270,18 +292,8 @@ export default function App() {
         await switchRole(currentSession.id, "Admin");
       }
 
-      // Call promote endpoint (which triggers file export & Celonis push)
-      const response = await fetch(`${API_BASE_URL}/sessions/${currentSession.id}/promote`, {
-        method: "POST",
-      });
-
-      if (!response.ok) {
-        const err = await response.json();
-        throw new Error(err.detail || "Failed to push to Celonis");
-      }
-
-      const result = await response.json();
-      setNotification(result.message || "Successfully pushed all assets to Celonis!");
+      await pushArtifact(currentSession.id, stage);
+      setNotification(`Stage '${stage}' configurations successfully pushed to Celonis!`);
 
       // Refresh session and logs
       const logs = await getAuditLogs(currentSession.id);
@@ -290,15 +302,18 @@ export default function App() {
       setCurrentSession(sess);
     } catch (err: any) {
       setError(err.message || "Failed to push to Celonis");
+      const logs = await getAuditLogs(currentSession.id);
+      setAuditLogs(logs);
     } finally {
       setLoading(false);
     }
   };
 
-  const renderPromoteProgress = () => {
+  const renderPromoteProgress = (stageKey?: string) => {
+    const targetStage = stageKey || activeStage;
     const progressSteps = auditLogs
-      .filter(log => log.action === "promote_progress")
-      .reverse();
+      .filter(log => log.agent_name === "Celonis Deployer" && log.stage === targetStage)
+      .sort((a, b) => a.id - b.id);
 
     if (progressSteps.length === 0) return null;
 
@@ -333,23 +348,173 @@ export default function App() {
     );
   };
 
-  // Render specific layout based on active stage panel
   const renderStageContent = () => {
-    const art = artifacts[activeStage];
     const userRole = currentSession?.current_role || "Business User";
+    const approveAuthorized = ["Reviewer", "Admin"].includes(userRole);
 
-    // Check if role is authorized to build/trigger this stage
+    if (activeStage === "sql_data_model") {
+      const renderSubStageColumn = (stageKey: "sql" | "data_model") => {
+        const art = artifacts[stageKey];
+        const buildAuthorized = ["Process Analyst", "Admin"].includes(userRole);
+
+        if (loading && !art) {
+          return (
+            <div className="glass" style={{ display: 'flex', flex: 1, minHeight: '350px', alignItems: 'center', justifyContent: 'center' }}>
+              <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '12px' }}>
+                <div className="stage-icon-wrapper" style={{ animation: 'spin 2s linear infinite', width: '40px', height: '40px' }}>
+                  <Play size={20} />
+                </div>
+                <span style={{ fontSize: '0.875rem', color: 'var(--text-secondary)' }}>Orchestrator working...</span>
+              </div>
+            </div>
+          );
+        }
+
+        if (!art) {
+          return (
+            <div className="glass" style={{ display: 'flex', flex: 1, flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '2.5rem', textAlign: 'center', gap: '1.5rem', minHeight: '350px' }}>
+              <div>
+                <AlertTriangle size={36} style={{ color: 'var(--status-warning)', margin: '0 auto' }} />
+                <h3 style={{ marginTop: '0.75rem', fontSize: '1.1rem', fontWeight: 600 }}>No Specs Generated</h3>
+                <p style={{ color: 'var(--text-secondary)', fontSize: '0.8rem', maxWidth: '300px', margin: '0.25rem auto' }}>
+                  {stageKey === "sql" ? "SQL transformation queries have not been generated yet." : "Data Model configuration details have not been built yet."}
+                </p>
+              </div>
+              {buildAuthorized ? (
+                <button className="btn btn-primary" onClick={() => handleTriggerAgent(stageKey)}>
+                  <Play size={14} /> Run {stageKey === "sql" ? "SQL Agent" : "Data Model Agent"}
+                </button>
+              ) : (
+                <div style={{ color: 'var(--status-error)', fontSize: '0.75rem', fontWeight: 600 }}>
+                  Role {userRole} unauthorized to trigger.
+                </div>
+              )}
+            </div>
+          );
+        }
+
+        if (editingStage === stageKey) {
+          return (
+            <div className="glass" style={{ display: 'flex', flexDirection: 'column', flex: 1 }}>
+              <div className="card-title-bar">
+                <span className="card-title">Modify {stageKey === "sql" ? "SQL" : "Data Model"} Spec</span>
+              </div>
+              <div className="card-body" style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '10px' }}>
+                <textarea
+                  className="textarea-input"
+                  style={{ flex: 1, minHeight: '220px', fontFamily: 'var(--font-mono)', fontSize: '0.8rem' }}
+                  value={editContent}
+                  onChange={(e) => setEditContent(e.target.value)}
+                />
+                <span style={{ fontSize: '0.75rem', fontWeight: 600, color: 'var(--text-secondary)' }}>Rationale for manual override:</span>
+                <textarea
+                  className="textarea-input"
+                  style={{ minHeight: '60px', fontSize: '0.8rem' }}
+                  placeholder="Explain why you are applying this manual override..."
+                  value={editRationale}
+                  onChange={(e) => setEditRationale(e.target.value)}
+                />
+                <div style={{ display: 'flex', gap: '8px', justifyContent: 'flex-end', marginTop: '5px' }}>
+                  <button className="btn btn-secondary" style={{ padding: '6px 12px' }} onClick={() => setEditingStage(null)}>Cancel</button>
+                  <button className="btn btn-primary" style={{ padding: '6px 12px' }} onClick={() => handleSaveEdit(stageKey)}>Save V{art.version + 1}</button>
+                </div>
+              </div>
+            </div>
+          );
+        }
+
+        return (
+          <div className="glass" style={{ display: 'flex', flexDirection: 'column', flex: 1 }}>
+            <div className="card-title-bar">
+              <span className="card-title">{stageKey === "sql" ? "SQL Transformations" : "Data Model Schema"}</span>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <span className="header-badge" style={{ fontSize: '0.65rem', borderColor: art.approved ? 'var(--status-success)' : 'var(--status-warning)', color: art.approved ? 'var(--status-success)' : 'var(--status-warning)', background: 'transparent' }}>
+                  {art.approved ? "Approved" : "Draft (V" + art.version + ")"}
+                </span>
+                {["Process Analyst", "Admin"].includes(userRole) && (
+                  <button className="btn btn-secondary" style={{ padding: '3px 6px', fontSize: '0.75rem' }} onClick={() => handleStartEdit(stageKey)}>
+                    <Edit3 size={12} /> Edit
+                  </button>
+                )}
+              </div>
+            </div>
+            
+            <div className="card-body" style={{ flex: 1, overflowY: 'auto', borderBottom: '1px solid var(--border-color)', minHeight: '250px', maxHeight: '350px' }}>
+              {stageKey === "sql" ? (
+                <pre className="code-editor-pre" style={{ margin: 0, height: '100%', whiteSpace: 'pre-wrap', fontSize: '0.75rem' }}>{art.content}</pre>
+              ) : (
+                <DataModelViewer content={art.content} />
+              )}
+            </div>
+
+            <div style={{ padding: '10px 15px', background: 'rgba(255,255,255,0.01)', borderBottom: '1px solid var(--border-color)' }}>
+              <span style={{ fontSize: '0.75rem', fontWeight: 700, color: 'var(--text-secondary)', textTransform: 'uppercase', letterSpacing: '0.5px' }}>Rationale</span>
+              <p style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', margin: '4px 0 0 0', whiteSpace: 'pre-wrap' }}>
+                {art.rationale || "No explanation recorded."}
+              </p>
+            </div>
+
+            <div style={{ padding: '10px 15px', display: 'flex', flexDirection: 'column', gap: '8px' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                <span style={{ fontSize: '0.75rem', fontWeight: 600 }}>Governance Gate</span>
+                <div style={{ display: 'flex', gap: '6px', alignItems: 'center' }}>
+                  {art.approved ? (
+                    auditLogs.some(log => log.stage === stageKey && log.action === "push_completed") ? (
+                      <span style={{ fontSize: '0.75rem', color: 'var(--status-success)', fontWeight: 600 }}>
+                        ✓ Deployed to Celonis
+                      </span>
+                    ) : (
+                      <button
+                        className="btn btn-primary"
+                        style={{ padding: '4px 8px', fontSize: '0.75rem' }}
+                        onClick={() => handlePushToCelonis(stageKey)}
+                      >
+                        <ArrowRight size={12} /> Push to Celonis
+                      </button>
+                    )
+                  ) : approveAuthorized ? (
+                    <div style={{ display: 'flex', gap: '6px' }}>
+                      <input
+                        type="text"
+                        className="text-input"
+                        placeholder="Approval comments..."
+                        style={{ width: '120px', fontSize: '0.75rem', padding: '4px 8px' }}
+                        value={approvalNotes}
+                        onChange={(e) => setApprovalNotes(e.target.value)}
+                      />
+                      <button className="btn btn-success" style={{ padding: '4px 8px', fontSize: '0.75rem' }} onClick={() => handleApproveArtifact(stageKey, true)}>Approve</button>
+                      <button className="btn btn-danger" style={{ padding: '4px 8px', fontSize: '0.75rem' }} onClick={() => handleApproveArtifact(stageKey, false)}>Reject</button>
+                    </div>
+                  ) : (
+                    <span style={{ fontSize: '0.7rem', color: 'var(--status-warning)' }}>
+                      Awaiting Approval
+                    </span>
+                  )}
+                </div>
+              </div>
+              {renderPromoteProgress(stageKey)}
+            </div>
+          </div>
+        );
+      };
+
+      return (
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', flex: 1 }}>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px', flex: 1, alignItems: 'stretch' }}>
+            {renderSubStageColumn("sql")}
+            {renderSubStageColumn("data_model")}
+          </div>
+        </div>
+      );
+    }
+
+    const art = artifacts[activeStage];
     const buildAuthorized = {
       requirement: ["Business User", "Process Analyst", "Admin"],
-      sql: ["Process Analyst", "Admin"],
-      data_model: ["Process Analyst", "Admin"],
       knowledge_model: ["Process Analyst", "Admin"],
       analysis: ["Process Analyst", "Admin"],
       qa: ["Process Analyst", "Admin", "Reviewer"]
     }[activeStage]?.includes(userRole);
-
-    // Check if role is authorized to approve this stage (Reviewer / Admin)
-    const approveAuthorized = ["Reviewer", "Admin"].includes(userRole);
 
     if (loading && !art) {
       return (
@@ -376,7 +541,7 @@ export default function App() {
           </div>
           {buildAuthorized ? (
             <button className="btn btn-primary" onClick={() => handleTriggerAgent(activeStage)}>
-              <Play size={16} /> Run {STAGES.find(s => s.id === activeStage)?.label}
+              <Play size={16} /> Run {activeStage === 'requirement' ? 'Requirement Analyzer' : activeStage === 'knowledge_model' ? 'Knowledge Model Agent' : activeStage === 'analysis' ? 'Analysis Agent' : 'QA Agent'}
             </button>
           ) : (
             <div style={{ color: 'var(--status-error)', fontSize: '0.85rem', fontWeight: 600 }}>
@@ -387,7 +552,7 @@ export default function App() {
       );
     }
 
-    if (isEditing) {
+    if (editingStage === activeStage) {
       return (
         <div className="dual-grid" style={{ flex: 1 }}>
           <div className="glass" style={{ display: 'flex', flexDirection: 'column' }}>
@@ -416,8 +581,8 @@ export default function App() {
                 onChange={(e) => setEditRationale(e.target.value)}
               />
               <div style={{ display: 'flex', gap: '8px', justifyContent: 'flex-end' }}>
-                <button className="btn btn-secondary" onClick={() => setIsEditing(false)}>Cancel</button>
-                <button className="btn btn-primary" onClick={handleSaveEdit}>Save Version {art.version + 1}</button>
+                <button className="btn btn-secondary" onClick={() => setEditingStage(null)}>Cancel</button>
+                <button className="btn btn-primary" onClick={() => handleSaveEdit(activeStage)}>Save Version {art.version + 1}</button>
               </div>
             </div>
           </div>
@@ -437,23 +602,57 @@ export default function App() {
                   {art.approved ? "Approved" : "Draft (V" + art.version + ")"}
                 </span>
                 {["Process Analyst", "Admin"].includes(userRole) && (
-                  <button className="btn btn-secondary" style={{ padding: '4px 8px' }} onClick={handleStartEdit}>
+                  <button className="btn btn-secondary" style={{ padding: '4px 8px' }} onClick={() => handleStartEdit(activeStage)}>
                     <Edit3 size={14} /> Edit
                   </button>
                 )}
               </div>
             </div>
             <div className="card-body" style={{ flex: 1, overflowY: 'auto' }}>
-              {activeStage === "sql" ? (
-                <pre className="code-editor-pre" style={{ height: '100%', whiteSpace: 'pre-wrap' }}>{art.content}</pre>
-              ) : activeStage === "requirement" ? (
-                <RequirementSpecViewer content={art.content} />
-              ) : activeStage === "data_model" ? (
-                <DataModelViewer content={art.content} />
+              {activeStage === "requirement" ? (
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+                  <div className="glass" style={{ padding: '1rem', border: '1px dashed var(--border-color)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                    <div>
+                      <h4 style={{ fontWeight: 600, margin: 0 }}>Business Requirements PowerPoint Ingestion</h4>
+                      <p style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', margin: '4px 0 0 0' }}>
+                        {currentSession?.requirement_file ? `Attached: ${currentSession.requirement_file.split(/[/\\]/).pop()}` : "No PPTX attached. Upload a PowerPoint file to enhance the requirement analysis."}
+                      </p>
+                    </div>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                      <input
+                        type="file"
+                        id="stage-pptx-upload"
+                        accept=".pptx"
+                        style={{ display: 'none' }}
+                        onChange={async (e) => {
+                          if (e.target.files && e.target.files.length > 0 && currentSession) {
+                            setLoading(true);
+                            try {
+                              await uploadRequirementFile(currentSession.id, e.target.files[0]);
+                              await loadSessions();
+                              const updatedSess = await getSession(currentSession.id);
+                              setCurrentSession(updatedSess);
+                              await loadSessionData(updatedSess.id);
+                              setNotification("PowerPoint uploaded and requirement analyzer re-triggered successfully!");
+                            } catch (err: any) {
+                              setError(err.message || "Failed to upload PowerPoint file.");
+                            } finally {
+                              setLoading(false);
+                            }
+                          }
+                        }}
+                      />
+                      <label htmlFor="stage-pptx-upload" className="btn btn-secondary" style={{ cursor: 'pointer', margin: 0 }}>
+                        {currentSession?.requirement_file ? "Replace PPTX" : "Upload PPTX"}
+                      </label>
+                    </div>
+                  </div>
+                  <RequirementSpecViewer content={art.content} />
+                </div>
               ) : activeStage === "knowledge_model" ? (
                 <KnowledgeModelViewer content={art.content} />
               ) : activeStage === "analysis" ? (
-                <AnalysisMockupViewer content={art.content} onPushToCelonis={handlePushToCelonis} isPushed={isPushed} />
+                <AnalysisMockupViewer content={art.content} onPushToCelonis={() => handlePushToCelonis("analysis")} isPushed={auditLogs.some(log => log.stage === "analysis" && log.action === "push_completed")} />
               ) : activeStage === "qa" ? (
                 <QaViewer content={art.content} onPromote={handlePromoteToProduction} promoteAuthorized={approveAuthorized} />
               ) : (
@@ -461,7 +660,7 @@ export default function App() {
               )}
             </div>
           </div>
-
+ 
           <div className="glass" style={{ display: 'flex', flexDirection: 'column' }}>
             <div className="card-title-bar">
               <span className="card-title">Explainability & Rationale</span>
@@ -471,7 +670,7 @@ export default function App() {
             </div>
           </div>
         </div>
-
+ 
         {/* Human in the loop validation controls */}
         <div className="glass" style={{ padding: '1rem 1.5rem' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
@@ -480,33 +679,26 @@ export default function App() {
                 {activeStage === "analysis" ? "Production Promotion" : "Governance Approval Gate"}
               </h4>
               <p style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>
-                {isPushed
-                  ? "Pushed! All process configurations have been successfully deployed to Celonis Cloud."
-                  : activeStage === "analysis"
-                    ? "Ready to push all configurations directly to Celonis."
-                    : art.approved
-                      ? `Approved by ${art.approved_by || 'Admin'}. Ready to move downstream.`
-                      : "Requires analyst/reviewer approval before final promotion."}
+                {auditLogs.some(log => log.stage === activeStage && log.action === "push_completed")
+                  ? "Pushed! Configuration has been successfully deployed and verified in Celonis."
+                  : art.approved
+                    ? `Approved by ${art.approved_by || 'Admin'}. Ready to push to Celonis.`
+                    : "Requires analyst/reviewer approval before pushing to Celonis."}
               </p>
             </div>
             <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
-              {activeStage === "analysis" ? (
-                isPushed ? (
-                  <button
-                    className="btn btn-success"
-                    style={{ padding: '8px 16px', background: 'var(--status-success)', color: '#fff', fontWeight: 600, cursor: 'default' }}
-                    disabled={true}
-                  >
-                    ✓ Pushed to Celonis
-                  </button>
+              {["knowledge_model", "analysis"].includes(activeStage) && art.approved ? (
+                auditLogs.some(log => log.stage === activeStage && log.action === "push_completed") ? (
+                  <span className="status-message text-success" style={{ fontSize: '0.85rem', fontWeight: 600 }}>
+                    ✓ Successfully Deployed to Celonis Data Pool
+                  </span>
                 ) : (
                   <button
                     className="btn btn-primary"
-                    style={{ padding: '8px 16px', background: 'var(--accent-cyan)', color: '#000', fontWeight: 600 }}
-                    onClick={handlePushToCelonis}
-                    disabled={loading}
+                    style={{ display: 'flex', alignItems: 'center', gap: '6px' }}
+                    onClick={() => handlePushToCelonis(activeStage)}
                   >
-                    {loading ? "Pushing to Celonis..." : "Push to Celonis Platform"}
+                    <ArrowRight size={14} /> Deploy to Celonis Instance
                   </button>
                 )
               ) : art.approved ? (
@@ -523,8 +715,8 @@ export default function App() {
                     value={approvalNotes}
                     onChange={(e) => setApprovalNotes(e.target.value)}
                   />
-                  <button className="btn btn-success" style={{ padding: '8px 12px' }} onClick={() => handleApproveArtifact(true)}>Approve</button>
-                  <button className="btn btn-danger" style={{ padding: '8px 12px' }} onClick={() => handleApproveArtifact(false)}>Reject</button>
+                  <button className="btn btn-success" style={{ padding: '8px 12px' }} onClick={() => handleApproveArtifact(activeStage, true)}>Approve</button>
+                  <button className="btn btn-danger" style={{ padding: '8px 12px' }} onClick={() => handleApproveArtifact(activeStage, false)}>Reject</button>
                 </>
               ) : (
                 <div style={{ fontSize: '0.75rem', color: 'var(--status-warning)', fontWeight: 600 }}>
@@ -534,7 +726,7 @@ export default function App() {
               )}
             </div>
           </div>
-          {activeStage === "analysis" && renderPromoteProgress()}
+          {["knowledge_model", "analysis"].includes(activeStage) && renderPromoteProgress(activeStage)}
         </div>
       </div>
     );
@@ -608,8 +800,9 @@ export default function App() {
           <div className="sidebar-title">Pipeline Layers</div>
           <div className="stage-list">
             {STAGES.map((s) => {
-              const art = artifacts[s.id];
-              const isCompleted = art?.approved;
+              const isCompleted = s.id === "sql_data_model" 
+                ? (artifacts["sql"]?.approved && artifacts["data_model"]?.approved)
+                : artifacts[s.id]?.approved;
               const isActive = activeStage === s.id;
               const StageIcon = s.icon;
 
@@ -725,6 +918,27 @@ export default function App() {
                 required
                 value={initialRequirement}
                 onChange={(e) => setInitialRequirement(e.target.value)}
+              />
+            </div>
+
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
+              <label style={{ fontSize: '0.8rem', fontWeight: 600, color: 'var(--text-secondary)' }}>Attach PPTX Requirement File (Optional)</label>
+              <input
+                type="file"
+                accept=".pptx"
+                onChange={(e) => {
+                  if (e.target.files && e.target.files.length > 0) {
+                    setSelectedFile(e.target.files[0]);
+                  }
+                }}
+                style={{
+                  padding: '8px',
+                  borderRadius: '6px',
+                  border: '1px solid var(--border-color)',
+                  background: 'rgba(255, 255, 255, 0.05)',
+                  color: 'var(--text-primary)',
+                  fontSize: '0.875rem'
+                }}
               />
             </div>
 

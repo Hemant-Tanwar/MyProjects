@@ -1,57 +1,138 @@
 import json
+import re
 from app.agents.base_agent import BaseAgent
-from app.celonis_knowledge_base import get_kpi_catalog_text, VALID_CELONIS_COMPONENT_TYPES, KPI_CATALOG
+from app.celonis_knowledge_base import (
+    KPI_CATALOG,
+    PROCESS_FILTER_TEMPLATES,
+    get_kpi_catalog_text,
+    build_4_sheet_analysis,
+)
+
 
 class AnalysisAgent(BaseAgent):
     def __init__(self):
         super().__init__(name="Analysis Agent")
 
     def generate(self, requirement_spec: str, knowledge_model: str) -> tuple[str, str]:
-        # Inject the Celonis Knowledge Base context so the LLM generates valid component types
-        kb_context = get_kpi_catalog_text()
-        valid_types_str = ", ".join(VALID_CELONIS_COMPONENT_TYPES.keys())
+        """
+        Generate a Celonis Analysis configuration.
 
+        Strategy:
+          1. Ask the LLM to select the right KPI ids and filter ids from the
+             Knowledge Base catalog (lightweight task — just IDs, not formulas).
+          2. Call build_4_sheet_analysis() from celonis_knowledge_base.py to
+             build the full 4-sheet layout programmatically using verified
+             Celonis API structures.
+          3. Return a JSON string that deploy_analysis() can use directly.
+
+        This approach ensures:
+          - Sheets use the real Celonis 'contentType' field (not 'type')
+          - Process Explorer sheet uses 'processExplorerComponent' at sheet level
+          - Process Overview has 'timeUnits' / 'aggregateFunction' fields
+          - All component structures are validated against working Celonis examples
+        """
+        kb_context = get_kpi_catalog_text()
+
+        # ── Step 1: Let LLM choose the process type + relevant KPI/filter IDs ──
         system_prompt = (
-            "You are an expert Celonis Process Analytics Designer Agent. Your job is to generate a comprehensive "
-            "Celonis Analysis dashboard configuration based on the business requirements and Knowledge Model.\n\n"
-            "=== CRITICAL: 4-SHEET ANALYSIS LAYOUT ===\n"
-            "You MUST design the analysis with exactly 4 sheets in the following order:\n"
-            "1. Case Explorer (type='case-explorer'): Celonis built-in case drill-down (components list is empty).\n"
-            "2. Process Explorer (type='process-explorer'): Contains a single 'process-explorer' component (w=12, h=12).\n"
-            "3. Process Overview (type='process-overview'): Contains KPI cards (w=4, h=3) and an Activity Frequency 'pql-table' (w=12, h=6).\n"
-            "4. KPI & Analytics (no type/omit type key): Custom analytics sheet with filters/dropdowns (w=4, h=1), KPI cards (w=4, h=3), and tables (w=12 or w=6).\n\n"
-            "=== CRITICAL: VALID CELONIS COMPONENT TYPES ===\n"
-            f"Only use these component types inside the sheet components: {valid_types_str}\n"
-            "Use 'process-explorer' only inside the Process Explorer sheet components.\n\n"
+            "You are a Celonis Process Analytics Designer. Given a business requirement and "
+            "a Knowledge Model, select which KPIs and process filters from the catalog below "
+            "are most relevant for this analysis.\n\n"
             "=== CELONIS KNOWLEDGE BASE ===\n"
             f"{kb_context}\n\n"
+            "=== YOUR TASK ===\n"
+            "Output a JSON object with:\n"
+            "  process_type: 'P2P', 'O2C', or 'GENERIC'\n"
+            "  event_log_table: name of the event log table (e.g. TEMP_P2P_EVENT_LOG or TEMP_O2C_EVENT_LOG)\n"
+            "  case_table: name of the case/header table (e.g. TEMP_P2P_CASES or TEMP_O2C_CASES)\n"
+            "  process_name: short human-readable process name (e.g. 'Purchase-to-Pay')\n"
+            "  selected_kpi_ids: list of KPI id strings from the catalog (max 6)\n"
+            "  selected_filter_ids: list of filter name strings from PROCESS_FILTER_TEMPLATES (max 3)\n\n"
             "=== OUTPUT FORMAT ===\n"
-            "Format the output strictly as:\n"
             "---RATIONALE---\n"
-            "<Your explanation of sheets, KPI bindings, dropdown filters, and table components>\n"
+            "<Brief explanation of KPI and filter selections>\n"
             "---ANALYSIS---\n"
-            "<Valid JSON configuration describing the Celonis Analysis structure, sheets, and components>\n\n"
-            "The JSON structure must include:\n"
-            "- analysis_title: String\n"
-            "- sheets: List of objects containing id, name, type (optional), and components.\n"
-            "- components inside each sheet: List of chart, filter, or process-explorer objects specifying type (single-kpi, pql-table, dropdown, process-explorer), "
-            "bound_kpi_id or bound_filter_id, title, and layout (grid_width, grid_height, x, y, w, h)."
+            "<JSON object as described above>"
         )
 
         prompt = (
             f"Specification:\n{requirement_spec}\n\n"
-            f"Knowledge Model Layer:\n{knowledge_model}"
+            f"Knowledge Model:\n{knowledge_model}"
         )
 
-        response, model_used = self.invoke(system_prompt, prompt)
-        
-        rationale, analysis_content = self._parse_structured_response(response)
+        response, _ = self.invoke(system_prompt, prompt)
+        rationale, selection_json_str = self._parse_structured_response(response)
+
+        # ── Step 2: Parse LLM selection, resolve KPIs and filters ─────────────
+        try:
+            selection = json.loads(selection_json_str)
+        except Exception:
+            selection = {}
+
+        process_type   = selection.get("process_type", "P2P").upper()
+        event_log_tbl  = selection.get("event_log_table", "TEMP_P2P_EVENT_LOG")
+        case_tbl       = selection.get("case_table", "TEMP_P2P_CASES")
+        process_name   = selection.get("process_name", process_type)
+        sel_kpi_ids    = selection.get("selected_kpi_ids", [])
+        sel_filter_ids = selection.get("selected_filter_ids", [])
+
+        # Resolve KPI items from catalog
+        catalog = KPI_CATALOG.get(process_type, []) + KPI_CATALOG.get("GENERIC", [])
+        if sel_kpi_ids:
+            kpi_items = [
+                {"id": k["id"], "displayName": k["name"], "pql": k.get("formula", "")}
+                for k in catalog if k["id"] in sel_kpi_ids
+            ]
+        else:
+            # Default: first 6 KPIs from the matching catalog
+            kpi_items = [
+                {"id": k["id"], "displayName": k["name"], "pql": k.get("formula", "")}
+                for k in catalog[:6]
+            ]
+
+        # Resolve filter items from templates
+        filter_catalog = PROCESS_FILTER_TEMPLATES.get(
+            process_type, PROCESS_FILTER_TEMPLATES.get("P2P", {})
+        )
+        if sel_filter_ids:
+            filter_items = [
+                {"id": fid, "displayName": fid.replace("_", " ").title(), "pql": filter_catalog.get(fid, "")}
+                for fid in sel_filter_ids if fid in filter_catalog
+            ]
+        else:
+            # Default: first 3 filters
+            filter_items = [
+                {"id": fid, "displayName": fid.replace("_", " ").title(), "pql": fpql}
+                for fid, fpql in list(filter_catalog.items())[:3]
+            ]
+
+        # ── Step 3: Build 4-sheet analysis using KB builder ────────────────────
+        sheets = build_4_sheet_analysis(
+            kpi_items=kpi_items,
+            filter_items=filter_items,
+            event_log_table=event_log_tbl,
+            case_table=case_tbl,
+            process_name=process_name
+        )
+
+        # ── Step 4: Wrap in final analysis config JSON ─────────────────────────
+        analysis_config = {
+            "analysis_title": f"{process_name} Analysis",
+            "process_type":   process_type,
+            "event_log_table": event_log_tbl,
+            "case_table":     case_tbl,
+            "sheets":         sheets,
+            "kpi_items":      kpi_items,
+            "filter_items":   filter_items
+        }
+
+        analysis_content = json.dumps(analysis_config, indent=2)
         return rationale, analysis_content
 
     def _parse_structured_response(self, text: str) -> tuple[str, str]:
         rationale = "No rationale provided."
         analysis_content = "{}"
-        
+
         if "---RATIONALE---" in text and "---ANALYSIS---" in text:
             parts = text.split("---ANALYSIS---")
             rationale_part = parts[0].replace("---RATIONALE---", "").strip()
@@ -61,7 +142,7 @@ class AnalysisAgent(BaseAgent):
                 lines = analysis_part.split("\n")
                 if lines[0].startswith("```"):
                     lines = lines[1:]
-                if lines[-1].startswith("```"):
+                if lines and lines[-1].startswith("```"):
                     lines = lines[:-1]
                 analysis_part = "\n".join(lines).strip()
             return rationale_part, analysis_part
@@ -70,215 +151,8 @@ class AnalysisAgent(BaseAgent):
                 start_idx = text.find("{")
                 end_idx = text.rfind("}")
                 if start_idx != -1 and end_idx != -1:
-                    analysis_content = text[start_idx:end_idx+1]
+                    analysis_content = text[start_idx:end_idx + 1]
                     rationale = text[:start_idx].strip()
             except Exception:
                 pass
             return rationale, analysis_content
-
-    def _mock_response(self, prompt: str) -> str:
-        p_lower = prompt.lower()
-        if "o2c" in p_lower or "order-to-cash" in p_lower or "order to cash" in p_lower or "sales" in p_lower:
-            mock_analysis = {
-                "analysis_title": "Order-to-Cash Monitoring Cockpit",
-                "sheets": [
-                    {
-                        "id": "sheet-case-explorer",
-                        "name": "Case Explorer",
-                        "type": "case-explorer",
-                        "components": []
-                    },
-                    {
-                        "id": "sheet-process-explorer",
-                        "name": "Process Explorer",
-                        "type": "process-explorer",
-                        "components": [
-                            {
-                                "id": "pe-variant-flow",
-                                "type": "process-explorer",
-                                "title": "O2C — Process Variant Flow",
-                                "eventLogs": [{"eventLog": "TEMP_O2C_EVENT_LOG"}],
-                                "layout": {"grid_width": 12, "grid_height": 12, "x": 0, "y": 0, "w": 12, "h": 12}
-                            }
-                        ]
-                    },
-                    {
-                        "id": "sheet-process-overview",
-                        "name": "Process Overview",
-                        "type": "process-overview",
-                        "components": [
-                            {
-                                "id": "overview-kpi-throughput",
-                                "type": "single-kpi",
-                                "title": "Avg Throughput Time (SO -> Ship)",
-                                "bound_kpi_id": "THROUGHPUT_TIME_SO_TO_SHIP",
-                                "formula": {
-                                    "name": "Avg Throughput Time (SO -> Ship)",
-                                    "text": "AVG(CALC_THROUGHPUT(FIRST_OCCURRENCE['Create Sales Order Item'] TO LAST_OCCURRENCE['Ship Goods'], EVENTTIME('_cel_event_log')))"
-                                },
-                                "layout": {"grid_width": 4, "grid_height": 3, "x": 0, "y": 0, "w": 4, "h": 3}
-                            },
-                            {
-                                "id": "overview-kpi-touchless",
-                                "type": "single-kpi",
-                                "title": "Touchless Order Rate",
-                                "bound_kpi_id": "TOUCHLESS_ORDER_RATE",
-                                "formula": {
-                                    "name": "Touchless Order Rate",
-                                    "text": "COUNT(CASE WHEN PU_COUNT(TEMP_O2C_CASES, TEMP_O2C_EVENT_LOG.ACTIVITY, TEMP_O2C_EVENT_LOG.USER_NAME = 'SYSTEM') = PU_COUNT(TEMP_O2C_CASES, TEMP_O2C_EVENT_LOG.ACTIVITY) THEN TEMP_O2C_CASES.CASE_KEY END) / COUNT(TEMP_O2C_CASES.CASE_KEY) * 100.0"
-                                },
-                                "layout": {"grid_width": 4, "grid_height": 3, "x": 4, "y": 0, "w": 4, "h": 3}
-                            },
-                            {
-                                "id": "overview-kpi-so-value",
-                                "type": "single-kpi",
-                                "title": "Total SO Revenue",
-                                "bound_kpi_id": "TOTAL_SO_VALUE",
-                                "formula": {
-                                    "name": "Total SO Revenue",
-                                    "text": "SUM(TEMP_O2C_CASES.SO_AMOUNT)"
-                                },
-                                "layout": {"grid_width": 4, "grid_height": 3, "x": 8, "y": 0, "w": 4, "h": 3}
-                            },
-                            {
-                                "id": "overview-activity-table",
-                                "type": "pql-table",
-                                "title": "Process Activity Frequency",
-                                "axis0": [{"name": "Activity", "text": "TEMP_O2C_EVENT_LOG.ACTIVITY"}],
-                                "axis1": [
-                                    {"name": "Occurrence Count", "text": "COUNT(TEMP_O2C_EVENT_LOG.ACTIVITY)", "sorting": "DESC", "sortingIndex": 0},
-                                    {"name": "Affected Cases", "text": "COUNT_DISTINCT(TEMP_O2C_EVENT_LOG.CASE_KEY)"}
-                                ],
-                                "axis2": [],
-                                "layout": {"grid_width": 12, "grid_height": 6, "x": 0, "y": 3, "w": 12, "h": 6}
-                            }
-                        ]
-                    },
-                    {
-                        "id": "sheet-kpi-analytics",
-                        "name": "KPI & Analytics",
-                        "components": [
-                            {
-                                "id": "analytics-filter-late",
-                                "type": "dropdown",
-                                "title": "Show Late Deliveries",
-                                "bound_filter_id": "LATE_DELIVERY_FILTER",
-                                "filter": {
-                                    "name": "Show Late Deliveries",
-                                    "text": "FILTER PROCESS OCCURRENCE 'Ship Goods' AFTER 'Create Invoice';"
-                                },
-                                "layout": {"grid_width": 4, "grid_height": 1, "x": 0, "y": 0, "w": 4, "h": 1}
-                            }
-                        ]
-                    }
-                ]
-            }
-            return (
-                "---RATIONALE---\n"
-                "Designed a 4-sheet Celonis Analysis layout matching requirements. "
-                "Sheet 1 is Case Explorer, Sheet 2 is Process Explorer, Sheet 3 is Process Overview with KPIs and Activity Frequency, "
-                "and Sheet 4 is KPI & Analytics with dropdown filter for Late Deliveries.\n"
-                "---ANALYSIS---\n" + json.dumps(mock_analysis, indent=2)
-            )
-        else:
-            mock_analysis = {
-                "analysis_title": "Purchase-to-Pay Monitoring Cockpit",
-                "sheets": [
-                    {
-                        "id": "sheet-case-explorer",
-                        "name": "Case Explorer",
-                        "type": "case-explorer",
-                        "components": []
-                    },
-                    {
-                        "id": "sheet-process-explorer",
-                        "name": "Process Explorer",
-                        "type": "process-explorer",
-                        "components": [
-                            {
-                                "id": "pe-variant-flow",
-                                "type": "process-explorer",
-                                "title": "P2P — Process Variant Flow",
-                                "eventLogs": [{"eventLog": "TEMP_P2P_EVENT_LOG"}],
-                                "layout": {"grid_width": 12, "grid_height": 12, "x": 0, "y": 0, "w": 12, "h": 12}
-                            }
-                        ]
-                    },
-                    {
-                        "id": "sheet-process-overview",
-                        "name": "Process Overview",
-                        "type": "process-overview",
-                        "components": [
-                            {
-                                "id": "overview-kpi-throughput",
-                                "type": "single-kpi",
-                                "title": "Avg Throughput Time (PO -> GR)",
-                                "bound_kpi_id": "THROUGHPUT_TIME_PO_TO_GR",
-                                "formula": {
-                                    "name": "Avg Throughput Time (PO -> GR)",
-                                    "text": "AVG(CALC_THROUGHPUT(FIRST_OCCURRENCE['Create Purchase Order Item'] TO LAST_OCCURRENCE['Receive Goods'], EVENTTIME('_cel_event_log')))"
-                                },
-                                "layout": {"grid_width": 4, "grid_height": 3, "x": 0, "y": 0, "w": 4, "h": 3}
-                            },
-                            {
-                                "id": "overview-kpi-automation",
-                                "type": "single-kpi",
-                                "title": "Touchless PO Rate",
-                                "bound_kpi_id": "AUTOMATION_RATE",
-                                "formula": {
-                                    "name": "Touchless PO Rate",
-                                    "text": "COUNT(CASE WHEN PU_COUNT(TEMP_P2P_CASES, TEMP_P2P_EVENT_LOG.ACTIVITY, TEMP_P2P_EVENT_LOG.USER_NAME = 'SYSTEM') = PU_COUNT(TEMP_P2P_CASES, TEMP_P2P_EVENT_LOG.ACTIVITY) THEN TEMP_P2P_CASES.CASE_KEY END) / COUNT(TEMP_P2P_CASES.CASE_KEY) * 100.0"
-                                },
-                                "layout": {"grid_width": 4, "grid_height": 3, "x": 4, "y": 0, "w": 4, "h": 3}
-                            },
-                            {
-                                "id": "overview-kpi-po-value",
-                                "type": "single-kpi",
-                                "title": "Total PO Spend Volume",
-                                "bound_kpi_id": "TOTAL_PO_VALUE",
-                                "formula": {
-                                    "name": "Total PO Spend Volume",
-                                    "text": "SUM(TEMP_P2P_CASES.PO_AMOUNT)"
-                                },
-                                "layout": {"grid_width": 4, "grid_height": 3, "x": 8, "y": 0, "w": 4, "h": 3}
-                            },
-                            {
-                                "id": "overview-activity-table",
-                                "type": "pql-table",
-                                "title": "Process Activity Frequency",
-                                "axis0": [{"name": "Activity", "text": "TEMP_P2P_EVENT_LOG.ACTIVITY"}],
-                                "axis1": [
-                                    {"name": "Occurrence Count", "text": "COUNT(TEMP_P2P_EVENT_LOG.ACTIVITY)", "sorting": "DESC", "sortingIndex": 0},
-                                    {"name": "Affected Cases", "text": "COUNT_DISTINCT(TEMP_P2P_EVENT_LOG.CASE_KEY)"}
-                                ],
-                                "axis2": [],
-                                "layout": {"grid_width": 12, "grid_height": 6, "x": 0, "y": 3, "w": 12, "h": 6}
-                            }
-                        ]
-                    },
-                    {
-                        "id": "sheet-kpi-analytics",
-                        "name": "KPI & Analytics",
-                        "components": [
-                            {
-                                "id": "analytics-filter-maverick",
-                                "type": "dropdown",
-                                "title": "Show Maverick Buying",
-                                "bound_filter_id": "MAVERICK_BUYING_FILTER",
-                                "filter": {
-                                    "name": "Show Maverick Buying",
-                                    "text": "FILTER PROCESS OCCURRENCE 'Receive Invoice' BEFORE 'Create Purchase Order Item';"
-                                },
-                                "layout": {"grid_width": 4, "grid_height": 1, "x": 0, "y": 0, "w": 4, "h": 1}
-                            }
-                        ]
-                    }
-                ]
-            }
-            return (
-                "---RATIONALE---\n"
-                "Designed a 4-sheet Celonis Analysis layout matching requirements. "
-                "Sheet 1 is Case Explorer, Sheet 2 is Process Explorer, Sheet 3 is Process Overview with KPIs and Activity Frequency, "
-                "and Sheet 4 is KPI & Analytics with dropdown filter for Maverick Buying.\n"
-                "---ANALYSIS---\n" + json.dumps(mock_analysis, indent=2)
-            )
