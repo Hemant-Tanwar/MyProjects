@@ -3,8 +3,9 @@ import datetime
 import os
 import re
 import yaml
-from fastapi import FastAPI, Depends, HTTPException, Body, UploadFile, File
+from fastapi import FastAPI, Depends, HTTPException, Body, UploadFile, File, Request
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import JSONResponse
 from sqlalchemy.orm import Session
 from typing import List, Dict, Any
 
@@ -35,6 +36,16 @@ app.add_middleware(
 )
 
 orchestrator = WorkflowOrchestrator()
+
+# Global exception handler: always return JSON so the frontend can parse error details
+@app.exception_handler(Exception)
+async def global_exception_handler(request: Request, exc: Exception):
+    import logging
+    logging.getLogger("main").error(f"Unhandled exception: {exc}", exc_info=True)
+    return JSONResponse(
+        status_code=500,
+        content={"detail": str(exc)},
+    )
 
 @app.on_event("startup")
 def startup_event():

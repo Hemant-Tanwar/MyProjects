@@ -135,8 +135,18 @@ export async function pushArtifact(id: string, stage: string): Promise<Artifact>
     method: "POST"
   });
   if (!response.ok) {
-    const err = await response.json();
-    throw new Error(err.detail || `Failed to push stage '${stage}' to Celonis.`);
+    // Safely parse error body — backend may return text/plain on unhandled 500s
+    let errorMsg = `Failed to push stage '${stage}' to Celonis.`;
+    try {
+      const err = await response.json();
+      errorMsg = err.detail || errorMsg;
+    } catch {
+      try {
+        const text = await response.text();
+        if (text) errorMsg = text;
+      } catch { /* ignore */ }
+    }
+    throw new Error(errorMsg);
   }
   return response.json();
 }
