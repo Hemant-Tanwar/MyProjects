@@ -1,0 +1,43 @@
+{
+  "process_name": "Procure to Pay (P2P)",
+  "source_systems": ["SAP"],
+  "case_id_definition": "Purchase Order Number (EBELN). For item-level granularity, use EBELN + EBELP.",
+  "activity_definitions": [
+    {"name": "Create Purchase Requisition", "trigger_condition": "New EBAN record created (ME51N or MRP)"},
+    {"name": "Change Purchase Requisition", "trigger_condition": "CDHDR.UDATE where OBJECTCLAS = BANF"},
+    {"name": "Release Purchase Requisition", "trigger_condition": "CDHDR.UDATE where EBAN.FRGKZ changes to released"},
+    {"name": "Refuse Purchase Requisition", "trigger_condition": "CDHDR.UDATE where EBAN release indicator set to rejected"},
+    {"name": "Create Purchase Order Item", "trigger_condition": "New EKKO/EKPO record created (EKKO.BEDAT)"},
+    {"name": "Change Purchase Order", "trigger_condition": "CDHDR.UDATE where OBJECTCLAS = EINKBELEG"},
+    {"name": "Change Purchase Order Item", "trigger_condition": "CDPOS changes on EKPO fields"},
+    {"name": "Change Schedule Line", "trigger_condition": "CDPOS changes on EKET fields"},
+    {"name": "PO Approval Step", "trigger_condition": "CDHDR.UDATE where EKKO.FRGKE changes to approved"},
+    {"name": "Record Goods Receipt", "trigger_condition": "MKPF.BUDAT where MSEG.BWART = 101"},
+    {"name": "First Invoice Created", "trigger_condition": "EKBE.BUDAT where EKBE.VGABE = 2"},
+    {"name": "Clear Invoice", "trigger_condition": "BSEG.AUGDT where BSEG.AUGBL is populated"},
+    {"name": "Payment Block", "trigger_condition": "CDHDR.UDATE where CDPOS.FNAME = 'ZLSPR'"},
+    {"name": "Order Messages", "trigger_condition": "NAST.DATVR where KAPPL = EF"}
+  ],
+  "key_timestamp_fields": [
+    {"activity_name": "Create Purchase Requisition", "source_field": "EBAN.BADAT"},
+    {"activity_name": "Create Purchase Order Item", "source_field": "EKKO.BEDAT"},
+    {"activity_name": "Record Goods Receipt", "source_field": "MKPF.BUDAT"},
+    {"activity_name": "First Invoice Created", "source_field": "EKBE.BUDAT"},
+    {"activity_name": "Clear Invoice", "source_field": "BSEG.AUGDT"}
+  ],
+  "kpis": [
+    {"name": "Cycle Time: PO to GR", "description": "Time elapsed between PO creation and Goods Receipt", "calculation_idea": "AVG(Record Goods Receipt - Create Purchase Order Item)"},
+    {"name": "Invoice Processing Time", "description": "Time from GR to Invoice Posting", "calculation_idea": "AVG(First Invoice Created - Record Goods Receipt)"},
+    {"name": "Payment Lead Time", "description": "Time from Invoice Posting to Clearing", "calculation_idea": "AVG(Clear Invoice - First Invoice Created)"},
+    {"name": "Automation Rate", "description": "Percentage of POs created without manual changes", "calculation_idea": "COUNT(POs with no Change activity) / COUNT(Total POs)"}
+  ],
+  "business_filters": [
+    {"name": "Exclude Deleted Items", "rule": "EKPO.LOEKZ IS NULL"},
+    {"name": "Exclude Returns", "rule": "MSEG.SHKZG != 'H'"}
+  ],
+  "acceptance_rules": [
+    "All PO items must be linked to their respective GR and Invoice documents.",
+    "Payment block events must be captured to identify invoice processing delays.",
+    "Case key must be consistent across all tables (EBELN)."
+  ]
+}

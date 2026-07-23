@@ -1,0 +1,56 @@
+key_performance_indicators:
+- id: cycle_time_po_to_gr
+  name: 'Cycle Time: PO to GR'
+  formula: AVG(CALC_THROUGHPUT(FIRST_OCCURRENCE['Create Purchase Order Item'] TO FIRST_OCCURRENCE['Record
+    Goods Receipt'], REMAP_TIMESTAMPS("P2P_EVENT_LOG"."EVENT_TIME", DAYS)))
+  description: Time elapsed between PO creation and Goods Receipt.
+  unit: Days
+- id: invoice_processing_time
+  name: Invoice Processing Time
+  formula: AVG(CALC_THROUGHPUT(FIRST_OCCURRENCE['Record Goods Receipt'] TO FIRST_OCCURRENCE['First
+    Invoice Created'], REMAP_TIMESTAMPS("P2P_EVENT_LOG"."EVENT_TIME", DAYS)))
+  description: Time from Goods Receipt to Invoice Posting.
+  unit: Days
+- id: payment_lead_time
+  name: Payment Lead Time
+  formula: AVG(CALC_THROUGHPUT(FIRST_OCCURRENCE['First Invoice Created'] TO FIRST_OCCURRENCE['Clear
+    Invoice'], REMAP_TIMESTAMPS("P2P_EVENT_LOG"."EVENT_TIME", DAYS)))
+  description: Time from Invoice Posting to Clearing.
+  unit: Days
+- id: automation_rate
+  name: Automation Rate
+  formula: COUNT_TABLE(P2P_CASES) FILTER (NOT FILTER_ACTIVITY('Change Purchase Order')
+    AND NOT FILTER_ACTIVITY('Change Purchase Order Item')) / COUNT_TABLE(P2P_CASES)
+  description: Percentage of POs created without manual changes.
+  unit: '%'
+custom_dimensions:
+- id: purchasing_org
+  name: Purchasing Organization
+  expression: EKKO.EKORG
+  description: The purchasing organization responsible for the PO.
+- id: vendor
+  name: Vendor
+  expression: EKKO.LIFNR
+  description: The vendor associated with the purchase order.
+- id: material_group
+  name: Material Group
+  expression: EKPO.MATKL
+  description: The material group assigned to the PO item.
+process_filters:
+- id: exclude_deleted_items
+  name: Exclude Deleted Items
+  filter_expression: FILTER EKPO.LOEKZ IS NULL
+  description: Removes PO items marked as deleted.
+- id: exclude_returns
+  name: Exclude Returns
+  filter_expression: FILTER MSEG.SHKZG != 'H'
+  description: Removes goods receipt return movements.
+business_entities:
+- name: Purchase Order
+  description: The core P2P case entity defined by EBELN.
+  key_mappings:
+    case_id: P2P_CASES.CASE_ID
+- name: Purchase Order Item
+  description: Line item level detail for the purchase order.
+  key_mappings:
+    case_id: EKPO.EBELN

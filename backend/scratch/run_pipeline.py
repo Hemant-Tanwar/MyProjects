@@ -51,7 +51,7 @@ def run(session_name: str, requirement: str):
     api_post(f"/sessions/{session_id}/role", {"role": "Admin"})
 
     # 3. Run all pipeline stages
-    stages = ["sql", "data_model", "knowledge_model", "view"]
+    stages = ["sql", "data_model", "knowledge_model", "analysis"]
     print("[3/5] Running pipeline stages...")
     for stage in stages:
         print(f"  → {stage} ...", end="", flush=True)

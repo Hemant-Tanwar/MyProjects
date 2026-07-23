@@ -1,0 +1,134 @@
+{
+  "draft": {
+    "id": "5c57df34-2520-44ea-8ec7-872444cd270e",
+    "document": {
+      "id": "5c57df34-2520-44ea-8ec7-872444cd270e",
+      "name": "P2P",
+      "theme": "celonis_current",
+      "editMode": true,
+      "components": [
+        {
+          "id": "ad127595-6a72-415a-abf6-707c7e3add5d",
+          "name": "Process Explorer",
+          "format": "FULLSCREEN",
+          "position": {
+            "top": 0,
+            "left": 0,
+            "width": 1200,
+            "height": 804
+          },
+          "components": [],
+          "contentType": "process-explorer",
+          "sheetFilter": {
+            "text": ""
+          },
+          "processExplorerComponent": {
+            "id": "PROCESS_EXPLORER",
+            "type": "simple_process",
+            "kpiView": {
+              "id": "FREQUENCY",
+              "icon": "https://static.celonis.cloud/static/analysis-widget/20260630-123523-RC0/assets/widgets/analysis-widget/icons/icon-frequency.svg",
+              "title": "frequency",
+              "inlineKpi": "caseCount",
+              "isDefaultKpi": true,
+              "connectionKpi": {
+                "id": "FREQUENCY",
+                "name": "frequency",
+                "text": "",
+                "units": "",
+                "colorEnd": "#1190b6",
+                "colorStart": "#40c6ed",
+                "valueFormat": ",f"
+              },
+              "connectionKpis": [
+                {
+                  "id": "FREQUENCY",
+                  "name": "frequency",
+                  "text": "",
+                  "units": "",
+                  "colorEnd": "#1190b6",
+                  "colorStart": "#40c6ed",
+                  "valueFormat": ",f"
+                }
+              ]
+            },
+            "version": 2,
+            "fullDotLayout": true,
+            "preventResize": true,
+            "edgeSliderState": 0,
+            "nodeSliderState": 0,
+            "hiddenActivities": {},
+            "activityColumnRef": "\"P2P_EVENT_LOG\".\"ACTIVITY\"",
+            "groupsConfigurations": [],
+            "activityConfigurations": [
+              {
+                "name": "Create Purchase Order Item",
+                "color": "#14a9d5",
+                "hidden": false
+              },
+              {
+                "name": "Create Purchase Requisition",
+                "color": "#14a9d5",
+                "hidden": false
+              },
+              {
+                "name": "First Invoice Created",
+                "color": "#14a9d5",
+                "hidden": false
+              }
+            ]
+          }
+        },
+        {
+          "id": "011977a0-aa8b-4de5-b512-0a3158070b81",
+          "name": "Case Explorer",
+          "format": "FULLSCREEN",
+          "position": {
+            "top": 0,
+            "left": 0,
+            "width": 1200,
+            "height": 804
+          },
+          "components": [],
+          "contentType": "case-explorer",
+          "sheetFilter": {
+            "text": ""
+          }
+        },
+        {
+          "id": "d43ae3ca-8804-471e-a401-cb002a4b5acc",
+          "name": "Process Overview",
+          "format": "FULLSCREEN",
+          "position": {
+            "top": 0,
+            "left": 0,
+            "width": 1200,
+            "height": 804
+          },
+          "timeUnits": "DAYS",
+          "components": [],
+          "contentType": "process-overview",
+          "sheetFilter": {
+            "text": ""
+          },
+          "aggregateFunction": "avg"
+        }
+      ],
+      "translationMap": {}
+    },
+    "lastChangeDate": "2026-07-23 19:40:33",
+    "lastChangeUserId": "add39617-4b08-454c-bf80-3b01dc772eef",
+    "lastChangeUserName": "sumanroutray10@gmail.com(Suman Routray)"
+  },
+  "knowledgeModelKey": "procure-to-pay-p2p-c55c2461-km-93c14af1",
+  "eventLog": "",
+  "customDimension": "",
+  "analysis": {
+    "id": "5c57df34-2520-44ea-8ec7-872444cd270e",
+    "name": "P2P",
+    "objectId": "5c57df34-2520-44ea-8ec7-872444cd270e",
+    "lastPublishedDraftId": "5c57df34-2520-44ea-8ec7-872444cd270e"
+  },
+  "changeDefaultEventLog": false,
+  "kpis": []
+}

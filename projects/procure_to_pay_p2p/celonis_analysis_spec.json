@@ -1,0 +1,464 @@
+{
+  "analysis_title": "Procure to Pay (P2P) Analysis",
+  "process_type": "P2P",
+  "event_log_table": "P2P_EVENT_LOG",
+  "case_table": "P2P_CASES",
+  "sheets": [
+    {
+      "id": "87dfd137-6e20-4111-8a93-4e63450d353f",
+      "name": "Case Explorer 1",
+      "format": "FULLSCREEN",
+      "position": {
+        "top": 0,
+        "left": 0,
+        "width": 1200,
+        "height": 800
+      },
+      "components": [],
+      "sheetFilter": {
+        "text": ""
+      },
+      "contentType": "case-explorer"
+    },
+    {
+      "id": "7dd5e484-7b39-4d54-a809-b779d038ee7c",
+      "name": "Process Explorer 2",
+      "format": "FULLSCREEN",
+      "position": {
+        "top": 0,
+        "left": 0,
+        "width": 1200,
+        "height": 800
+      },
+      "components": [],
+      "sheetFilter": {
+        "text": ""
+      },
+      "contentType": "process-explorer",
+      "processExplorerComponent": {
+        "id": "PROCESS_EXPLORER",
+        "type": "simple_process",
+        "kpiView": {
+          "id": "FREQUENCY",
+          "icon": "https://static.celonis.cloud/static/analysis-widget/20260528-085837-RC0/assets/widgets/analysis-widget/icons/icon-frequency.svg",
+          "title": "frequency",
+          "inlineKpi": "caseCount",
+          "isDefaultKpi": true,
+          "connectionKpi": {
+            "id": "FREQUENCY",
+            "name": "frequency",
+            "text": "",
+            "units": "",
+            "colorEnd": "#1190b6",
+            "colorStart": "#40c6ed",
+            "valueFormat": ",f"
+          },
+          "connectionKpis": [
+            {
+              "id": "FREQUENCY",
+              "name": "frequency",
+              "text": "",
+              "units": "",
+              "colorEnd": "#1190b6",
+              "colorStart": "#40c6ed",
+              "valueFormat": ",f"
+            }
+          ]
+        },
+        "version": 2,
+        "fullDotLayout": true,
+        "preventResize": true,
+        "edgeSliderState": 0,
+        "nodeSliderState": 0,
+        "hiddenActivities": {},
+        "activityColumnRef": "\"P2P_EVENT_LOG\".\"ACTIVITY\"",
+        "groupsConfigurations": [],
+        "activityConfigurations": []
+      }
+    },
+    {
+      "id": "546e766c-981d-4e7f-ac89-399f575a54cd",
+      "name": "KPI & Analytics",
+      "format": "FULLSCREEN",
+      "position": {
+        "top": 0,
+        "left": 0,
+        "width": 1200,
+        "height": 800
+      },
+      "components": [
+        {
+          "id": "analytics-filter-REWORK_CASES",
+          "type": "dropdown",
+          "title": "Rework Cases",
+          "filter": {
+            "name": "Rework Cases",
+            "text": "FILTER PU_COUNT(P2P_CASES, P2P_EVENT_LOG.ACTIVITY) > PU_COUNT_DISTINCT(P2P_CASES, P2P_EVENT_LOG.ACTIVITY);"
+          },
+          "x": 0,
+          "y": 0,
+          "w": 4,
+          "h": 1,
+          "width": 4,
+          "height": 1,
+          "layout": {
+            "x": 0,
+            "y": 0,
+            "w": 4,
+            "h": 1,
+            "width": 4,
+            "height": 1
+          },
+          "position": {
+            "x": 0,
+            "y": 0,
+            "w": 4,
+            "h": 1,
+            "width": 4,
+            "height": 1
+          }
+        },
+        {
+          "id": "analytics-kpi-cycle_time_po_to_gr",
+          "type": "single-kpi",
+          "title": "Cycle Time: PO to GR",
+          "formula": {
+            "name": "Cycle Time: PO to GR",
+            "text": "AVG(CALC_THROUGHPUT(FIRST_OCCURRENCE['Create Purchase Order Item'] TO FIRST_OCCURRENCE['Record Goods Receipt'], REMAP_TIMESTAMPS(\"P2P_EVENT_LOG\".\"EVENT_TIME\", DAYS)))"
+          },
+          "version": 1,
+          "x": 0,
+          "y": 1,
+          "w": 4,
+          "h": 3,
+          "width": 4,
+          "height": 3,
+          "layout": {
+            "x": 0,
+            "y": 1,
+            "w": 4,
+            "h": 3,
+            "width": 4,
+            "height": 3
+          },
+          "position": {
+            "x": 0,
+            "y": 1,
+            "w": 4,
+            "h": 3,
+            "width": 4,
+            "height": 3
+          }
+        },
+        {
+          "id": "analytics-kpi-invoice_processing_time",
+          "type": "single-kpi",
+          "title": "Invoice Processing Time",
+          "formula": {
+            "name": "Invoice Processing Time",
+            "text": "AVG(CALC_THROUGHPUT(FIRST_OCCURRENCE['Record Goods Receipt'] TO FIRST_OCCURRENCE['First Invoice Created'], REMAP_TIMESTAMPS(\"P2P_EVENT_LOG\".\"EVENT_TIME\", DAYS)))"
+          },
+          "version": 1,
+          "x": 4,
+          "y": 1,
+          "w": 4,
+          "h": 3,
+          "width": 4,
+          "height": 3,
+          "layout": {
+            "x": 4,
+            "y": 1,
+            "w": 4,
+            "h": 3,
+            "width": 4,
+            "height": 3
+          },
+          "position": {
+            "x": 4,
+            "y": 1,
+            "w": 4,
+            "h": 3,
+            "width": 4,
+            "height": 3
+          }
+        },
+        {
+          "id": "analytics-kpi-payment_lead_time",
+          "type": "single-kpi",
+          "title": "Payment Lead Time",
+          "formula": {
+            "name": "Payment Lead Time",
+            "text": "AVG(CALC_THROUGHPUT(FIRST_OCCURRENCE['First Invoice Created'] TO FIRST_OCCURRENCE['Clear Invoice'], REMAP_TIMESTAMPS(\"P2P_EVENT_LOG\".\"EVENT_TIME\", DAYS)))"
+          },
+          "version": 1,
+          "x": 8,
+          "y": 1,
+          "w": 4,
+          "h": 3,
+          "width": 4,
+          "height": 3,
+          "layout": {
+            "x": 8,
+            "y": 1,
+            "w": 4,
+            "h": 3,
+            "width": 4,
+            "height": 3
+          },
+          "position": {
+            "x": 8,
+            "y": 1,
+            "w": 4,
+            "h": 3,
+            "width": 4,
+            "height": 3
+          }
+        },
+        {
+          "id": "analytics-kpi-automation_rate",
+          "type": "single-kpi",
+          "title": "Automation Rate",
+          "formula": {
+            "name": "Automation Rate",
+            "text": "COUNT_TABLE(P2P_CASES) FILTER (NOT FILTER_ACTIVITY('Change Purchase Order') AND NOT FILTER_ACTIVITY('Change Purchase Order Item')) / COUNT_TABLE(P2P_CASES)"
+          },
+          "version": 1,
+          "x": 0,
+          "y": 4,
+          "w": 4,
+          "h": 3,
+          "width": 4,
+          "height": 3,
+          "layout": {
+            "x": 0,
+            "y": 4,
+            "w": 4,
+            "h": 3,
+            "width": 4,
+            "height": 3
+          },
+          "position": {
+            "x": 0,
+            "y": 4,
+            "w": 4,
+            "h": 3,
+            "width": 4,
+            "height": 3
+          }
+        },
+        {
+          "id": "analytics-kpi-TOTAL_PO_VALUE",
+          "type": "single-kpi",
+          "title": "Total PO Spend",
+          "formula": {
+            "name": "Total PO Spend",
+            "text": "SUM(P2P_CASES.PO_AMOUNT)"
+          },
+          "version": 1,
+          "x": 4,
+          "y": 4,
+          "w": 4,
+          "h": 3,
+          "width": 4,
+          "height": 3,
+          "layout": {
+            "x": 4,
+            "y": 4,
+            "w": 4,
+            "h": 3,
+            "width": 4,
+            "height": 3
+          },
+          "position": {
+            "x": 4,
+            "y": 4,
+            "w": 4,
+            "h": 3,
+            "width": 4,
+            "height": 3
+          }
+        },
+        {
+          "id": "analytics-kpi-CASE_COUNT",
+          "type": "single-kpi",
+          "title": "Number of PO Cases",
+          "formula": {
+            "name": "Number of PO Cases",
+            "text": "COUNT(P2P_CASES.CASE_KEY)"
+          },
+          "version": 1,
+          "x": 8,
+          "y": 4,
+          "w": 4,
+          "h": 3,
+          "width": 4,
+          "height": 3,
+          "layout": {
+            "x": 8,
+            "y": 4,
+            "w": 4,
+            "h": 3,
+            "width": 4,
+            "height": 3
+          },
+          "position": {
+            "x": 8,
+            "y": 4,
+            "w": 4,
+            "h": 3,
+            "width": 4,
+            "height": 3
+          }
+        },
+        {
+          "id": "analytics-activity-table",
+          "type": "pql-table",
+          "title": "Process Activity Frequency",
+          "distinct": false,
+          "limitMode": "LIMIT",
+          "showOthers": false,
+          "axis0": [
+            {
+              "name": "Activity",
+              "text": "P2P_EVENT_LOG.ACTIVITY",
+              "sorting": null,
+              "sortingIndex": null
+            }
+          ],
+          "axis1": [
+            {
+              "name": "Occurrence Count",
+              "text": "COUNT(P2P_EVENT_LOG.ACTIVITY)",
+              "sorting": "DESC",
+              "sortingIndex": 0
+            },
+            {
+              "name": "Affected Cases",
+              "text": "COUNT_DISTINCT(P2P_EVENT_LOG.CASE_ID)",
+              "sorting": null,
+              "sortingIndex": null
+            }
+          ],
+          "axis2": [],
+          "x": 0,
+          "y": 7,
+          "w": 12,
+          "h": 6,
+          "width": 12,
+          "height": 6,
+          "layout": {
+            "x": 0,
+            "y": 7,
+            "w": 12,
+            "h": 6,
+            "width": 12,
+            "height": 6
+          },
+          "position": {
+            "x": 0,
+            "y": 7,
+            "w": 12,
+            "h": 6,
+            "width": 12,
+            "height": 6
+          }
+        },
+        {
+          "id": "analytics-case-table",
+          "type": "pql-table",
+          "title": "Case Detail Overview",
+          "distinct": false,
+          "limitMode": "LIMIT",
+          "showOthers": false,
+          "axis0": [
+            {
+              "name": "Case ID",
+              "text": "P2P_CASES.CASE_ID",
+              "sorting": null,
+              "sortingIndex": null
+            }
+          ],
+          "axis1": [
+            {
+              "name": "Activity Count",
+              "text": "PU_COUNT(P2P_CASES, P2P_EVENT_LOG.ACTIVITY)",
+              "sorting": "DESC",
+              "sortingIndex": 0
+            },
+            {
+              "name": "Unique Activities",
+              "text": "PU_COUNT_DISTINCT(P2P_CASES, P2P_EVENT_LOG.ACTIVITY)",
+              "sorting": null,
+              "sortingIndex": null
+            }
+          ],
+          "axis2": [],
+          "x": 0,
+          "y": 13,
+          "w": 6,
+          "h": 6,
+          "width": 6,
+          "height": 6,
+          "layout": {
+            "x": 0,
+            "y": 13,
+            "w": 6,
+            "h": 6,
+            "width": 6,
+            "height": 6
+          },
+          "position": {
+            "x": 0,
+            "y": 13,
+            "w": 6,
+            "h": 6,
+            "width": 6,
+            "height": 6
+          }
+        }
+      ],
+      "sheetFilter": {
+        "text": ""
+      }
+    }
+  ],
+  "kpi_items": [
+    {
+      "id": "cycle_time_po_to_gr",
+      "displayName": "Cycle Time: PO to GR",
+      "pql": "AVG(CALC_THROUGHPUT(FIRST_OCCURRENCE['Create Purchase Order Item'] TO FIRST_OCCURRENCE['Record Goods Receipt'], REMAP_TIMESTAMPS(\"P2P_EVENT_LOG\".\"EVENT_TIME\", DAYS)))"
+    },
+    {
+      "id": "invoice_processing_time",
+      "displayName": "Invoice Processing Time",
+      "pql": "AVG(CALC_THROUGHPUT(FIRST_OCCURRENCE['Record Goods Receipt'] TO FIRST_OCCURRENCE['First Invoice Created'], REMAP_TIMESTAMPS(\"P2P_EVENT_LOG\".\"EVENT_TIME\", DAYS)))"
+    },
+    {
+      "id": "payment_lead_time",
+      "displayName": "Payment Lead Time",
+      "pql": "AVG(CALC_THROUGHPUT(FIRST_OCCURRENCE['First Invoice Created'] TO FIRST_OCCURRENCE['Clear Invoice'], REMAP_TIMESTAMPS(\"P2P_EVENT_LOG\".\"EVENT_TIME\", DAYS)))"
+    },
+    {
+      "id": "automation_rate",
+      "displayName": "Automation Rate",
+      "pql": "COUNT_TABLE(P2P_CASES) FILTER (NOT FILTER_ACTIVITY('Change Purchase Order') AND NOT FILTER_ACTIVITY('Change Purchase Order Item')) / COUNT_TABLE(P2P_CASES)"
+    },
+    {
+      "id": "TOTAL_PO_VALUE",
+      "displayName": "Total PO Spend",
+      "pql": "SUM(P2P_CASES.PO_AMOUNT)"
+    },
+    {
+      "id": "CASE_COUNT",
+      "displayName": "Number of PO Cases",
+      "pql": "COUNT(P2P_CASES.CASE_KEY)"
+    }
+  ],
+  "filter_items": [
+    {
+      "id": "REWORK_CASES",
+      "displayName": "Rework Cases",
+      "pql": "FILTER PU_COUNT(P2P_CASES, P2P_EVENT_LOG.ACTIVITY) > PU_COUNT_DISTINCT(P2P_CASES, P2P_EVENT_LOG.ACTIVITY);"
+    }
+  ]
+}

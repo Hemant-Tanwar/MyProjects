@@ -1,0 +1,80 @@
+{
+  "case_table": "AP_CASES",
+  "event_table": "AP_EVENT_LOG",
+  "model_type": "Case-centric",
+  "tables": [
+    {
+      "name": "AP_CASES",
+      "type": "Case",
+      "primary_keys": ["CASE_ID"],
+      "description": "Master table for FI-AP process cases defined by Accounting Document Header (BELNR-BUKRS-GJAHR)."
+    },
+    {
+      "name": "AP_EVENT_LOG",
+      "type": "Event",
+      "primary_keys": ["CASE_ID", "ACTIVITY", "EVENT_TIME"],
+      "description": "Consolidated event log containing all AP process activities."
+    },
+    {
+      "name": "BKPF",
+      "type": "Dimension",
+      "primary_keys": ["BELNR", "BUKRS", "GJAHR"],
+      "description": "Accounting Document Header data."
+    },
+    {
+      "name": "BSEG",
+      "type": "Dimension",
+      "primary_keys": ["BELNR", "BUKRS", "GJAHR", "BUZEI"],
+      "description": "Accounting Document Segment data."
+    },
+    {
+      "name": "CDHDR",
+      "type": "Dimension",
+      "primary_keys": ["OBJECTCLAS", "OBJECTID", "CHANGENR"],
+      "description": "Change document header for audit trail."
+    },
+    {
+      "name": "PAYR",
+      "type": "Dimension",
+      "primary_keys": ["ZBUKR", "HBKID", "HKTID", "RZAWE", "ZALDT", "ZBNKL"],
+      "description": "Payment medium file data."
+    }
+  ],
+  "relationships": [
+    {
+      "source_table": "AP_CASES",
+      "target_table": "AP_EVENT_LOG",
+      "source_column": "CASE_ID",
+      "target_column": "CASE_ID",
+      "cardinality": "1:N"
+    },
+    {
+      "source_table": "AP_CASES",
+      "target_table": "BKPF",
+      "source_column": ["BELNR", "BUKRS", "GJAHR"],
+      "target_column": ["BELNR", "BUKRS", "GJAHR"],
+      "cardinality": "1:1"
+    },
+    {
+      "source_table": "AP_CASES",
+      "target_table": "BSEG",
+      "source_column": ["BELNR", "BUKRS", "GJAHR"],
+      "target_column": ["BELNR", "BUKRS", "GJAHR"],
+      "cardinality": "1:N"
+    },
+    {
+      "source_table": "AP_CASES",
+      "target_table": "CDHDR",
+      "source_column": "BELNR",
+      "target_column": "OBJECTID",
+      "cardinality": "1:N"
+    },
+    {
+      "source_table": "AP_CASES",
+      "target_table": "PAYR",
+      "source_column": ["BELNR", "BUKRS", "GJAHR"],
+      "target_column": ["VBLNR", "BUKRS", "GJAHR"],
+      "cardinality": "1:N"
+    }
+  ]
+}

@@ -448,7 +448,7 @@ def deploy_sql(sess: SessionModel, sql_content: str, db) -> str:
                 
     # 4. Normalize and Execute transformations
     final_sql = normalize_temp_tables(sql_content)
-    max_retries = 3
+    max_retries = 10
     current_sql = final_sql
     
     for attempt in range(1, max_retries + 1):
@@ -619,7 +619,7 @@ def deploy_data_model(sess: SessionModel, data_model_content: str, db) -> str:
     ).order_by(ArtifactModel.version.desc()).first()
     sql_text = latest_sql_art.content if latest_sql_art else ""
     
-    max_dm_retries = 3
+    max_dm_retries = 10
     current_dm_json = data_model_content
     
     for dm_attempt in range(1, max_dm_retries + 1):
@@ -645,14 +645,33 @@ def deploy_data_model(sess: SessionModel, data_model_content: str, db) -> str:
             dm_tables = data_model.get_tables()
             dm_table_names = [t.name.upper() for t in dm_tables]
             
+            # Fetch all actual tables currently existing in the Celonis Data Pool
+            pool_tables = {t.name.upper() for t in data_pool.get_tables()}
+            
+            # Remove any table currently in the data model that is NOT present in the data pool
+            for t in dm_tables:
+                t_name_upper = t.name.upper()
+                if t_name_upper not in pool_tables:
+                    try:
+                        t.delete()
+                        log_progress(db, sess.id, stage, "table_removed", f"Removed table '{t.name}' from Data Model because it does not exist in the Data Pool.")
+                        if t_name_upper in dm_table_names:
+                            dm_table_names.remove(t_name_upper)
+                    except Exception as t_del_err:
+                        logger.warning(f"Could not delete table {t.name} from Data Model: {t_del_err}")
+            
             for table_spec in dm_obj.get("tables", []):
                 tname = table_spec.get("name", "").upper()
-                if tname not in dm_table_names:
-                    try:
-                        data_model.add_table(name=tname)
-                        dm_table_names.append(tname)
-                    except Exception as t_err:
-                        log_progress(db, sess.id, stage, "add_table_failed", f"Warning: Could not add table {tname} to Data Model: {t_err}")
+                # ONLY add the table to the Data Model if it exists in the Data Pool
+                if tname in pool_tables:
+                    if tname not in dm_table_names:
+                        try:
+                            data_model.add_table(name=tname)
+                            dm_table_names.append(tname)
+                        except Exception as t_err:
+                            log_progress(db, sess.id, stage, "add_table_failed", f"Warning: Could not add table {tname} to Data Model: {t_err}")
+                else:
+                    log_progress(db, sess.id, stage, "table_skipped", f"Skipping configuration for table '{tname}' because it does not exist in the Data Pool.")
                         
             # Configure Event and Case mapping dynamically from the JSON
             event_table_name = dm_obj.get("event_table", "").upper()
@@ -672,6 +691,10 @@ def deploy_data_model(sess: SessionModel, data_model_content: str, db) -> str:
             for rel in dm_obj.get("relationships", []):
                 src_name = rel.get("source_table", "").upper()
                 tgt_name = rel.get("target_table", "").upper()
+                
+                # Only create relationships if both tables actually exist in the Data Model
+                if src_name not in dm_tables_dict or tgt_name not in dm_tables_dict:
+                    continue
                 
                 src_cols = rel.get("source_columns") or rel.get("source_column")
                 tgt_cols = rel.get("target_columns") or rel.get("target_column")
@@ -1032,14 +1055,13 @@ def deploy_analysis(sess: SessionModel, analysis_content: str, db) -> str:
     Deploys a Celonis Studio ANALYSIS (not a View / BOARD_V2).
 
     Uses the analysis configuration built by analysis_agent.py (which calls
-    build_4_sheet_analysis() from celonis_knowledge_base.py) and pushes it
+    build_3_sheet_analysis() from celonis_knowledge_base.py) and pushes it
     directly to the Celonis Analysis API via package.create_analysis().
 
-    The 4-sheet structure built by the KB:
+    The 3-sheet structure built by the KB:
       Sheet 1: Case Explorer     (contentType='case-explorer')
       Sheet 2: Process Explorer  (contentType='process-explorer', processExplorerComponent at sheet level)
-      Sheet 3: Process Overview  (contentType='process-overview', timeUnits/aggregateFunction)
-      Sheet 4: KPI & Analytics   (no contentType — custom sheet with filters + KPI tiles + tables)
+      Sheet 3: KPI & Analytics   (no contentType — custom sheet with filters + KPI tiles + tables)
 
     Why Analysis (not View/BOARD_V2)?
       - The user requested an Analysis, which is the classic Celonis Studio interface
@@ -1128,9 +1150,9 @@ def deploy_analysis(sess: SessionModel, analysis_content: str, db) -> str:
     # ── If agent didn't call the KB builder, do it now as fallback ───────────
     if not sheets:
         log_progress(db, sess.id, stage, "kb_fallback",
-                     "No sheets in analysis config — building 4-sheet layout from KB...")
+                     "No sheets in analysis config — building 3-sheet layout from KB...")
         from app.celonis_knowledge_base import (
-            build_4_sheet_analysis, KPI_CATALOG, PROCESS_FILTER_TEMPLATES
+            build_3_sheet_analysis, KPI_CATALOG, PROCESS_FILTER_TEMPLATES
         )
         process_type = analysis_config.get("process_type", "P2P").upper()
         # Use this process's catalog; fall back to GENERIC if process not in catalog
@@ -1143,13 +1165,13 @@ def deploy_analysis(sess: SessionModel, analysis_content: str, db) -> str:
                 {
                     "id": "CASE_COUNT",
                     "name": "Total Cases",
-                    "formula": f"COUNT({case_table}.{real_case_col})",
+                    "formula": "COUNT({case_table}.{case_col})",
                     "component_type": "single-kpi"
                 },
                 {
                     "id": "ACTIVITY_COUNT",
                     "name": "Total Activities",
-                    "formula": f"COUNT({event_log_table}.ACTIVITY)",
+                    "formula": "COUNT({event_log_table}.ACTIVITY)",
                     "component_type": "single-kpi"
                 },
                 {
@@ -1160,20 +1182,34 @@ def deploy_analysis(sess: SessionModel, analysis_content: str, db) -> str:
                 }
             ]
         if not kpi_items:
-            # Replace any TEMP_ prefixes in formula strings with real table names
+            # Replace template placeholders in formula strings
             for k in catalog[:6]:
                 formula = k.get("formula", "")
-                formula = formula.replace(f"TEMP_{event_log_table}", event_log_table)
-                formula = formula.replace(f"TEMP_{case_table}", case_table)
-                formula = formula.replace("CASE_KEY", real_case_col)
+                try:
+                    formula = formula.format(
+                        event_log_table=event_log_table,
+                        case_table=case_table,
+                        case_col=real_case_col
+                    )
+                except Exception:
+                    formula = formula.replace(f"TEMP_{event_log_table}", event_log_table)
+                    formula = formula.replace(f"TEMP_{case_table}", case_table)
+                    formula = formula.replace("CASE_KEY", real_case_col)
                 kpi_items.append({"id": k["id"], "displayName": k["name"], "pql": formula})
         if not filter_items:
-            ftemplates = PROCESS_FILTER_TEMPLATES.get(process_type, {})
-            filter_items = [
-                {"id": fid, "displayName": fid.replace("_", " ").title(), "pql": fpql}
-                for fid, fpql in list(ftemplates.items())[:3]
-            ]
-        sheets = build_4_sheet_analysis(
+            ftemplates = PROCESS_FILTER_TEMPLATES.get(process_type, {}) or PROCESS_FILTER_TEMPLATES.get("GENERIC", {})
+            filter_items = []
+            for fid, fpql in list(ftemplates.items())[:3]:
+                try:
+                    fpql = fpql.format(
+                        event_log_table=event_log_table,
+                        case_table=case_table,
+                        case_col=real_case_col
+                    )
+                except Exception:
+                    pass
+                filter_items.append({"id": fid, "displayName": fid.replace("_", " ").title(), "pql": fpql})
+        sheets = build_3_sheet_analysis(
             kpi_items=kpi_items,
             filter_items=filter_items,
             event_log_table=event_log_table,
@@ -1229,11 +1265,6 @@ def deploy_analysis(sess: SessionModel, analysis_content: str, db) -> str:
     try:
         # Build the full Analysis document structure.
         # Verified against a real working Celonis analysis serialized_content.
-        analysis_document = {
-            "components": [],   # top-level components (empty — sheets hold the components)
-            "sheets": sheets
-        }
-
         # Celonis analysis uses serialized_content.draft.document for the layout
         # Get the current serialized content and update it
         current_content = analysis.serialized_content or {}
@@ -1244,13 +1275,51 @@ def deploy_analysis(sess: SessionModel, analysis_content: str, db) -> str:
             except Exception:
                 current_content = {}
 
-        # Set the document structure
-        if "draft" not in current_content:
+        # Ensure draft and document exist as dicts
+        if "draft" not in current_content or not isinstance(current_content["draft"], dict):
             current_content["draft"] = {}
-        current_content["draft"]["document"] = analysis_document
+        if "document" not in current_content["draft"] or not isinstance(current_content["draft"]["document"], dict):
+            current_content["draft"]["document"] = {}
 
-        # Also set published version
-        current_content["published"] = current_content["draft"].copy()
+        doc_id = current_content["draft"].get("id") or getattr(analysis, "id", None) or str(uuid.uuid4())
+        current_content["draft"]["id"] = doc_id
+
+        doc_dict = current_content["draft"]["document"]
+        doc_dict["id"] = doc_dict.get("id") or doc_id
+        doc_dict["name"] = doc_dict.get("name") or analysis_title
+        doc_dict["theme"] = doc_dict.get("theme") or "celonis_current"
+
+        # CRITICAL: Celonis stores sheets under document.components (NOT document.sheets).
+        # Verified by comparing serialized_content of manually-created vs agent-created analyses.
+        # The 'sheets' key is ignored by the Celonis UI — only 'components' is rendered.
+        doc_dict.pop("sheets", None)  # Remove any stale 'sheets' key
+        doc_dict["components"] = sheets
+        # editMode must be True (seen in manually-created analyses) for the UI to render correctly
+        doc_dict["editMode"] = True
+
+        # Add top-level keys that match manually-created Celonis analyses
+        # (missing these causes blank render in some Celonis UI versions)
+        if "eventLog" not in current_content:
+            current_content["eventLog"] = ""
+        if "customDimension" not in current_content:
+            current_content["customDimension"] = ""
+
+        # Set the published field to draft's representation
+        current_content["published"] = json.loads(json.dumps(current_content["draft"]))
+
+        # Check if Celonis also requires analysis.document key
+        if "analysis" not in current_content or not isinstance(current_content["analysis"], dict):
+            current_content["analysis"] = {}
+        if "document" not in current_content["analysis"] or not isinstance(current_content["analysis"]["document"], dict):
+            current_content["analysis"]["document"] = {}
+        
+        current_content["analysis"]["id"] = doc_id
+        current_content["analysis"]["document"]["id"] = doc_id
+        current_content["analysis"]["document"]["name"] = analysis_title
+        current_content["analysis"]["document"]["theme"] = "celonis_current"
+        # Also use 'components' (not 'sheets') in the analysis.document key
+        current_content["analysis"]["document"].pop("sheets", None)
+        current_content["analysis"]["document"]["components"] = sheets
 
         # Push back
         serialized_str = json.dumps(current_content)
@@ -1314,6 +1383,14 @@ def deploy_analysis(sess: SessionModel, analysis_content: str, db) -> str:
         analysis.serialized_content = serialized_str
         analysis.update()
 
+        # ── Publish the analysis so it appears in View mode (not just Edit mode) ──
+        try:
+            analysis.publish()
+            log_progress(db, sess.id, stage, "analysis_published",
+                         "Analysis published successfully — sheets visible in View mode.")
+        except Exception as pub_err:
+            logger.warning(f"Could not publish analysis (non-fatal): {pub_err}")
+
         log_progress(db, sess.id, stage, "sheets_pushed",
                      f"Successfully pushed {len(sheets)} sheets to Analysis.")
 
@@ -1361,9 +1438,9 @@ def deploy_analysis(sess: SessionModel, analysis_content: str, db) -> str:
             error="None (Successful Run)",
             fix_output=analysis_content,
             rationale=(
-                "Celonis Analysis (4-sheet: Case Explorer, Process Explorer, "
-                "Process Overview, KPI & Analytics) successfully deployed using "
-                "build_4_sheet_analysis() from celonis_knowledge_base.py."
+                "Celonis Analysis (3-sheet: Case Explorer, Process Explorer, "
+                "KPI & Analytics) successfully deployed using "
+                "build_3_sheet_analysis() from celonis_knowledge_base.py."
             )
         )
     except Exception as save_err:

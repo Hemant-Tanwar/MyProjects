@@ -1,0 +1,112 @@
+{
+  "case_table": "P2P_CASES",
+  "event_table": "P2P_EVENT_LOG",
+  "model_type": "Case-centric",
+  "tables": [
+    {
+      "name": "P2P_CASES",
+      "type": "Case",
+      "primary_keys": ["CASE_ID"],
+      "description": "Master table for P2P process cases defined by Purchase Order Number (EBELN)."
+    },
+    {
+      "name": "P2P_EVENT_LOG",
+      "type": "Event",
+      "primary_keys": ["CASE_ID", "ACTIVITY", "EVENT_TIME"],
+      "description": "Consolidated event log containing all P2P process activities."
+    },
+    {
+      "name": "EKKO",
+      "type": "Dimension",
+      "primary_keys": ["EBELN"],
+      "description": "Purchase Order Header data."
+    },
+    {
+      "name": "EKPO",
+      "type": "Dimension",
+      "primary_keys": ["EBELN", "EBELP"],
+      "description": "Purchase Order Item details."
+    },
+    {
+      "name": "EBAN",
+      "type": "Dimension",
+      "primary_keys": ["EBELN", "BNFPO"],
+      "description": "Purchase Requisition data."
+    },
+    {
+      "name": "EKBE",
+      "type": "Dimension",
+      "primary_keys": ["EBELN", "EBELP", "ZEKKN"],
+      "description": "Purchase Order History (Goods Receipts and Invoices)."
+    },
+    {
+      "name": "MSEG",
+      "type": "Dimension",
+      "primary_keys": ["MBLNR", "MJAHR", "ZEILE"],
+      "description": "Goods Movement document items."
+    },
+    {
+      "name": "BSEG",
+      "type": "Dimension",
+      "primary_keys": ["BELNR", "BUKRS", "GJAHR", "BUZEI"],
+      "description": "Accounting Document Segment data for invoice clearing."
+    },
+    {
+      "name": "CDHDR",
+      "type": "Dimension",
+      "primary_keys": ["OBJECTCLAS", "OBJECTID", "CHANGENR"],
+      "description": "Change document header for audit trail."
+    }
+  ],
+  "relationships": [
+    {
+      "source_table": "P2P_CASES",
+      "target_table": "P2P_EVENT_LOG",
+      "source_column": "CASE_ID",
+      "target_column": "CASE_ID",
+      "cardinality": "1:N"
+    },
+    {
+      "source_table": "P2P_CASES",
+      "target_table": "EKKO",
+      "source_column": "EBELN",
+      "target_column": "EBELN",
+      "cardinality": "1:1"
+    },
+    {
+      "source_table": "P2P_CASES",
+      "target_table": "EKPO",
+      "source_column": "EBELN",
+      "target_column": "EBELN",
+      "cardinality": "1:N"
+    },
+    {
+      "source_table": "P2P_CASES",
+      "target_table": "EBAN",
+      "source_column": "EBELN",
+      "target_column": "EBELN",
+      "cardinality": "1:N"
+    },
+    {
+      "source_table": "P2P_CASES",
+      "target_table": "EKBE",
+      "source_column": "EBELN",
+      "target_column": "EBELN",
+      "cardinality": "1:N"
+    },
+    {
+      "source_table": "P2P_CASES",
+      "target_table": "BSEG",
+      "source_column": "EBELN",
+      "target_column": "EBELN",
+      "cardinality": "1:N"
+    },
+    {
+      "source_table": "P2P_CASES",
+      "target_table": "CDHDR",
+      "source_column": "EBELN",
+      "target_column": "OBJECTID",
+      "cardinality": "1:N"
+    }
+  ]
+}

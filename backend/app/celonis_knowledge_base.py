@@ -5,7 +5,7 @@ Comprehensive reference of:
   - All valid Celonis Analysis SHEET TEMPLATE TYPES (Case Explorer, Process Explorer, etc.)
   - All valid Celonis Analysis COMPONENT TYPES (pql-table, single-kpi, dropdown, etc.)
   - PQL formula templates, KPI definitions, layout patterns, and component builders.
-  - build_4_sheet_analysis() — creates a beautiful 4-sheet analysis automatically.
+  - build_3_sheet_analysis() — creates a beautiful 3-sheet analysis automatically.
 
 Referenced by the Analysis Agent when generating analysis configurations.
 """
@@ -262,19 +262,23 @@ PROCESS_FILTER_TEMPLATES = {
         "MAVERICK_BUYING":            "FILTER PROCESS OCCURRENCE 'Receive Invoice' BEFORE 'Create Purchase Order Item';",
         "GOODS_RECEIPT_BEFORE_INVOICE":"FILTER PROCESS OCCURRENCE 'Receive Goods' BEFORE 'Receive Invoice';",
         "SKIP_GR":                    "FILTER NOT PROCESS OCCURRENCE['Receive Goods'];",
-        "LATE_GR_OVER_30_DAYS":       "FILTER CALC_THROUGHPUT(FIRST_OCCURRENCE['Create Purchase Order Item'] TO FIRST_OCCURRENCE['Receive Goods'], REMAP_TIMESTAMPS(TEMP_P2P_EVENT_LOG.EVENTTIME, DAYS)) > 30;",
-        "AUTOMATED_CASES":            "FILTER PU_COUNT(TEMP_P2P_CASES, TEMP_P2P_EVENT_LOG.ACTIVITY, TEMP_P2P_EVENT_LOG.USER_NAME = 'SYSTEM') = PU_COUNT(TEMP_P2P_CASES, TEMP_P2P_EVENT_LOG.ACTIVITY);",
-        "HIGH_VALUE_PO":              "FILTER TEMP_P2P_CASES.PO_AMOUNT > 10000;",
+        "LATE_GR_OVER_30_DAYS":       "FILTER CALC_THROUGHPUT(FIRST_OCCURRENCE['Create Purchase Order Item'] TO FIRST_OCCURRENCE['Receive Goods'], REMAP_TIMESTAMPS({event_log_table}.EVENTTIME, DAYS)) > 30;",
+        "AUTOMATED_CASES":            "FILTER PU_COUNT({case_table}, {event_log_table}.ACTIVITY, {event_log_table}.USER_NAME = 'SYSTEM') = PU_COUNT({case_table}, {event_log_table}.ACTIVITY);",
+        "HIGH_VALUE_PO":              "FILTER {case_table}.PO_AMOUNT > 10000;",
         "PROCESS_VIOLATIONS":         "FILTER PROCESS OCCURRENCE 'Approve Purchase Order' BEFORE 'Create Purchase Order Item';",
-        "REWORK_CASES":               "FILTER PU_COUNT(TEMP_P2P_CASES, TEMP_P2P_EVENT_LOG.ACTIVITY) > PU_COUNT_DISTINCT(TEMP_P2P_CASES, TEMP_P2P_EVENT_LOG.ACTIVITY);"
+        "REWORK_CASES":               "FILTER PU_COUNT({case_table}, {event_log_table}.ACTIVITY) > PU_COUNT_DISTINCT({case_table}, {event_log_table}.ACTIVITY);"
     },
     "O2C": {
         "LATE_DELIVERY":              "FILTER PROCESS OCCURRENCE 'Ship Goods' AFTER 'Create Invoice';",
         "BLOCKED_ORDERS":             "FILTER PROCESS OCCURRENCE['Credit Block Delivery'];",
         "RETURNS":                    "FILTER PROCESS OCCURRENCE['Create Returns Order'];",
-        "TOUCHLESS_ORDERS":           "FILTER PU_COUNT(TEMP_O2C_CASES, TEMP_O2C_EVENT_LOG.ACTIVITY, TEMP_O2C_EVENT_LOG.USER_NAME = 'SYSTEM') = PU_COUNT(TEMP_O2C_CASES, TEMP_O2C_EVENT_LOG.ACTIVITY);",
-        "HIGH_VALUE_SO":              "FILTER TEMP_O2C_CASES.SO_AMOUNT > 20000;",
-        "REWORK_CASES":               "FILTER PU_COUNT(TEMP_O2C_CASES, TEMP_O2C_EVENT_LOG.ACTIVITY) > PU_COUNT_DISTINCT(TEMP_O2C_CASES, TEMP_O2C_EVENT_LOG.ACTIVITY);"
+        "TOUCHLESS_ORDERS":           "FILTER PU_COUNT({case_table}, {event_log_table}.ACTIVITY, {event_log_table}.USER_NAME = 'SYSTEM') = PU_COUNT({case_table}, {event_log_table}.ACTIVITY);",
+        "HIGH_VALUE_SO":              "FILTER {case_table}.SO_AMOUNT > 20000;",
+        "REWORK_CASES":               "FILTER PU_COUNT({case_table}, {event_log_table}.ACTIVITY) > PU_COUNT_DISTINCT({case_table}, {event_log_table}.ACTIVITY);"
+    },
+    "GENERIC": {
+        "REWORK_CASES":               "FILTER PU_COUNT({case_table}, {event_log_table}.ACTIVITY) > PU_COUNT_DISTINCT({case_table}, {event_log_table}.ACTIVITY);",
+        "AUTOMATED_CASES":            "FILTER PU_COUNT({case_table}, {event_log_table}.ACTIVITY, {event_log_table}.USER_NAME = 'SYSTEM') = PU_COUNT({case_table}, {event_log_table}.ACTIVITY);"
     }
 }
 
@@ -299,7 +303,7 @@ KPI_CATALOG = {
             "name": "Automation Rate (Touchless PO)",
             "description": "% of PO items processed fully automatically (SYSTEM user only)",
             "unit": "%",
-            "formula": "COUNT(CASE WHEN PU_COUNT(TEMP_P2P_CASES, TEMP_P2P_EVENT_LOG.ACTIVITY, TEMP_P2P_EVENT_LOG.USER_NAME = 'SYSTEM') = PU_COUNT(TEMP_P2P_CASES, TEMP_P2P_EVENT_LOG.ACTIVITY) THEN TEMP_P2P_CASES.CASE_KEY END) / COUNT(TEMP_P2P_CASES.CASE_KEY) * 100.0",
+            "formula": "COUNT(CASE WHEN PU_COUNT({case_table}, {event_log_table}.ACTIVITY, {event_log_table}.USER_NAME = 'SYSTEM') = PU_COUNT({case_table}, {event_log_table}.ACTIVITY) THEN {case_table}.{case_col} END) / COUNT({case_table}.{case_col}) * 100.0",
             "component_type": "single-kpi",
             "good_value": "higher is better"
         },
@@ -308,7 +312,7 @@ KPI_CATALOG = {
             "name": "Total PO Spend",
             "description": "Total net value of all purchase orders",
             "unit": "EUR",
-            "formula": "SUM(TEMP_P2P_CASES.PO_AMOUNT)",
+            "formula": "SUM({case_table}.PO_AMOUNT)",
             "component_type": "single-kpi",
             "good_value": "informational"
         },
@@ -317,7 +321,7 @@ KPI_CATALOG = {
             "name": "Number of PO Cases",
             "description": "Total count of PO items in scope",
             "unit": "Count",
-            "formula": "COUNT(TEMP_P2P_CASES.CASE_KEY)",
+            "formula": "COUNT({case_table}.{case_col})",
             "component_type": "single-kpi",
             "good_value": "informational"
         },
@@ -326,7 +330,7 @@ KPI_CATALOG = {
             "name": "Maverick Buying Rate",
             "description": "% of cases where invoice received before PO creation",
             "unit": "%",
-            "formula": "COUNT(CASE WHEN PROCESS OCCURRENCE 'Receive Invoice' BEFORE 'Create Purchase Order Item' THEN TEMP_P2P_CASES.CASE_KEY END) / COUNT(TEMP_P2P_CASES.CASE_KEY) * 100.0",
+            "formula": "COUNT(CASE WHEN PROCESS OCCURRENCE 'Receive Invoice' BEFORE 'Create Purchase Order Item' THEN {case_table}.{case_col} END) / COUNT({case_table}.{case_col}) * 100.0",
             "component_type": "single-kpi",
             "good_value": "lower is better"
         },
@@ -335,7 +339,7 @@ KPI_CATALOG = {
             "name": "3-Way Match Rate",
             "description": "% of POs with PO + GR + Invoice all matched",
             "unit": "%",
-            "formula": "COUNT(CASE WHEN PROCESS OCCURRENCE['Create Purchase Order Item'] AND PROCESS OCCURRENCE['Receive Goods'] AND PROCESS OCCURRENCE['Receive Invoice'] THEN TEMP_P2P_CASES.CASE_KEY END) / COUNT(TEMP_P2P_CASES.CASE_KEY) * 100.0",
+            "formula": "COUNT(CASE WHEN PROCESS OCCURRENCE['Create Purchase Order Item'] AND PROCESS OCCURRENCE['Receive Goods'] AND PROCESS OCCURRENCE['Receive Invoice'] THEN {case_table}.{case_col} END) / COUNT({case_table}.{case_col}) * 100.0",
             "component_type": "single-kpi",
             "good_value": "higher is better"
         },
@@ -344,7 +348,7 @@ KPI_CATALOG = {
             "name": "Avg PO Item Value",
             "description": "Average net value per PO line item",
             "unit": "EUR",
-            "formula": "AVG(TEMP_P2P_CASES.PO_AMOUNT)",
+            "formula": "AVG({case_table}.PO_AMOUNT)",
             "component_type": "single-kpi",
             "good_value": "informational"
         },
@@ -353,10 +357,10 @@ KPI_CATALOG = {
             "name": "Process Activity Frequency",
             "description": "Table showing activity occurrences and impacted cases — the process footprint",
             "unit": "Table",
-            "axis0_columns": [{"name": "Activity", "text": "TEMP_P2P_EVENT_LOG.ACTIVITY"}],
+            "axis0_columns": [{"name": "Activity", "text": "{event_log_table}.ACTIVITY"}],
             "axis1_columns": [
-                {"name": "Occurrence Count", "text": "COUNT(TEMP_P2P_EVENT_LOG.ACTIVITY)", "sorting": "DESC", "sortingIndex": 0},
-                {"name": "Affected Cases", "text": "COUNT_DISTINCT(TEMP_P2P_EVENT_LOG.CASE_KEY)"}
+                {"name": "Occurrence Count", "text": "COUNT({event_log_table}.ACTIVITY)", "sorting": "DESC", "sortingIndex": 0},
+                {"name": "Affected Cases", "text": "COUNT_DISTINCT({event_log_table}.{case_col})"}
             ],
             "component_type": "pql-table"
         },
@@ -370,9 +374,9 @@ KPI_CATALOG = {
                 {"name": "Vendor Name", "text": "LFA1.NAME1"}
             ],
             "axis1_columns": [
-                {"name": "Total Spend", "text": "SUM(TEMP_P2P_CASES.PO_AMOUNT)"},
-                {"name": "PO Count", "text": "COUNT(TEMP_P2P_CASES.CASE_KEY)"},
-                {"name": "Avg PO Value", "text": "AVG(TEMP_P2P_CASES.PO_AMOUNT)"}
+                {"name": "Total Spend", "text": "SUM({case_table}.PO_AMOUNT)"},
+                {"name": "PO Count", "text": "COUNT({case_table}.{case_col})"},
+                {"name": "Avg PO Value", "text": "AVG({case_table}.PO_AMOUNT)"}
             ],
             "component_type": "pql-table"
         }
@@ -392,7 +396,7 @@ KPI_CATALOG = {
             "name": "Touchless Order Rate",
             "description": "% of sales orders processed fully automatically",
             "unit": "%",
-            "formula": "COUNT(CASE WHEN PU_COUNT(TEMP_O2C_CASES, TEMP_O2C_EVENT_LOG.ACTIVITY, TEMP_O2C_EVENT_LOG.USER_NAME = 'SYSTEM') = PU_COUNT(TEMP_O2C_CASES, TEMP_O2C_EVENT_LOG.ACTIVITY) THEN TEMP_O2C_CASES.CASE_KEY END) / COUNT(TEMP_O2C_CASES.CASE_KEY) * 100.0",
+            "formula": "COUNT(CASE WHEN PU_COUNT({case_table}, {event_log_table}.ACTIVITY, {event_log_table}.USER_NAME = 'SYSTEM') = PU_COUNT({case_table}, {event_log_table}.ACTIVITY) THEN {case_table}.{case_col} END) / COUNT({case_table}.{case_col}) * 100.0",
             "component_type": "single-kpi",
             "good_value": "higher is better"
         },
@@ -401,7 +405,7 @@ KPI_CATALOG = {
             "name": "Total SO Revenue",
             "description": "Sum of all sales order line item net values",
             "unit": "EUR",
-            "formula": "SUM(TEMP_O2C_CASES.SO_AMOUNT)",
+            "formula": "SUM({case_table}.SO_AMOUNT)",
             "component_type": "single-kpi",
             "good_value": "informational"
         },
@@ -410,7 +414,7 @@ KPI_CATALOG = {
             "name": "Number of SO Cases",
             "description": "Total count of sales order items in scope",
             "unit": "Count",
-            "formula": "COUNT(TEMP_O2C_CASES.CASE_KEY)",
+            "formula": "COUNT({case_table}.{case_col})",
             "component_type": "single-kpi",
             "good_value": "informational"
         },
@@ -419,7 +423,7 @@ KPI_CATALOG = {
             "name": "Late Delivery Rate",
             "description": "% of cases where shipment occurred after invoice creation",
             "unit": "%",
-            "formula": "COUNT(CASE WHEN PROCESS OCCURRENCE 'Ship Goods' AFTER 'Create Invoice' THEN TEMP_O2C_CASES.CASE_KEY END) / COUNT(TEMP_O2C_CASES.CASE_KEY) * 100.0",
+            "formula": "COUNT(CASE WHEN PROCESS OCCURRENCE 'Ship Goods' AFTER 'Create Invoice' THEN {case_table}.{case_col} END) / COUNT({case_table}.{case_col}) * 100.0",
             "component_type": "single-kpi",
             "good_value": "lower is better"
         },
@@ -428,7 +432,7 @@ KPI_CATALOG = {
             "name": "Avg SO Item Value",
             "description": "Average net value per sales order line item",
             "unit": "EUR",
-            "formula": "AVG(TEMP_O2C_CASES.SO_AMOUNT)",
+            "formula": "AVG({case_table}.SO_AMOUNT)",
             "component_type": "single-kpi",
             "good_value": "informational"
         },
@@ -437,10 +441,10 @@ KPI_CATALOG = {
             "name": "O2C Activity Frequency",
             "description": "Table showing O2C process activity occurrences",
             "unit": "Table",
-            "axis0_columns": [{"name": "Activity", "text": "TEMP_O2C_EVENT_LOG.ACTIVITY"}],
+            "axis0_columns": [{"name": "Activity", "text": "{event_log_table}.ACTIVITY"}],
             "axis1_columns": [
-                {"name": "Occurrence Count", "text": "COUNT(TEMP_O2C_EVENT_LOG.ACTIVITY)", "sorting": "DESC", "sortingIndex": 0},
-                {"name": "Affected Cases", "text": "COUNT_DISTINCT(TEMP_O2C_EVENT_LOG.CASE_KEY)"}
+                {"name": "Occurrence Count", "text": "COUNT({event_log_table}.ACTIVITY)", "sorting": "DESC", "sortingIndex": 0},
+                {"name": "Affected Cases", "text": "COUNT_DISTINCT({event_log_table}.{case_col})"}
             ],
             "component_type": "pql-table"
         }
@@ -451,9 +455,9 @@ KPI_CATALOG = {
             "name": "Rework Rate",
             "description": "% of cases with any activity repeated more than once",
             "unit": "%",
-            "formula": "COUNT(CASE WHEN PU_MAX(TEMP_CASES, PU_COUNT(TEMP_CASES, TEMP_EVENT_LOG.ACTIVITY)) > 1 THEN TEMP_CASES.CASE_KEY END) / COUNT(TEMP_CASES.CASE_KEY) * 100.0",
+            "formula": "COUNT(CASE WHEN PU_MAX({case_table}, PU_COUNT({case_table}, {event_log_table}.ACTIVITY)) > 1 THEN {case_table}.{case_col} END) / COUNT({case_table}.{case_col}) * 100.0",
             "component_type": "single-kpi",
-            "note": "Replace TEMP_CASES and TEMP_EVENT_LOG with actual table names",
+            "note": "Generic rework rate formula",
             "good_value": "lower is better"
         }
     ]
@@ -735,7 +739,7 @@ def _make_sheet(
     return sheet
 
 
-def build_4_sheet_analysis(
+def build_3_sheet_analysis(
     kpi_items: list,
     filter_items: list,
     event_log_table: str,
@@ -744,38 +748,15 @@ def build_4_sheet_analysis(
     case_col: str = "CASE_ID"
 ) -> list:
     """
-    Build the complete 4-sheet Celonis Analysis document.
-
-    Structure verified against a real working Celonis analysis.
-
-    Key Celonis API facts (verified from serialized_content):
-      - Sheet template type = 'contentType', NOT 'type'
-      - Process Explorer sheet uses 'processExplorerComponent' at sheet level,
-        NOT a component inside the components list
-      - Process Overview sheet uses 'timeUnits' and 'aggregateFunction'
-      - sheetFilter must be {"text": ""}
-      - Sheet components for KPI/table/filter use standard component JSON
-
-    Sheet layout:
-    ┌─────────────────────────────────────────────────────────┐
-    │ SHEET 1: Case Explorer  (contentType='case-explorer')   │
-    │   - Celonis built-in case drill-down UI                 │
-    ├─────────────────────────────────────────────────────────┤
-    │ SHEET 2: Process Explorer  (contentType='process-explorer')│
-    │   - processExplorerComponent at sheet level              │
-    ├─────────────────────────────────────────────────────────┤
-    │ SHEET 3: Process Overview  (contentType='process-overview')│
-    │   - Celonis built-in overview with timeUnits/aggregate   │
-    ├─────────────────────────────────────────────────────────┤
-    │ SHEET 4: KPI & Analytics  (no contentType = custom)     │
-    │   - KPI tiles, filters, tables                          │
-    └─────────────────────────────────────────────────────────┘
+    Build the complete 3-sheet Celonis Analysis document.
+    Structure:
+      1. Case Explorer (contentType='case-explorer')
+      2. Process Explorer (contentType='process-explorer')
+      3. KPI & Analytics (custom sheet with widgets)
     """
     import uuid
 
     # ─── SHEET 1: Case Explorer ─────────────────────────────────
-    # Celonis renders this with its built-in case inspection UI.
-    # No manual components needed — Celonis auto-populates.
     sheet1 = _make_sheet(
         sheet_id=str(uuid.uuid4()),
         sheet_name="Case Explorer 1",
@@ -784,8 +765,6 @@ def build_4_sheet_analysis(
     )
 
     # ─── SHEET 2: Process Explorer ──────────────────────────────
-    # Uses processExplorerComponent at the SHEET level (not inside components).
-    # This is how Celonis actually stores it in serialized_content.
     pe_extra = {
         "processExplorerComponent": {
             "id": "PROCESS_EXPLORER",
@@ -836,22 +815,7 @@ def build_4_sheet_analysis(
         extra_fields=pe_extra
     )
 
-    # ─── SHEET 3: Process Overview ───────────────────────────────
-    # Celonis auto-populates with throughput and process metrics.
-    # Requires timeUnits and aggregateFunction fields.
-    sheet3 = _make_sheet(
-        sheet_id=str(uuid.uuid4()),
-        sheet_name="Process Overview 3",
-        components=[],
-        content_type="process-overview",
-        extra_fields={
-            "timeUnits": "DAYS",
-            "aggregateFunction": "avg"
-        }
-    )
-
-    # ─── SHEET 4: KPI & Analytics (Custom Sheet) ────────────────
-    # Custom analytics dashboard with filters, KPI tiles, and tables.
+    # ─── SHEET 3: KPI & Analytics (Custom Sheet) ────────────────
     analytics_components = []
 
     # Row y=0 h=1: Filter dropdown bar (up to 3 filters)
@@ -923,14 +887,14 @@ def build_4_sheet_analysis(
             x=6 + (i % 2) * 3, y=extra_y + (i // 2), w=3, h=1
         ))
 
-    sheet4 = _make_sheet(
+    sheet3 = _make_sheet(
         sheet_id=str(uuid.uuid4()),
         sheet_name="KPI & Analytics",
         components=analytics_components,
-        content_type=None   # plain custom sheet — no template type
+        content_type=None
     )
 
-    return [sheet1, sheet2, sheet3, sheet4]
+    return [sheet1, sheet2, sheet3]
 
 
 def build_analysis_layout(
@@ -940,7 +904,7 @@ def build_analysis_layout(
     process_name: str = "Process"
 ) -> list:
     """
-    [Legacy single-sheet layout — use build_4_sheet_analysis() instead for new analyses.]
+    [Legacy single-sheet layout — use build_3_sheet_analysis() instead for new analyses.]
     Build a single-sheet component list (Process Explorer + KPIs + filters + table).
     """
     components = []

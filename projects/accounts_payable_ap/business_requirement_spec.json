@@ -1,0 +1,72 @@
+{
+  "process_name": "Accounts Payable (FI-AP)",
+  "source_systems": ["SAP ECC/S4HANA"],
+  "case_id_definition": "Concatenation of BELNR + BUKRS + GJAHR where BSEG.KOART = 'K'",
+  "activity_definitions": [
+    {
+      "name": "Scan Invoice",
+      "trigger_condition": "BKPF.CPUDT (OCR document creation timestamp)"
+    },
+    {
+      "name": "Create Invoice",
+      "trigger_condition": "BKPF.BUDAT (First posting of document with BLART = invoice type)"
+    },
+    {
+      "name": "Set Payment Block",
+      "trigger_condition": "CDHDR.UDATE where CDPOS.FNAME = 'ZLSPR' and VALUE_NEW is not empty"
+    },
+    {
+      "name": "Clear Invoice",
+      "trigger_condition": "BSEG.AUGDT where BSEG.AUGBL is populated"
+    },
+    {
+      "name": "Payment Issued",
+      "trigger_condition": "PAYR.ZALDT (Payment run creation)"
+    }
+  ],
+  "key_timestamp_fields": [
+    {
+      "activity_name": "Scan Invoice",
+      "source_field": "BKPF.CPUDT"
+    },
+    {
+      "activity_name": "Create Invoice",
+      "source_field": "BKPF.BUDAT"
+    },
+    {
+      "activity_name": "Set Payment Block",
+      "source_field": "CDHDR.UDATE"
+    },
+    {
+      "activity_name": "Clear Invoice",
+      "source_field": "BSEG.AUGDT"
+    },
+    {
+      "activity_name": "Payment Issued",
+      "source_field": "PAYR.ZALDT"
+    }
+  ],
+  "kpis": [
+    {
+      "name": "Cycle Time: Invoice to Payment",
+      "description": "Average time from invoice creation to payment issuance",
+      "calculation_idea": "AVG(PAYR.ZALDT - BKPF.BUDAT)"
+    },
+    {
+      "name": "Payment Block Rate",
+      "description": "Percentage of invoices that have a payment block set",
+      "calculation_idea": "COUNT(CASE WHEN Set Payment Block IS NOT NULL THEN 1 ELSE 0 END) / COUNT(CASE_ID)"
+    }
+  ],
+  "business_filters": [
+    {
+      "name": "Vendor Documents Only",
+      "rule": "BSEG.KOART = 'K'"
+    }
+  ],
+  "acceptance_rules": [
+    "Case key must be unique per Accounting Document Header",
+    "Only include documents where account type is Vendor",
+    "Ensure clearing date is only captured when AUGBL is present"
+  ]
+}

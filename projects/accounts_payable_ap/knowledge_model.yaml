@@ -1,0 +1,43 @@
+key_performance_indicators:
+- id: cycle_time_invoice_to_payment
+  name: 'Cycle Time: Invoice to Payment'
+  formula: AVG(CALC_THROUGHPUT(FIRST_OCCURRENCE['Create Invoice'] TO FIRST_OCCURRENCE['Payment
+    Issued'], REMAP_TIMESTAMPS("AP_EVENT_LOG"."EVENT_TIME", DAYS)))
+  description: Average time in days from invoice creation to payment issuance.
+  unit: Days
+- id: payment_block_rate
+  name: Payment Block Rate
+  formula: COUNT_TABLE(AP_CASES) FILTER (FILTER_ACTIVITY('Set Payment Block')) / COUNT_TABLE(AP_CASES)
+  description: Percentage of invoices that have a payment block set.
+  unit: '%'
+custom_dimensions:
+- id: vendor
+  name: Vendor
+  expression: BKPF.LIFNR
+  description: The vendor associated with the accounting document.
+- id: company_code
+  name: Company Code
+  expression: BKPF.BUKRS
+  description: The company code for the invoice.
+- id: doc_type
+  name: Document Type
+  expression: BKPF.BLART
+  description: The accounting document type (e.g., KR, RE).
+process_filters:
+- id: vendor_documents_only
+  name: Vendor Documents Only
+  filter_expression: FILTER BSEG.KOART = 'K'
+  description: Filters for AP documents only (KOART = 'K').
+- id: exclude_reversals
+  name: Exclude Reversals
+  filter_expression: FILTER BKPF.STBLG IS NULL
+  description: Removes reversed accounting documents.
+business_entities:
+- name: Accounting Document
+  description: The core AP case entity defined by BELNR, BUKRS, and GJAHR.
+  key_mappings:
+    case_id: AP_CASES.CASE_ID
+- name: Accounting Header
+  description: Header level information for the accounting document.
+  key_mappings:
+    case_id: BKPF.BELNR
