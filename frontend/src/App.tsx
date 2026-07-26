@@ -1209,7 +1209,7 @@ function QaViewer({ content, onPromote, promoteAuthorized }: QaViewerProps) {
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           <div>
             <strong>Compliance Validation Score:</strong>
-            <span style={{ fontSize: '1.5rem', fontWeight: 800, color: qa.total_score >= 80 ? 'var(--status-success)' : 'var(--status-error)', marginLeft: '10px' }}>
+            <span style={{ fontSize: '1.5rem', fontWeight: 800, color: qa.total_score >= 90 ? 'var(--status-success)' : 'var(--status-error)', marginLeft: '10px' }}>
               {qa.total_score}/100
             </span>
           </div>
@@ -1249,7 +1249,7 @@ function QaViewer({ content, onPromote, promoteAuthorized }: QaViewerProps) {
           })}
         </div>
 
-        {qa.total_score >= 80 && (
+        {qa.total_score >= 90 && (
           <div className="approval-box">
             <span className="approval-title">Promote Workspace to Production</span>
             <p style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>
