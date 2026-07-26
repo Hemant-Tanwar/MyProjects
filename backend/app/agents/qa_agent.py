@@ -37,7 +37,7 @@ class QAAgent(BaseAgent):
             "<Valid JSON with the QA results>\n\n"
             "The JSON structure must include:\n"
             "- total_score: Number (0-100), computed using the rubric above\n"
-            "- validation_status: 'Passed' (>=95), 'Approved with Warnings' (80-94), 'Failed' (<80)\n"
+            "- validation_status: 'Passed' (>=90), 'Approved with Warnings' (75-89), 'Failed' (<75)\n"
             "- checklist_items: List of objects with check_name, status (Passed/Warning/Failed), "
             "description, and found_issues (List of Strings, empty if Passed).\n"
             "Verify these 5 items:\n"
@@ -71,16 +71,18 @@ class QAAgent(BaseAgent):
 
     def _recalculate_score(self, qa_report_str: str) -> str:
         """
-        Recalculate total_score from checklist_items to ensure the score naturally
-        reflects actual check outcomes mapped to a 90-100 quality range.
+        Recalculate total_score from checklist_items to ensure the score
+        accurately reflects actual check outcomes.
 
         Scoring logic:
           - Start at 100.
           - Each Warning  -> -2 points (minor, fixable issue)
           - Each Failed   -> -5 points (blocking runtime issue)
-          - Map the raw [0-100] result linearly into [90-100] so that
-            even a worst-case config stays visually in the quality band,
-            while preserving relative differences between runs.
+
+        Validation status thresholds:
+          - >= 90  -> 'Passed'
+          - 75-89  -> 'Approved with Warnings'
+          - < 75   -> 'Failed'
         """
         try:
             report = json.loads(qa_report_str)
@@ -93,16 +95,14 @@ class QAAgent(BaseAgent):
 
             # Raw score based on deductions
             raw_score = 100 - (warnings * 2) - (failed * 5)
-            raw_score = max(0, min(100, raw_score))
+            natural_score = max(0, min(100, raw_score))
 
-            # Map raw [0-100] -> natural [90-100]
-            # raw=100 -> 100, raw=0 -> 90  (linear)
-            natural_score = round(90 + (raw_score / 100) * 10)
-
-            if natural_score >= 98:
+            if natural_score >= 90:
                 validation_status = "Passed"
-            else:
+            elif natural_score >= 75:
                 validation_status = "Approved with Warnings"
+            else:
+                validation_status = "Failed"
 
             report["total_score"] = natural_score
             report["validation_status"] = validation_status
