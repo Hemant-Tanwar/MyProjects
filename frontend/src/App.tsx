@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
 import {
-  FileText, Database, GitMerge, FileCode, LayoutDashboard,
+  FileText, Database, GitMerge, LayoutDashboard,
   Play, CheckCircle2, AlertTriangle, ChevronRight, PlusCircle,
   Edit3, ArrowRight, Download, Users, Trash2, Shield
 } from "lucide-react";
 import {
   listSessions, getSession, createSession, deleteSession, triggerAgent,
   getArtifact, editArtifact, approveArtifact, switchRole, getAuditLogs,
-  pushArtifact, getPromotionUrl, uploadRequirementFile, API_BASE_URL
+  pushArtifact, getPromotionUrl, uploadRequirementFile
 } from "./api";
 import type { Session, Artifact, AuditLog } from "./api";
 
@@ -26,8 +26,6 @@ export default function App() {
   const [editingStage, setEditingStage] = useState<string | null>(null);
   const [artifacts, setArtifacts] = useState<Record<string, Artifact>>({});
   const [auditLogs, setAuditLogs] = useState<AuditLog[]>([]);
-
-  const isPushed = auditLogs.some(log => log.action === "promoted_to_production");
 
   // UI creation states
   const [newSessionName, setNewSessionName] = useState("");
@@ -155,7 +153,7 @@ export default function App() {
       // Fetch fresh details with requirement_file
       const freshSess = await getSession(newSess.id);
       setCurrentSession(freshSess);
-      await handleSelectSession(freshSess);
+      await loadSessionData(freshSess.id);
       setNotification("Session created and requirement analyzer launched!");
     } catch (err: any) {
       setError(err.message || "Failed to create session");
@@ -812,7 +810,7 @@ export default function App() {
                   className={`stage-item ${isActive ? 'active' : ''} ${isCompleted ? 'completed' : ''}`}
                   onClick={() => {
                     setActiveStage(s.id);
-                    setIsEditing(false);
+                    setEditingStage(null);
                   }}
                 >
                   <div className="stage-icon-wrapper">
