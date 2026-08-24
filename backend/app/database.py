@@ -56,6 +56,11 @@ class AuditLogModel(Base):
 def init_db():
     Base.metadata.create_all(bind=engine)
 
+try:
+    init_db()
+except Exception:
+    pass
+
 def get_db():
     db = SessionLocal()
     try:

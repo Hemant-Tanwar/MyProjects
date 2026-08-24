@@ -12,7 +12,7 @@ class BaseAgent:
         self.api_key = GEMINI_API_KEY
         self.model_id = GEMINI_MODEL_ID
         if not self.api_key:
-            raise ValueError(f"No GEMINI_API_KEY configured for {self.name}.")
+            logger.warning(f"GEMINI_API_KEY is not configured for {self.name}.")
 
     def _load_sap_knowledge_base(self) -> dict:
         import os
