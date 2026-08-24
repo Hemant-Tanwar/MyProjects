@@ -3,7 +3,7 @@ import datetime
 import os
 import re
 import yaml
-from fastapi import FastAPI, Depends, HTTPException, Body, UploadFile, File, Request
+from fastapi import FastAPI, Depends, HTTPException, Body, UploadFile, File, Request, APIRouter
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 from sqlalchemy.orm import Session
@@ -25,6 +25,7 @@ from app.orchestrator import WorkflowOrchestrator
 from app.config import ROLES, CELONIS_URL, CELONIS_API_TOKEN
 
 app = FastAPI(title="Celonis Multi-Agent Workflow Orchestrator API")
+router = APIRouter()
 
 # Enable CORS for frontend requests
 app.add_middleware(
@@ -51,7 +52,7 @@ async def global_exception_handler(request: Request, exc: Exception):
 def startup_event():
     init_db()
 
-@app.post("/sessions", response_model=SessionResponse)
+@router.post("/sessions", response_model=SessionResponse)
 def create_session(session_data: SessionCreate, db: Session = Depends(get_db)):
     # Create the session db row
     new_session = SessionModel(
@@ -78,18 +79,18 @@ def create_session(session_data: SessionCreate, db: Session = Depends(get_db)):
 
     return new_session
 
-@app.get("/sessions", response_model=List[SessionResponse])
+@router.get("/sessions", response_model=List[SessionResponse])
 def list_sessions(db: Session = Depends(get_db)):
     return db.query(SessionModel).order_by(SessionModel.created_at.desc()).all()
 
-@app.get("/sessions/{session_id}", response_model=SessionResponse)
+@router.get("/sessions/{session_id}", response_model=SessionResponse)
 def get_session(session_id: str, db: Session = Depends(get_db)):
     sess = db.query(SessionModel).filter(SessionModel.id == session_id).first()
     if not sess:
         raise HTTPException(status_code=404, detail="Session not found.")
     return sess
 
-@app.delete("/sessions/{session_id}")
+@router.delete("/sessions/{session_id}")
 def delete_session(session_id: str, db: Session = Depends(get_db)):
     sess = db.query(SessionModel).filter(SessionModel.id == session_id).first()
     if not sess:
@@ -98,7 +99,7 @@ def delete_session(session_id: str, db: Session = Depends(get_db)):
     db.commit()
     return {"message": f"Session {session_id} successfully deleted."}
 
-@app.post("/sessions/{session_id}/trigger", response_model=ArtifactResponse)
+@router.post("/sessions/{session_id}/trigger", response_model=ArtifactResponse)
 def trigger_agent(session_id: str, payload: TriggerAgentRequest, db: Session = Depends(get_db)):
     sess = db.query(SessionModel).filter(SessionModel.id == session_id).first()
     if not sess:
@@ -128,11 +129,11 @@ def trigger_agent(session_id: str, payload: TriggerAgentRequest, db: Session = D
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Agent runtime failure: {str(e)}")
 
-@app.get("/sessions/{session_id}/artifacts", response_model=List[ArtifactResponse])
+@router.get("/sessions/{session_id}/artifacts", response_model=List[ArtifactResponse])
 def get_all_artifacts(session_id: str, db: Session = Depends(get_db)):
     return db.query(ArtifactModel).filter(ArtifactModel.session_id == session_id).order_by(ArtifactModel.version.desc()).all()
 
-@app.get("/sessions/{session_id}/artifacts/{stage}", response_model=ArtifactResponse)
+@router.get("/sessions/{session_id}/artifacts/{stage}", response_model=ArtifactResponse)
 def get_latest_stage_artifact(session_id: str, stage: str, db: Session = Depends(get_db)):
     art = db.query(ArtifactModel).filter(
         ArtifactModel.session_id == session_id,
@@ -143,7 +144,7 @@ def get_latest_stage_artifact(session_id: str, stage: str, db: Session = Depends
         raise HTTPException(status_code=404, detail=f"No artifact generated for stage '{stage}' in this session.")
     return art
 
-@app.put("/sessions/{session_id}/artifacts/{stage}", response_model=ArtifactResponse)
+@router.put("/sessions/{session_id}/artifacts/{stage}", response_model=ArtifactResponse)
 def edit_artifact(session_id: str, stage: str, edit_data: ArtifactEdit, db: Session = Depends(get_db)):
     sess = db.query(SessionModel).filter(SessionModel.id == session_id).first()
     if not sess:
@@ -181,7 +182,7 @@ def edit_artifact(session_id: str, stage: str, edit_data: ArtifactEdit, db: Sess
     db.refresh(edited_art)
     return edited_art
 
-@app.post("/sessions/{session_id}/artifacts/{stage}/approve", response_model=ArtifactResponse)
+@router.post("/sessions/{session_id}/artifacts/{stage}/approve", response_model=ArtifactResponse)
 def approve_artifact(session_id: str, stage: str, req: ApprovalRequest, db: Session = Depends(get_db)):
     sess = db.query(SessionModel).filter(SessionModel.id == session_id).first()
     if not sess:
@@ -219,7 +220,7 @@ def approve_artifact(session_id: str, stage: str, req: ApprovalRequest, db: Sess
     db.refresh(latest_art)
     return latest_art
 
-@app.post("/sessions/{session_id}/artifacts/{stage}/push", response_model=ArtifactResponse)
+@router.post("/sessions/{session_id}/artifacts/{stage}/push", response_model=ArtifactResponse)
 def push_artifact(session_id: str, stage: str, db: Session = Depends(get_db)):
     sess = db.query(SessionModel).filter(SessionModel.id == session_id).first()
     if not sess:
@@ -271,7 +272,7 @@ def push_artifact(session_id: str, stage: str, db: Session = Depends(get_db)):
     db.refresh(latest_art)
     return latest_art
 
-@app.post("/sessions/{session_id}/role", response_model=SessionResponse)
+@router.post("/sessions/{session_id}/role", response_model=SessionResponse)
 def switch_role(session_id: str, req: RoleSwitchRequest, db: Session = Depends(get_db)):
     sess = db.query(SessionModel).filter(SessionModel.id == session_id).first()
     if not sess:
@@ -289,11 +290,11 @@ def switch_role(session_id: str, req: RoleSwitchRequest, db: Session = Depends(g
     db.refresh(sess)
     return sess
 
-@app.get("/sessions/{session_id}/audit_logs", response_model=List[AuditLogResponse])
+@router.get("/sessions/{session_id}/audit_logs", response_model=List[AuditLogResponse])
 def get_audit_logs(session_id: str, db: Session = Depends(get_db)):
     return db.query(AuditLogModel).filter(AuditLogModel.session_id == session_id).order_by(AuditLogModel.timestamp.desc()).all()
 
-@app.post("/sessions/{session_id}/promote")
+@router.post("/sessions/{session_id}/promote")
 def promote_to_production(session_id: str, db: Session = Depends(get_db)):
     sess = db.query(SessionModel).filter(SessionModel.id == session_id).first()
     if not sess:
@@ -464,7 +465,7 @@ def promote_to_production(session_id: str, db: Session = Depends(get_db)):
     }
 
 
-@app.post("/sessions/{session_id}/upload_requirement_file")
+@router.post("/sessions/{session_id}/upload_requirement_file")
 def upload_requirement_file(session_id: str, file: UploadFile = File(...), db: Session = Depends(get_db)):
     sess = db.query(SessionModel).filter(SessionModel.id == session_id).first()
     if not sess:
@@ -496,4 +497,12 @@ def upload_requirement_file(session_id: str, file: UploadFile = File(...), db: S
         logging.getLogger(__name__).error(f"Auto-triggering requirement stage failed: {str(e)}")
         
     return {"message": "PowerPoint requirement file uploaded successfully.", "filename": file.filename, "file_path": file_path}
+
+@router.get("/health")
+def health_check():
+    return {"status": "ok", "app": "Celonis Orchestrator API"}
+
+app.include_router(router)
+app.include_router(router, prefix="/api")
+
 
