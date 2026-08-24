@@ -1,6 +1,7 @@
 import os
 
-DATABASE_URL = os.getenv("DATABASE_URL", "sqlite:////tmp/celonis_orchestrator.db" if os.getenv("VERCEL") else "sqlite:///./celonis_orchestrator.db")
+# Uses Neon PostgreSQL on Vercel (set via env var), falls back to local SQLite
+DATABASE_URL = os.getenv("DATABASE_URL", "sqlite:///./celonis_orchestrator.db")
 AWS_REGION = os.getenv("AWS_DEFAULT_REGION", "us-east-1")
 BEDROCK_MODEL_ID = os.getenv("BEDROCK_MODEL_ID", "meta.llama3-1-70b-instruct-v1:0")
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY", "")
