@@ -10,5 +10,5 @@ GEMINI_MODEL_ID = os.getenv("GEMINI_MODEL_ID", "gemini-3.1-flash-lite")
 ROLES = ["Business User", "Process Analyst", "Admin", "Reviewer"]
 
 # Celonis integration config
-CELONIS_URL = os.getenv("CELONIS_URL", "https://wbd8lqn9-2026-06-12.training.celonis.cloud/")
-CELONIS_API_TOKEN = os.getenv("CELONIS_API_TOKEN", "Y2YzNGVjZDktZTY5MC00MDg3LWI0ZmMtZmY1ODFhYjYwMWVjOk5wb0JGWW5sM0ZEZlpNRnRXYWVJR0ErNlp3UnY3dndIMVpYSzJQRVFvTWZs")
+CELONIS_URL = os.getenv("CELONIS_URL", "")
+CELONIS_API_TOKEN = os.getenv("CELONIS_API_TOKEN", "")

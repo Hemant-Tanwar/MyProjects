@@ -31,3 +31,4 @@ frontend/dist/
 brain/
 *.webp
 *.png
+.vercel
