@@ -475,7 +475,10 @@ def upload_requirement_file(session_id: str, file: UploadFile = File(...), db: S
     if file_ext.lower() not in [".pptx"]:
         raise HTTPException(status_code=400, detail="Only PPTX files are supported.")
         
-    upload_dir = os.path.join(WORKSPACE_DIR, "backend", "uploads")
+    if os.environ.get("VERCEL"):
+        upload_dir = "/tmp/uploads"
+    else:
+        upload_dir = os.path.join(WORKSPACE_DIR, "backend", "uploads")
     os.makedirs(upload_dir, exist_ok=True)
     
     filename = f"{session_id}_requirement{file_ext}"
