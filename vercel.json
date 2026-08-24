@@ -3,19 +3,11 @@
   "outputDirectory": "frontend/dist",
   "rewrites": [
     {
-      "source": "/sessions/:path*",
+      "source": "/api/:path*",
       "destination": "/api/index.py"
     },
     {
-      "source": "/sessions",
-      "destination": "/api/index.py"
-    },
-    {
-      "source": "/docs",
-      "destination": "/api/index.py"
-    },
-    {
-      "source": "/openapi.json",
+      "source": "/api",
       "destination": "/api/index.py"
     },
     {
